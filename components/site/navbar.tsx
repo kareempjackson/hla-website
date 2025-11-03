@@ -63,9 +63,10 @@ export default function Navbar() {
   }, []);
 
   // Color classes based on background
+  // For dark green #00433E: using a more precise filter
   const logoFilter = isDark
     ? "brightness(0) saturate(100%) invert(95%) sepia(13%) saturate(573%) hue-rotate(329deg) brightness(103%) contrast(95%)" // cream on dark
-    : "invert(14%) sepia(28%) saturate(1518%) hue-rotate(130deg) brightness(92%) contrast(97%)"; // dark green #00433E on light
+    : "brightness(0) saturate(100%) invert(15%) sepia(20%) saturate(1200%) hue-rotate(130deg) brightness(90%) contrast(95%)"; // dark green #00433E on light
 
   const navBg = isDark ? "bg-[#0000003D]" : "bg-white/40";
   const navTextColor = isDark
