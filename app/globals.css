@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Font registrations from /public/fonts */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYMEDIUM.OTF") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYBOLD.OTF") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Italic weights (best-effort mapping to common weights) */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYLIGHTITALIC.OTF") format("opentype");
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYSEMIBOLDITALIC.OTF") format("opentype");
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYHEAVYITALIC.OTF") format("opentype");
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYBLACKITALIC.OTF") format("opentype");
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* Theme tokens (Tailwind v4) */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Fonts */
+  --font-display: "SF Pro Display", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-sans: "SF Pro Display", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Core palette */
+  --color-brand-deep: #00433E;
+  --color-cream: #FAEFCF;
+  --color-black: #000000;
+  --color-mint: #72DE88;
+  --color-gray-200: #DBDBDB;
+  --color-cream-200: #F9EECE;
+  --color-white: #FFFFFF;
+
+  /* Semantic palette */
+  --color-bg: var(--color-brand-deep);
+  /* slightly lighter than brand-deep for surfaces */
+  --color-surface: #1B5E58;
+  --color-border: rgba(255, 255, 255, 0.5);
+  --color-text: var(--color-white);
+  --color-accent: var(--color-mint);
+  --color-muted: var(--color-gray-200);
+
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 40px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base element styles relying on theme tokens */
+html, body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-sans bg-bg text-text antialiased;
 }
