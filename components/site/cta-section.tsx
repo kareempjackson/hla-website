@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="bg-bg py-20 md:py-24 pt-20">
-      <div className="mx-auto max-w-4xl px-6 text-center">
+    <section className="bg-bg py-32 min-h-screen flex items-center">
+      <div className="mx-auto max-w-4xl px-6 text-center w-full">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-cream mb-8 tracking-tight leading-tight">
           Running blind is a risk you can't afford
         </h2>
