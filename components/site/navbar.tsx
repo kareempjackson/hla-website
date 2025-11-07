@@ -28,6 +28,7 @@ export default function Navbar() {
       const aboutWhoWeServe = document.getElementById("about-who-we-serve");
       const aboutApproach = document.getElementById("about-approach");
       const aboutTeam = document.getElementById("about-team");
+      const aboutTestimonials = document.getElementById("about-testimonials");
       const aboutCta = document.getElementById("about-cta");
 
       // Check which section is currently visible at the top
@@ -57,6 +58,8 @@ export default function Navbar() {
 
       // Check About page sections
       if (newIsDark === null) newIsDark = checkSection(aboutCta, true);
+      if (newIsDark === null)
+        newIsDark = checkSection(aboutTestimonials, false);
       if (newIsDark === null) newIsDark = checkSection(aboutTeam, false);
       if (newIsDark === null) newIsDark = checkSection(aboutApproach, false);
       if (newIsDark === null) newIsDark = checkSection(aboutWhoWeServe, true);
@@ -99,13 +102,13 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] transition-colors duration-300">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-5">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/images/logo/logo.svg"
-            width={150}
-            height={32}
+            width={130}
+            height={28}
             alt="Higher Level Accounting"
             style={{ filter: logoFilter }}
             className="transition-all duration-300"
@@ -115,11 +118,11 @@ export default function Navbar() {
         {/* Center: Nav links - single capsule background */}
         <div className="hidden md:flex items-center justify-center flex-nowrap">
           <div
-            className={`flex items-center gap-5 rounded-pill h-12 pl-0 pr-3 overflow-hidden transition-colors duration-300 ${navBg} backdrop-blur-sm`}
+            className={`flex items-center gap-4 rounded-pill h-10 pl-0 pr-2.5 overflow-hidden transition-colors duration-300 ${navBg} backdrop-blur-sm`}
           >
             <Link
               href="/"
-              className={`rounded-pill h-full px-7 text-base md:text-lg font-medium whitespace-nowrap flex items-center transition-colors duration-300 ${
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
                 pathname === "/" ? `${activeTabBg} shadow-sm` : navTextColor
               }`}
             >
@@ -127,7 +130,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/about"
-              className={`rounded-pill h-full px-7 text-base md:text-lg font-medium whitespace-nowrap flex items-center transition-colors duration-300 ${
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
                 pathname === "/about"
                   ? `${activeTabBg} shadow-sm`
                   : navTextColor
@@ -137,19 +140,19 @@ export default function Navbar() {
             </Link>
             <Link
               href="#services"
-              className={`rounded-pill h-full px-7 text-base md:text-lg whitespace-nowrap flex items-center gap-2 transition-colors duration-300 ${navTextColor}`}
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center gap-2 transition-colors duration-300 ${navTextColor}`}
             >
               <span>Services</span>
             </Link>
             <Link
               href="#insights"
-              className={`rounded-pill h-full px-7 text-base md:text-lg whitespace-nowrap flex items-center transition-colors duration-300 ${navTextColor}`}
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${navTextColor}`}
             >
               Insights
             </Link>
             <Link
               href="#industries"
-              className={`rounded-pill h-full px-7 text-base md:text-lg whitespace-nowrap flex items-center transition-colors duration-300 ${navTextColor}`}
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${navTextColor}`}
             >
               Industries
             </Link>
@@ -160,7 +163,7 @@ export default function Navbar() {
         <div className="shrink-0">
           <Button
             variant="soft"
-            className="h-12 px-6 rounded-pill border-0 focus-visible:ring-0 transition-colors duration-300"
+            className="h-10 px-5 text-sm font-light rounded-pill border-0 focus-visible:ring-0 transition-colors duration-300"
           >
             Client Portal
           </Button>

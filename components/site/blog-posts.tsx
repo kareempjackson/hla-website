@@ -6,7 +6,7 @@ function ArrowLeft(props: React.SVGProps<SVGSVGElement>) {
       <path
         d="M15 18l-6-6 6-6"
         stroke="currentColor"
-        strokeWidth={2}
+        strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -20,7 +20,7 @@ function ArrowRight(props: React.SVGProps<SVGSVGElement>) {
       <path
         d="M9 18l6-6-6-6"
         stroke="currentColor"
-        strokeWidth={2}
+        strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -59,22 +59,22 @@ const blogPosts = [
 
 export default function BlogPosts() {
   return (
-    <section className="bg-cream min-h-screen flex items-center py-12 md:py-16 pt-20">
+    <section className="bg-cream min-h-screen flex items-center py-12 md:py-12 pt-20">
       <div className="mx-auto w-full max-w-6xl px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-black tracking-tight">
             Our Insights
           </h2>
           <div className="flex items-center gap-2">
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-black/20 text-black/60 hover:border-black/40 hover:text-black transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-black/60 hover:border-black/20 hover:text-black transition-colors"
               aria-label="Previous"
             >
               <ArrowLeft className="size-4" />
             </button>
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-black/20 text-black/60 hover:border-black/40 hover:text-black transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-black/60 hover:border-black/20 hover:text-black transition-colors"
               aria-label="Next"
             >
               <ArrowRight className="size-4" />
@@ -83,11 +83,11 @@ export default function BlogPosts() {
         </div>
 
         {/* Blog Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {blogPosts.map((post) => (
             <article key={post.id} className="group cursor-pointer">
               {/* Image */}
-              <div className="mb-4 overflow-hidden rounded-xl">
+              <div className="mb-3 overflow-hidden rounded-2xl">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -98,7 +98,7 @@ export default function BlogPosts() {
               </div>
 
               {/* Meta */}
-              <div className="mb-2 flex items-center gap-2 text-xs text-black/60">
+              <div className="mb-2 flex items-center gap-2 text-xs text-black/50 font-light">
                 <span>Published in {post.category}</span>
                 <span>•</span>
                 <span>{post.date}</span>
@@ -111,12 +111,12 @@ export default function BlogPosts() {
               </div>
 
               {/* Title */}
-              <h3 className="mb-2 text-lg font-semibold text-black group-hover:text-black/80 transition-colors">
+              <h3 className="mb-2 text-base font-light text-black group-hover:text-black/70 transition-colors">
                 {post.title}
               </h3>
 
               {/* Excerpt */}
-              <p className="text-xs text-black/70 leading-relaxed">
+              <p className="text-xs text-black/60 leading-relaxed font-light">
                 {post.excerpt}
               </p>
             </article>

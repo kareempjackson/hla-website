@@ -27,11 +27,11 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export default function Testimonial() {
   return (
-    <section className="bg-cream-200 min-h-screen flex items-center py-16 md:py-20 pt-20">
+    <section className="bg-cream-200 min-h-screen flex items-center py-16 md:py-16 pt-20">
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-6 md:grid-cols-2">
         {/* Left - Image */}
         <div className="relative max-w-sm">
-          <div className="relative overflow-hidden rounded-xl">
+          <div className="relative overflow-hidden rounded-2xl">
             <Image
               src="/window.svg"
               alt="Dr. Ron Daniels"
@@ -40,10 +40,10 @@ export default function Testimonial() {
               className="h-auto w-full object-cover"
             />
             {/* Name overlay at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm px-4 py-2.5">
-              <p className="text-sm text-white font-light">
-                <span className="text-accent font-normal">Dr. Ron Daniels</span>
-                , President
+            <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm px-4 py-2">
+              <p className="text-xs text-white font-light">
+                <span className="text-accent font-light">Dr. Ron Daniels</span>,
+                President
               </p>
             </div>
           </div>
@@ -51,8 +51,8 @@ export default function Testimonial() {
 
         {/* Right - Content */}
         <div>
-          <blockquote className="mb-5">
-            <p className="text-base md:text-lg text-black/80 leading-relaxed font-light mb-4">
+          <blockquote className="mb-4">
+            <p className="text-sm md:text-base text-black/70 leading-relaxed font-light mb-3">
               "Working with Higher Level Accounting has been transformative for
               the Institute of the Black World 21st Century. They meticulously
               cleaned up our financial records, prepared us for audits, and
@@ -60,7 +60,7 @@ export default function Testimonial() {
               transparency. Their professionalism, expertise, and dedication
               have been invaluable to our organization."
             </p>
-            <footer className="text-sm text-black/60 font-light">
+            <footer className="text-xs text-black/50 font-light">
               — Dr. Ron Daniels, President, Institute of the Black World 21st
               Century, Inc.
             </footer>
@@ -68,7 +68,7 @@ export default function Testimonial() {
 
           <div className="flex items-center justify-between pt-2">
             {/* Social Icons */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <a
                 href="#"
                 className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition-colors"
@@ -95,7 +95,7 @@ export default function Testimonial() {
             {/* Learn More Link */}
             <Link
               href="#"
-              className="text-xs text-accent font-medium hover:text-accent/80 transition-colors uppercase tracking-wide"
+              className="text-xs text-accent font-light hover:text-accent/80 transition-colors uppercase tracking-wide"
             >
               Learn more →
             </Link>

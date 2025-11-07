@@ -26,21 +26,21 @@ const helpItems = [
 
 export default function HowCanWeHelp() {
   return (
-    <section className="bg-white min-h-screen flex items-center py-12 md:py-16 pt-20">
+    <section className="bg-white min-h-screen flex items-center py-12 md:py-12 pt-20">
       <div className="mx-auto w-full max-w-6xl px-6">
         {/* Header */}
-        <div className="mb-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black">
+        <div className="mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-black tracking-tight">
             Industry focus
           </h2>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {helpItems.map((item) => (
             <article key={item.id} className="group cursor-pointer">
               {/* Image */}
-              <div className="mb-4 overflow-hidden rounded-2xl">
+              <div className="mb-3 overflow-hidden rounded-2xl">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -51,12 +51,12 @@ export default function HowCanWeHelp() {
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-semibold text-black group-hover:text-black/80 transition-colors leading-snug mb-3">
+              <h3 className="text-base font-light text-black group-hover:text-black/70 transition-colors leading-snug mb-2.5">
                 {item.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-black/70 leading-relaxed">
+              <p className="text-xs text-black/60 leading-relaxed font-light">
                 {item.description}
               </p>
             </article>
@@ -64,11 +64,11 @@ export default function HowCanWeHelp() {
         </div>
 
         {/* Footer Note */}
-        <div className="mt-10 max-w-3xl">
-          <h4 className="text-lg font-semibold text-black mb-2">
+        <div className="mt-8 max-w-3xl">
+          <h4 className="text-base font-light text-black mb-2">
             Not in these industries?
           </h4>
-          <p className="text-base text-black/70 leading-relaxed">
+          <p className="text-sm text-black/60 leading-relaxed font-light">
             No problem. The same clarity, compliance, and strategic guidance
             apply to any business that values accurate numbers and smart growth.
           </p>

@@ -36,29 +36,29 @@ function StarIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export default function WhyGreat() {
   return (
-    <section className="bg-cream min-h-screen flex items-center py-12 md:py-16 pt-20">
+    <section className="bg-cream min-h-screen flex items-center py-12 md:py-12 pt-20">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 md:grid-cols-2 w-full">
         {/* Left content */}
         <div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-brand-deep leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-brand-deep leading-tight tracking-tight">
             Your numbers might be lying
           </h2>
-          <div className="mt-5 space-y-1 text-base md:text-lg text-brand-deep/80">
+          <div className="mt-4 space-y-1 text-xs md:text-sm text-brand-deep/70 font-light">
             <p>Revenue reports not matching what's in the bank?</p>
             <p>"Profit" disappearing right after you pay your vendors?</p>
             <p>Your books are "done" but things still feel out of whack</p>
           </div>
 
-          <p className="mt-6 text-base md:text-lg text-brand-deep font-medium">
+          <p className="mt-5 text-xs md:text-sm text-brand-deep font-light">
             Bad numbers can quickly tank your next move and most businesses
             don't see it coming until it's too late.
           </p>
 
-          <div className="mt-6">
-            <p className="text-base md:text-lg text-brand-deep/80 mb-3">
+          <div className="mt-5">
+            <p className="text-xs md:text-sm text-brand-deep/70 mb-2.5 font-light">
               When revenue and costs don't line up, you make bad calls:
             </p>
-            <ul className="space-y-2 text-base md:text-lg text-brand-deep/80">
+            <ul className="space-y-1.5 text-xs md:text-sm text-brand-deep/70 font-light">
               <li className="flex items-start gap-2">
                 <span className="text-accent mt-1">•</span>
                 <span>Hire too soon</span>
@@ -74,7 +74,7 @@ export default function WhyGreat() {
             </ul>
           </div>
 
-          <p className="mt-6 text-base md:text-lg text-brand-deep/80 leading-relaxed">
+          <p className="mt-5 text-xs md:text-sm text-brand-deep/70 leading-relaxed font-light">
             The cost isn't just money but maybe a fine you never saw coming, a
             license you can't get back, or an investor walking away before
             you've even finished your pitch.
@@ -83,7 +83,7 @@ export default function WhyGreat() {
 
         {/* Right image */}
         <div className="relative">
-          <div className="relative overflow-hidden rounded-xl">
+          <div className="relative overflow-hidden rounded-2xl">
             <Image
               src="/window.svg"
               alt="Team collaboration"
