@@ -8,20 +8,17 @@ export default function ServicesPage() {
       <Navbar sticky={true} />
 
       {/* Hero Section */}
-      <section
-        id="services-hero"
-        className="relative min-h-screen flex flex-col bg-cream"
-      >
-        {/* Top Section - Content */}
-        <div className="mx-auto max-w-6xl w-full px-6 py-12">
-          <div className="max-w-4xl">
+      <section id="services-hero" className="relative bg-cream py-16 md:py-20">
+        <div className="mx-auto max-w-6xl w-full px-6">
+          {/* Top Section - Content */}
+          <div className="max-w-4xl mb-12 md:mb-16">
             {/* Label */}
             <p className="text-xs font-light uppercase tracking-wider text-black/50 mb-4">
               Our Services
             </p>
 
             {/* Heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight text-black mb-6 leading-tight">
               Financial clarity. Compliance without the headaches. Reports you
               can trust.
             </h1>
@@ -36,13 +33,11 @@ export default function ServicesPage() {
               </Button>
             </div>
           </div>
-        </div>
 
-        {/* Bottom Section - Image */}
-        <div className="mx-auto max-w-6xl w-full px-6 pb-12 flex-1 flex items-end">
-          <div className="relative overflow-hidden rounded-sm bg-gray-300 w-full min-h-[400px] flex items-center justify-center">
+          {/* Bottom Section - Image */}
+          <div className="relative overflow-hidden rounded-sm bg-gray-300 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] flex items-center justify-center">
             {/* Placeholder for image */}
-            <div className="w-full h-[400px] bg-gray-400 flex items-center justify-center">
+            <div className="w-full h-full bg-gray-400 flex items-center justify-center">
               <p className="text-gray-500 text-sm font-light">
                 Service Image Placeholder
               </p>
@@ -54,12 +49,12 @@ export default function ServicesPage() {
       {/* Accrual-Based Bookkeeping Section */}
       <section
         id="services-bookkeeping"
-        className="relative bg-bg py-24 min-h-screen flex items-center"
+        className="relative bg-bg py-16 md:py-24"
       >
         <div className="mx-auto max-w-6xl w-full px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Content */}
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {/* Heading */}
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream leading-tight">
                 Accrual-Based Bookkeeping
@@ -130,7 +125,7 @@ export default function ServicesPage() {
 
             {/* Right Column - Image */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
                 {/* Placeholder for image */}
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -146,13 +141,13 @@ export default function ServicesPage() {
       {/* CFO Level Service Section */}
       <section
         id="services-controller"
-        className="relative bg-cream py-24 min-h-screen flex items-center"
+        className="relative bg-cream py-16 md:py-24"
       >
         <div className="mx-auto max-w-6xl w-full px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Image */}
             <div className="relative order-2 lg:order-1">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
                 {/* Placeholder for image */}
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -163,7 +158,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Right Column - Content */}
-            <div className="space-y-6 order-1 lg:order-2">
+            <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
               {/* Heading */}
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight">
                 Controller-Level Services
@@ -238,12 +233,12 @@ export default function ServicesPage() {
       {/* Compliance & Risk Management Section */}
       <section
         id="services-compliance"
-        className="relative bg-bg py-24 min-h-screen flex items-center"
+        className="relative bg-bg py-16 md:py-24"
       >
         <div className="mx-auto max-w-6xl w-full px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Content */}
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {/* Heading */}
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream leading-tight">
                 Compliance & Risk Management
@@ -306,7 +301,7 @@ export default function ServicesPage() {
 
             {/* Right Column - Image */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
                 {/* Placeholder for image */}
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -322,12 +317,12 @@ export default function ServicesPage() {
       {/* Strategic Planning Section */}
       <section
         id="services-addons"
-        className="relative bg-cream py-24 min-h-screen flex items-center"
+        className="relative bg-cream py-16 md:py-24"
       >
         <div className="mx-auto max-w-6xl w-full px-6">
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {/* Content - Full Width */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
               {/* Left - Heading */}
               <div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight">
@@ -407,10 +402,10 @@ export default function ServicesPage() {
       {/* Specialized Services Section */}
       <section
         id="services-specialized"
-        className="relative bg-black py-24 min-h-screen flex items-center"
+        className="relative bg-black py-16 md:py-24"
       >
         <div className="mx-auto max-w-6xl w-full px-6">
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream leading-tight max-w-3xl">
               Specialized Services
@@ -470,9 +465,9 @@ export default function ServicesPage() {
             </div>
 
             {/* Three Column Image Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
               {/* Left Image */}
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
                     Image Placeholder 1
@@ -481,15 +476,15 @@ export default function ServicesPage() {
               </div>
 
               {/* Middle Column - Image + Text */}
-              <div className="space-y-5">
-                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[280px] flex items-center justify-center">
+              <div className="space-y-4 md:space-y-5">
+                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[240px] md:h-[280px] flex items-center justify-center">
                   <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                     <p className="text-gray-500 text-sm font-light">
                       Image Placeholder 2
                     </p>
                   </div>
                 </div>
-                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[95px] flex items-center justify-center">
+                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[85px] md:h-[95px] flex items-center justify-center">
                   <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                     <p className="text-gray-500 text-sm font-light">
                       Image Placeholder
@@ -499,7 +494,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Right Image */}
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
                     Image Placeholder 3
@@ -512,12 +507,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Call to Action Section */}
-      <section
-        id="services-cta"
-        className="relative bg-cream py-24 min-h-screen flex items-center justify-center"
-      >
+      <section id="services-cta" className="relative bg-cream py-20 md:py-32">
         <div className="mx-auto max-w-4xl w-full px-6 text-center">
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {/* Heading */}
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-tight text-black leading-tight">
               Ready for Clarity?
