@@ -264,6 +264,16 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
                 Industries
               </Link>
             )}
+            <Link
+              href="/contact"
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
+                pathname === "/contact"
+                  ? `${activeTabBg} shadow-sm`
+                  : navTextColor
+              }`}
+            >
+              Contact
+            </Link>
           </div>
         </div>
 
