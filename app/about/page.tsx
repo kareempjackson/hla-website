@@ -50,7 +50,7 @@ export default function AboutPage() {
 
           {/* Bottom Section - Customer Service Image */}
           <div className="mx-auto max-w-6xl w-full px-6 pb-12">
-            <div className="relative overflow-hidden rounded-2xl bg-surface/30 min-h-[400px] flex items-center justify-center">
+            <div className="relative overflow-hidden rounded-sm bg-surface/30 min-h-[400px] flex items-center justify-center">
               {/* Placeholder for customer service image - replace with actual image when available */}
               <div className="w-full h-[400px] bg-linear-to-br from-surface to-bg flex items-center justify-center">
                 <p className="text-white/50 text-sm font-light">
@@ -117,7 +117,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="relative grid grid-cols-12 gap-3">
                   {/* Top Left - Team High Five (larger, spans more) */}
-                  <div className="col-span-7 relative overflow-hidden rounded-2xl bg-gray-700 h-72">
+                  <div className="col-span-7 relative overflow-hidden rounded-sm bg-gray-700 h-72">
                     <div className="w-full h-full bg-gray-600 flex items-center justify-center">
                       <p className="text-gray-400 text-xs font-light">
                         Team Image
@@ -126,7 +126,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Top Right - Person at Computer (smaller, positioned higher) */}
-                  <div className="col-span-5 relative overflow-hidden rounded-2xl bg-gray-700 h-64 mt-6">
+                  <div className="col-span-5 relative overflow-hidden rounded-sm bg-gray-700 h-64 mt-6">
                     <div className="w-full h-full bg-gray-600 flex items-center justify-center">
                       <p className="text-gray-400 text-xs font-light">
                         Computer Image
@@ -135,7 +135,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Bottom - Person Working at Desk (large, overlaps) */}
-                  <div className="col-span-8 col-start-3 relative overflow-hidden rounded-2xl bg-gray-700 h-80 -mt-10">
+                  <div className="col-span-8 col-start-3 relative overflow-hidden rounded-sm bg-gray-700 h-80 -mt-10">
                     <div className="w-full h-full bg-gray-600 flex items-center justify-center">
                       <p className="text-gray-400 text-xs font-light">
                         Desk Work Image

@@ -40,7 +40,7 @@ export default function HowCanWeHelp() {
           {helpItems.map((item) => (
             <article key={item.id} className="group cursor-pointer">
               {/* Image */}
-              <div className="mb-3 overflow-hidden rounded-2xl">
+              <div className="mb-3 overflow-hidden rounded-sm">
                 <Image
                   src={item.image}
                   alt={item.title}

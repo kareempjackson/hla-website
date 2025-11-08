@@ -29,7 +29,7 @@ export default function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative overflow-hidden rounded-2xl bg-surface/80">
+          <div className="relative overflow-hidden rounded-sm bg-surface/80">
             <Image
               src="/window.svg"
               alt="Team collaboration"

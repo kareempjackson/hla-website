@@ -76,7 +76,7 @@ export default function WhatWeDo() {
 
         {/* Right image */}
         <div className="relative max-w-lg mx-auto md:mx-0">
-          <div className="relative overflow-hidden rounded-2xl">
+          <div className="relative overflow-hidden rounded-sm">
             <Image
               src="/window.svg"
               alt="Team collaboration"

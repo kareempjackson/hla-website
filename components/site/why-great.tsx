@@ -83,7 +83,7 @@ export default function WhyGreat() {
 
         {/* Right image */}
         <div className="relative">
-          <div className="relative overflow-hidden rounded-2xl">
+          <div className="relative overflow-hidden rounded-sm">
             <Image
               src="/window.svg"
               alt="Team collaboration"

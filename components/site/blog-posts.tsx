@@ -87,7 +87,7 @@ export default function BlogPosts() {
           {blogPosts.map((post) => (
             <article key={post.id} className="group cursor-pointer">
               {/* Image */}
-              <div className="mb-3 overflow-hidden rounded-2xl">
+              <div className="mb-3 overflow-hidden rounded-sm">
                 <Image
                   src={post.image}
                   alt={post.title}

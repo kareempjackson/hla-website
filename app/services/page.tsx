@@ -5,12 +5,12 @@ import { Button } from "../../components/ui/button";
 export default function ServicesPage() {
   return (
     <div className="relative bg-cream">
-      <Navbar />
+      <Navbar sticky={true} />
 
       {/* Hero Section */}
       <section
         id="services-hero"
-        className="relative min-h-screen flex flex-col pt-20 bg-cream"
+        className="relative min-h-screen flex flex-col bg-cream"
       >
         {/* Top Section - Content */}
         <div className="mx-auto max-w-6xl w-full px-6 py-12">
@@ -32,14 +32,7 @@ export default function ServicesPage() {
                 size="md"
                 className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
               >
-                Contact US
-              </Button>
-              <Button
-                size="md"
-                variant="ghost"
-                className="rounded-pill focus-visible:ring-0 bg-black text-white hover:bg-black/90 h-10 px-7 text-xs font-light tracking-wide border-0"
-              >
-                Client Portal
+                Schedule Your Consultation
               </Button>
             </div>
           </div>
@@ -47,7 +40,7 @@ export default function ServicesPage() {
 
         {/* Bottom Section - Image */}
         <div className="mx-auto max-w-6xl w-full px-6 pb-12 flex-1 flex items-end">
-          <div className="relative overflow-hidden rounded-2xl bg-gray-300 w-full min-h-[400px] flex items-center justify-center">
+          <div className="relative overflow-hidden rounded-sm bg-gray-300 w-full min-h-[400px] flex items-center justify-center">
             {/* Placeholder for image */}
             <div className="w-full h-[400px] bg-gray-400 flex items-center justify-center">
               <p className="text-gray-500 text-sm font-light">
@@ -130,21 +123,14 @@ export default function ServicesPage() {
                   size="md"
                   className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                 >
-                  Contact US
-                </Button>
-                <Button
-                  size="md"
-                  variant="ghost"
-                  className="rounded-pill focus-visible:ring-0 bg-white text-black hover:bg-white/90 h-10 px-7 text-xs font-light tracking-wide border-0"
-                >
-                  Client Portal
+                  Schedule Your Consultation
                 </Button>
               </div>
             </div>
 
             {/* Right Column - Image */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
                 {/* Placeholder for image */}
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -166,7 +152,7 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Image */}
             <div className="relative order-2 lg:order-1">
-              <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
                 {/* Placeholder for image */}
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -241,14 +227,7 @@ export default function ServicesPage() {
                   size="md"
                   className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                 >
-                  Contact US
-                </Button>
-                <Button
-                  size="md"
-                  variant="ghost"
-                  className="rounded-pill focus-visible:ring-0 bg-black text-white hover:bg-black/90 h-10 px-7 text-xs font-light tracking-wide border-0"
-                >
-                  Client Portal
+                  Schedule Your Consultation
                 </Button>
               </div>
             </div>
@@ -320,21 +299,14 @@ export default function ServicesPage() {
                   size="md"
                   className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                 >
-                  Contact US
-                </Button>
-                <Button
-                  size="md"
-                  variant="ghost"
-                  className="rounded-pill focus-visible:ring-0 bg-white text-black hover:bg-white/90 h-10 px-7 text-xs font-light tracking-wide border-0"
-                >
-                  Client Portal
+                  Schedule Your Consultation
                 </Button>
               </div>
             </div>
 
             {/* Right Column - Image */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[500px] lg:h-[600px] flex items-center justify-center">
                 {/* Placeholder for image */}
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -409,7 +381,7 @@ export default function ServicesPage() {
 
             {/* Image - Full Width at Bottom */}
             <div className="relative w-full">
-              <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[400px] md:h-[500px] lg:h-[550px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[550px] flex items-center justify-center">
                 {/* Placeholder for image */}
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -425,14 +397,7 @@ export default function ServicesPage() {
                 size="md"
                 className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
               >
-                Contact US
-              </Button>
-              <Button
-                size="md"
-                variant="ghost"
-                className="rounded-pill focus-visible:ring-0 bg-black text-white hover:bg-black/90 h-10 px-7 text-xs font-light tracking-wide border-0"
-              >
-                Client Portal
+                Schedule Your Consultation
               </Button>
             </div>
           </div>
@@ -500,21 +465,14 @@ export default function ServicesPage() {
                 size="md"
                 className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
               >
-                Contact US
-              </Button>
-              <Button
-                size="md"
-                variant="ghost"
-                className="rounded-pill focus-visible:ring-0 bg-white text-black hover:bg-white/90 h-10 px-7 text-xs font-light tracking-wide border-0"
-              >
-                Client Portal
+                Schedule Your Consultation
               </Button>
             </div>
 
             {/* Three Column Image Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {/* Left Image */}
-              <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[400px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] flex items-center justify-center">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
                     Image Placeholder 1
@@ -524,14 +482,14 @@ export default function ServicesPage() {
 
               {/* Middle Column - Image + Text */}
               <div className="space-y-5">
-                <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[280px] flex items-center justify-center">
+                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[280px] flex items-center justify-center">
                   <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                     <p className="text-gray-500 text-sm font-light">
                       Image Placeholder 2
                     </p>
                   </div>
                 </div>
-                <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[95px] flex items-center justify-center">
+                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[95px] flex items-center justify-center">
                   <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                     <p className="text-gray-500 text-sm font-light">
                       Image Placeholder
@@ -541,7 +499,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Right Image */}
-              <div className="relative overflow-hidden rounded-2xl bg-gray-300 h-[400px] flex items-center justify-center">
+              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] flex items-center justify-center">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
                     Image Placeholder 3

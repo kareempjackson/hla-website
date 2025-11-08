@@ -31,7 +31,7 @@ export default function Testimonial() {
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-6 md:grid-cols-2">
         {/* Left - Image */}
         <div className="relative max-w-sm">
-          <div className="relative overflow-hidden rounded-2xl">
+          <div className="relative overflow-hidden rounded-sm">
             <Image
               src="/window.svg"
               alt="Dr. Ron Daniels"

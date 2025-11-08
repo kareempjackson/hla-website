@@ -1,16 +1,17 @@
 import Navbar from "../../components/site/navbar";
 import Footer from "../../components/site/footer";
 import { Button } from "../../components/ui/button";
+import Link from "next/link";
 
 export default function InsightsPage() {
   return (
     <div className="relative bg-bg">
-      <Navbar />
+      <Navbar sticky={true} />
 
       {/* Hero Section */}
       <section
         id="insights-hero"
-        className="relative min-h-[50vh] flex items-center pt-20 bg-bg"
+        className="relative min-h-[50vh] flex items-center bg-bg"
       >
         <div className="mx-auto max-w-6xl w-full px-6 py-12">
           <div className="max-w-4xl">
@@ -39,7 +40,10 @@ export default function InsightsPage() {
       {/* Featured Post Section */}
       <section id="featured-post" className="relative bg-white py-16 md:py-24">
         <div className="mx-auto max-w-6xl w-full px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <Link
+            href="/insight/1"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center group cursor-pointer"
+          >
             {/* Left Column - Image */}
             <div className="relative">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] lg:h-[500px] flex items-center justify-center">
@@ -60,7 +64,7 @@ export default function InsightsPage() {
               </p>
 
               {/* Heading */}
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight group-hover:text-accent transition-colors">
                 Being the best we can be in everything accounting
               </h2>
 
@@ -83,7 +87,7 @@ export default function InsightsPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -105,14 +109,14 @@ export default function InsightsPage() {
           {/* Blog Posts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Blog Post Card 1 */}
-            <div className="flex gap-5">
+            <Link href="/insight/2" className="flex gap-5 group cursor-pointer">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">Post 1</p>
                 </div>
               </div>
               <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
                   Lead happiness for customers
                 </h3>
                 <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
@@ -129,17 +133,17 @@ export default function InsightsPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Blog Post Card 2 */}
-            <div className="flex gap-5">
+            <Link href="/insight/1" className="flex gap-5 group cursor-pointer">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">Post 2</p>
                 </div>
               </div>
               <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
                   Mutually support each other
                 </h3>
                 <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
@@ -156,17 +160,17 @@ export default function InsightsPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Blog Post Card 3 */}
-            <div className="flex gap-5">
+            <Link href="/insight/2" className="flex gap-5 group cursor-pointer">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">Post 3</p>
                 </div>
               </div>
               <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
                   Have fun growing together
                 </h3>
                 <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
@@ -183,17 +187,17 @@ export default function InsightsPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Blog Post Card 4 */}
-            <div className="flex gap-5">
+            <Link href="/insight/1" className="flex gap-5 group cursor-pointer">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">Post 4</p>
                 </div>
               </div>
               <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
                   Make Your Business Grow
                 </h3>
                 <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
@@ -210,7 +214,7 @@ export default function InsightsPage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -248,7 +252,10 @@ export default function InsightsPage() {
         <div className="relative">
           <div className="flex gap-6 overflow-x-auto scrollbar-hide pl-6 md:pl-[calc((100vw-72rem)/2+1.5rem)]">
             {/* Article Card 1 */}
-            <div className="flex-shrink-0 w-[500px] space-y-4">
+            <Link
+              href="/insight/1"
+              className="flex-shrink-0 w-[500px] space-y-4 group cursor-pointer"
+            >
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[450px] flex items-center justify-center">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -260,17 +267,20 @@ export default function InsightsPage() {
                 <div className="flex items-center gap-2 text-xs text-black/50 font-light">
                   <span>Published in Insight Jan 30, 2021</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
                   Practice making User Flow
                 </h3>
                 <p className="text-sm text-black/50 leading-relaxed font-light">
                   In this article, we'll cover how to create user flows
                 </p>
               </div>
-            </div>
+            </Link>
 
             {/* Article Card 2 */}
-            <div className="flex-shrink-0 w-[500px] space-y-4">
+            <Link
+              href="/insight/2"
+              className="flex-shrink-0 w-[500px] space-y-4 group cursor-pointer"
+            >
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[450px] flex items-center justify-center">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -283,7 +293,7 @@ export default function InsightsPage() {
                   <span>Published in Insight Jan 30, 2021</span>
                   <span>by : Albert Sans</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
                   Overview of the Design Principles
                 </h3>
                 <p className="text-sm text-black/50 leading-relaxed font-light">
@@ -291,10 +301,13 @@ export default function InsightsPage() {
                   principles, we first discuss the principles.
                 </p>
               </div>
-            </div>
+            </Link>
 
             {/* Article Card 3 */}
-            <div className="flex-shrink-0 w-[500px] space-y-4 pr-6">
+            <Link
+              href="/insight/1"
+              className="flex-shrink-0 w-[500px] space-y-4 pr-6 group cursor-pointer"
+            >
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[450px] flex items-center justify-center">
                 <div className="w-full h-full bg-gray-400 flex items-center justify-center">
                   <p className="text-gray-500 text-sm font-light">
@@ -306,14 +319,14 @@ export default function InsightsPage() {
                 <div className="flex items-center gap-2 text-xs text-black/50 font-light">
                   <span>Published in Insight Jan 30, 2021</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
                   Using Grid in website design
                 </h3>
                 <p className="text-sm text-black/50 leading-relaxed font-light">
                   Andi: "What's the grid like?" Toni: "Like below"
                 </p>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
