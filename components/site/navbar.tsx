@@ -201,7 +201,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
         {/* Center: Nav links - single capsule background */}
         <div className="hidden md:flex items-center justify-center flex-nowrap">
           <div
-            className={`flex items-center gap-4 rounded-pill h-10 pr-2.5 overflow-hidden transition-colors duration-300 ${navBg} backdrop-blur-sm`}
+            className={`flex items-center gap-4 rounded-pill h-10 pl-3 pr-2.5 overflow-hidden transition-colors duration-300 ${navBg} backdrop-blur-sm`}
           >
             <Link
               href="/"
