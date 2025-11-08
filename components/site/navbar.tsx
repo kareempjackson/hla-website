@@ -31,6 +31,19 @@ export default function Navbar() {
       const aboutTestimonials = document.getElementById("about-testimonials");
       const aboutCta = document.getElementById("about-cta");
 
+      // Get all section wrappers - Services page
+      const servicesHero = document.getElementById("services-hero");
+      const servicesBookkeeping = document.getElementById(
+        "services-bookkeeping"
+      );
+      const servicesController = document.getElementById("services-controller");
+      const servicesCompliance = document.getElementById("services-compliance");
+      const servicesAddons = document.getElementById("services-addons");
+      const servicesSpecialized = document.getElementById(
+        "services-specialized"
+      );
+      const servicesCta = document.getElementById("services-cta");
+
       // Check which section is currently visible at the top
       // Since sections are sticky, we check if they're stuck at top-0
       const checkSection = (element: HTMLElement | null, isDarkBg: boolean) => {
@@ -65,6 +78,19 @@ export default function Navbar() {
       if (newIsDark === null) newIsDark = checkSection(aboutWhoWeServe, true);
       if (newIsDark === null) newIsDark = checkSection(aboutMission, false);
       if (newIsDark === null) newIsDark = checkSection(aboutHero, true);
+
+      // Check Services page sections
+      if (newIsDark === null) newIsDark = checkSection(servicesCta, false); // cream
+      if (newIsDark === null)
+        newIsDark = checkSection(servicesSpecialized, true); // black
+      if (newIsDark === null) newIsDark = checkSection(servicesAddons, false); // cream
+      if (newIsDark === null)
+        newIsDark = checkSection(servicesCompliance, true); // dark green
+      if (newIsDark === null)
+        newIsDark = checkSection(servicesController, false); // cream
+      if (newIsDark === null)
+        newIsDark = checkSection(servicesBookkeeping, true); // dark green
+      if (newIsDark === null) newIsDark = checkSection(servicesHero, false); // cream
 
       if (newIsDark !== null) {
         setIsDark(newIsDark);
@@ -107,8 +133,8 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/images/logo/logo.svg"
-            width={130}
-            height={28}
+            width={110}
+            height={24}
             alt="Higher Level Accounting"
             style={{ filter: logoFilter }}
             className="transition-all duration-300"
@@ -139,19 +165,42 @@ export default function Navbar() {
               About
             </Link>
             <Link
-              href="#services"
-              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center gap-2 transition-colors duration-300 ${navTextColor}`}
+              href="/services"
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center gap-2 transition-colors duration-300 ${
+                pathname === "/services"
+                  ? `${activeTabBg} shadow-sm`
+                  : navTextColor
+              }`}
             >
               <span>Services</span>
             </Link>
             <Link
-              href="#insights"
-              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${navTextColor}`}
+              href="/insights"
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
+                pathname === "/insights"
+                  ? `${activeTabBg} shadow-sm`
+                  : navTextColor
+              }`}
             >
               Insights
             </Link>
             <Link
-              href="#industries"
+              href="/#how-can-we-help"
+              onClick={(e) => {
+                // If we're already on home page, prevent default and smooth scroll
+                if (pathname === "/") {
+                  e.preventDefault();
+                  const section = document.getElementById("how-can-we-help");
+                  if (section) {
+                    const offset = section.offsetTop;
+                    window.scrollTo({
+                      top: offset,
+                      behavior: "smooth",
+                    });
+                  }
+                }
+                // Otherwise, let the link navigate normally to /#how-can-we-help
+              }}
               className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${navTextColor}`}
             >
               Industries
