@@ -27,13 +27,63 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export default function Testimonial() {
   return (
-    <section className="bg-cream-200 min-h-screen flex items-center py-16 md:py-16 pt-20">
-      <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-6 md:grid-cols-2">
+    <section className="relative bg-cream-200 min-h-screen flex items-center py-16 md:py-16 pt-20 overflow-hidden">
+      {/* Decorative Stepped Lines */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Pattern 1 - Top Left to Bottom Right */}
+        <div className="absolute top-0 left-0 w-px h-[24%] bg-black/10"></div>
+        <div className="absolute top-[24%] left-0 w-[32%] h-px bg-black/10"></div>
+        <div className="absolute top-[24%] left-[32%] w-px h-[26%] bg-black/10"></div>
+        <div className="absolute top-[50%] left-[32%] w-[28%] h-px bg-black/10"></div>
+        <div className="absolute top-[50%] left-[60%] w-px h-[50%] bg-black/10"></div>
+        <div className="absolute bottom-0 left-[60%] w-[40%] h-px bg-black/10"></div>
+
+        {/* Pattern 2 - Top Right to Bottom Left */}
+        <div className="absolute top-0 right-0 w-px h-[28%] bg-black/8"></div>
+        <div className="absolute top-[28%] right-[18%] w-[18%] h-px bg-black/8"></div>
+        <div className="absolute top-[28%] right-[18%] w-px h-[30%] bg-black/8"></div>
+        <div className="absolute top-[58%] right-[36%] w-[18%] h-px bg-black/8"></div>
+        <div className="absolute top-[58%] right-[36%] w-px h-[42%] bg-black/8"></div>
+        <div className="absolute bottom-0 left-0 w-[64%] h-px bg-black/8"></div>
+
+        {/* Pattern 3 - Top Left to Bottom Left */}
+        <div className="absolute top-0 left-[18%] w-px h-[20%] bg-black/9"></div>
+        <div className="absolute top-[20%] left-[8%] w-[10%] h-px bg-black/9"></div>
+        <div className="absolute top-[20%] left-[8%] w-px h-[52%] bg-black/9"></div>
+        <div className="absolute top-[72%] left-[0] w-[8%] h-px bg-black/9"></div>
+        <div className="absolute top-[72%] left-0 w-px h-[28%] bg-black/9"></div>
+
+        {/* Pattern 4 - Top Right to Bottom Right */}
+        <div className="absolute top-0 right-[10%] w-px h-[22%] bg-black/7"></div>
+        <div className="absolute top-[22%] right-[22%] w-[12%] h-px bg-black/7"></div>
+        <div className="absolute top-[22%] right-[22%] w-px h-[26%] bg-black/7"></div>
+        <div className="absolute top-[48%] right-[10%] w-[12%] h-px bg-black/7"></div>
+        <div className="absolute top-[48%] right-[10%] w-px h-[52%] bg-black/7"></div>
+        <div className="absolute bottom-0 right-[10%] w-[10%] h-px bg-black/7"></div>
+
+        {/* Pattern 5 - Top Right to Bottom Left */}
+        <div className="absolute top-0 right-[28%] w-px h-[26%] bg-black/11"></div>
+        <div className="absolute top-[26%] right-[46%] w-[18%] h-px bg-black/11"></div>
+        <div className="absolute top-[26%] right-[46%] w-px h-[30%] bg-black/11"></div>
+        <div className="absolute top-[56%] right-[58%] w-[12%] h-px bg-black/11"></div>
+        <div className="absolute top-[56%] right-[58%] w-px h-[44%] bg-black/11"></div>
+        <div className="absolute bottom-0 left-0 w-[42%] h-px bg-black/11"></div>
+
+        {/* Pattern 6 - Top Left to Bottom Right */}
+        <div className="absolute top-0 left-[40%] w-px h-[18%] bg-black/6"></div>
+        <div className="absolute top-[18%] left-[40%] w-[22%] h-px bg-black/6"></div>
+        <div className="absolute top-[18%] left-[62%] w-px h-[24%] bg-black/6"></div>
+        <div className="absolute top-[42%] left-[62%] w-[24%] h-px bg-black/6"></div>
+        <div className="absolute top-[42%] left-[86%] w-px h-[58%] bg-black/6"></div>
+        <div className="absolute bottom-0 left-[86%] w-[14%] h-px bg-black/6"></div>
+      </div>
+
+      <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-6 md:grid-cols-2 relative z-10">
         {/* Left - Image */}
         <div className="relative max-w-sm">
           <div className="relative overflow-hidden rounded-sm">
             <Image
-              src="/window.svg"
+              src="/images/image/ibw21_president_dr_ron_daniels-400x400.jpg"
               alt="Dr. Ron Daniels"
               width={450}
               height={550}
@@ -66,7 +116,7 @@ export default function Testimonial() {
             </footer>
           </blockquote>
 
-          <div className="flex items-center justify-between pt-2">
+          <div className="pt-2">
             {/* Social Icons */}
             <div className="flex items-center gap-2">
               <a
@@ -91,14 +141,6 @@ export default function Testimonial() {
                 <InstagramIcon className="size-3.5" />
               </a>
             </div>
-
-            {/* Learn More Link */}
-            <Link
-              href="#"
-              className="text-xs text-accent font-light hover:text-accent/80 transition-colors uppercase tracking-wide"
-            >
-              Learn more →
-            </Link>
           </div>
         </div>
       </div>

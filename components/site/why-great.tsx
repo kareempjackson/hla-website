@@ -36,8 +36,58 @@ function StarIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export default function WhyGreat() {
   return (
-    <section className="bg-cream min-h-screen flex items-center py-12 md:py-12 pt-20">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 md:grid-cols-2 w-full">
+    <section className="relative bg-cream min-h-screen flex items-center py-12 md:py-12 pt-20 overflow-hidden">
+      {/* Decorative Stepped Lines */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Pattern 1 - Top Left to Bottom Right */}
+        <div className="absolute top-0 left-0 w-px h-[20%] bg-black/10"></div>
+        <div className="absolute top-[20%] left-0 w-[28%] h-px bg-black/10"></div>
+        <div className="absolute top-[20%] left-[28%] w-px h-[35%] bg-black/10"></div>
+        <div className="absolute top-[55%] left-[28%] w-[42%] h-px bg-black/10"></div>
+        <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-black/10"></div>
+        <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-black/10"></div>
+
+        {/* Pattern 2 - Top Right to Bottom Left */}
+        <div className="absolute top-0 right-0 w-px h-[25%] bg-black/8"></div>
+        <div className="absolute top-[25%] right-[15%] w-[15%] h-px bg-black/8"></div>
+        <div className="absolute top-[25%] right-[15%] w-px h-[30%] bg-black/8"></div>
+        <div className="absolute top-[55%] right-[30%] w-[15%] h-px bg-black/8"></div>
+        <div className="absolute top-[55%] right-[30%] w-px h-[45%] bg-black/8"></div>
+        <div className="absolute bottom-0 left-0 w-[70%] h-px bg-black/8"></div>
+
+        {/* Pattern 3 - Top Left to Bottom Right */}
+        <div className="absolute top-0 left-[12%] w-px h-[22%] bg-black/6"></div>
+        <div className="absolute top-[22%] left-[12%] w-[25%] h-px bg-black/6"></div>
+        <div className="absolute top-[22%] left-[37%] w-px h-[28%] bg-black/6"></div>
+        <div className="absolute top-[50%] left-[37%] w-[30%] h-px bg-black/6"></div>
+        <div className="absolute top-[50%] left-[67%] w-px h-[50%] bg-black/6"></div>
+        <div className="absolute bottom-0 left-[67%] w-[33%] h-px bg-black/6"></div>
+
+        {/* Pattern 4 - Top Right to Bottom Right */}
+        <div className="absolute top-0 right-[12%] w-px h-[18%] bg-black/7"></div>
+        <div className="absolute top-[18%] right-[20%] w-[8%] h-px bg-black/7"></div>
+        <div className="absolute top-[18%] right-[20%] w-px h-[32%] bg-black/7"></div>
+        <div className="absolute top-[50%] right-[8%] w-[12%] h-px bg-black/7"></div>
+        <div className="absolute top-[50%] right-[8%] w-px h-[50%] bg-black/7"></div>
+        <div className="absolute bottom-0 right-[8%] w-[8%] h-px bg-black/7"></div>
+
+        {/* Pattern 5 - Top Left to Bottom Left */}
+        <div className="absolute top-0 left-[45%] w-px h-[15%] bg-black/5"></div>
+        <div className="absolute top-[15%] left-[15%] w-[30%] h-px bg-black/5"></div>
+        <div className="absolute top-[15%] left-[15%] w-px h-[58%] bg-black/5"></div>
+        <div className="absolute top-[73%] left-[0] w-[15%] h-px bg-black/5"></div>
+        <div className="absolute top-[73%] left-0 w-px h-[27%] bg-black/5"></div>
+
+        {/* Pattern 6 - Top Right to Bottom Left */}
+        <div className="absolute top-0 right-[25%] w-px h-[15%] bg-black/6"></div>
+        <div className="absolute top-[15%] right-[45%] w-[20%] h-px bg-black/6"></div>
+        <div className="absolute top-[15%] right-[45%] w-px h-[28%] bg-black/6"></div>
+        <div className="absolute top-[43%] right-[55%] w-[10%] h-px bg-black/6"></div>
+        <div className="absolute top-[43%] right-[55%] w-px h-[57%] bg-black/6"></div>
+        <div className="absolute bottom-0 left-0 w-[45%] h-px bg-black/6"></div>
+      </div>
+
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 md:grid-cols-2 w-full relative z-10">
         {/* Left content */}
         <div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-brand-deep leading-tight tracking-tight">
@@ -82,14 +132,14 @@ export default function WhyGreat() {
         </div>
 
         {/* Right image */}
-        <div className="relative">
-          <div className="relative overflow-hidden rounded-sm">
+        <div className="relative max-w-md mx-auto">
+          <div className="relative overflow-hidden rounded-sm aspect-[3/4]">
             <Image
-              src="/window.svg"
+              src="/images/image/annie-spratt-tuJ3tXSayco-unsplash.jpg"
               alt="Team collaboration"
-              width={700}
+              width={600}
               height={800}
-              className="h-auto w-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
         </div>
