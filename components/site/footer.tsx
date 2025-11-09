@@ -91,7 +91,7 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white/90">
       {/* top row */}
-      <div className="mx-auto max-w-6xl px-6 py-16">
+      <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex items-center justify-between">
           <Image
             src="/images/logo/logo.svg"
@@ -128,7 +128,7 @@ export default function Footer() {
 
       {/* client portal row */}
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex items-center justify-between py-16">
+        <div className="flex items-center justify-between py-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-wide font-extralight text-cream flex items-center gap-3">
             Client Portal
             <ArrowUpRight className="size-7 text-cream" />
@@ -145,8 +145,8 @@ export default function Footer() {
       <div className="w-full border-t border-white/10" />
 
       {/* columns */}
-      <div className="mx-auto max-w-6xl px-6 py-20">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div className="mx-auto max-w-6xl px-6 py-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div className="space-y-3">
             <Image
               src="/images/icon/icon.png"

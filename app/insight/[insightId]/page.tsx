@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "../../../components/site/navbar";
 import Footer from "../../../components/site/footer";
 import Image from "next/image";
@@ -54,12 +55,89 @@ const getInsightById = (id: string) => {
   return insights[id] || null;
 };
 
+// Generate dynamic metadata for each insight
+export async function generateMetadata({
+  params,
+}: {
+  params: { insightId: string };
+}): Promise<Metadata> {
+  const insight = getInsightById(params.insightId);
+
+  if (!insight) {
+    return {
+      title: "Insight Not Found | Higher Level Accounting",
+      description: "The insight you're looking for doesn't exist.",
+    };
+  }
+
+  return {
+    title: `${insight.title} | Higher Level Accounting Insights`,
+    description: insight.content.replace(/<[^>]*>/g, "").substring(0, 160),
+    keywords: `${insight.category.toLowerCase()}, accounting insights, financial management, ${insight.title.toLowerCase()}`,
+    authors: [{ name: insight.author }],
+    openGraph: {
+      title: insight.title,
+      description: insight.content.replace(/<[^>]*>/g, "").substring(0, 160),
+      url: `https://higherlevelacct.com/insight/${insight.id}`,
+      siteName: "Higher Level Accounting",
+      type: "article",
+      publishedTime: insight.date,
+      authors: [insight.author],
+      images: [
+        {
+          url: insight.image,
+          width: 1200,
+          height: 630,
+          alt: insight.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: insight.title,
+      description: insight.content.replace(/<[^>]*>/g, "").substring(0, 160),
+      images: [insight.image],
+    },
+    alternates: {
+      canonical: `https://higherlevelacct.com/insight/${insight.id}`,
+    },
+  };
+}
+
 export default function InsightPage({
   params,
 }: {
   params: { insightId: string };
 }) {
   const insight = getInsightById(params.insightId);
+
+  // Structured data for individual blog post
+  const structuredData = insight
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: insight.title,
+        author: {
+          "@type": "Person",
+          name: insight.author,
+        },
+        datePublished: insight.date,
+        description: insight.content.replace(/<[^>]*>/g, "").substring(0, 200),
+        image: insight.image,
+        publisher: {
+          "@type": "Organization",
+          name: "Higher Level Accounting",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://higherlevelacct.com/images/logo/logo.svg",
+          },
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `https://higherlevelacct.com/insight/${insight.id}`,
+        },
+      }
+    : null;
 
   if (!insight) {
     return (
@@ -82,6 +160,14 @@ export default function InsightPage({
 
   return (
     <div className="relative bg-white">
+      {/* Add structured data */}
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
+
       <Navbar sticky={true} />
 
       {/* Hero Section with Featured Image */}

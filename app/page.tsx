@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "../components/site/navbar";
 import Hero from "../components/site/hero";
 import WhyGreat from "../components/site/why-great";
@@ -7,6 +8,42 @@ import HowCanWeHelp from "../components/site/how-can-we-help";
 import OurProcess from "../components/site/our-process";
 import Testimonial from "../components/site/testimonial";
 import CTASection from "../components/site/cta-section";
+
+export const metadata: Metadata = {
+  title:
+    "Higher Level Accounting | Controller-Level Accounting Services for Growth-Minded Businesses",
+  description:
+    "Strategic, controller-level accounting services for SaaS companies, marketing agencies, and regulated retailers. Get accurate financials, actionable insights, and rock-solid compliance to scale confidently.",
+  keywords:
+    "controller accounting services, accrual accounting, SaaS accounting, agency accounting, cannabis retail accounting, financial compliance, strategic accounting, investor-ready financials, bookkeeping services",
+  authors: [{ name: "Higher Level Accounting" }],
+  openGraph: {
+    title: "Higher Level Accounting | Controller-Level Accounting Services",
+    description:
+      "Strategic accounting services for growth-minded businesses. Accurate financials, actionable insights, and rock-solid compliance.",
+    url: "https://higherlevelacct.com",
+    siteName: "Higher Level Accounting",
+    type: "website",
+    images: [
+      {
+        url: "/images/logo/logo.svg",
+        width: 1200,
+        height: 630,
+        alt: "Higher Level Accounting",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Higher Level Accounting | Controller-Level Accounting Services",
+    description:
+      "Strategic accounting services for growth-minded businesses. Accurate financials, actionable insights, and rock-solid compliance.",
+    images: ["/images/logo/logo.svg"],
+  },
+  alternates: {
+    canonical: "https://higherlevelacct.com",
+  },
+};
 
 export default function Home() {
   return (

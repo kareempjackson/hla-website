@@ -8,8 +8,95 @@ export default function ServicesPage() {
       <Navbar sticky={true} />
 
       {/* Hero Section */}
-      <section id="services-hero" className="relative bg-cream py-16 md:py-20">
-        <div className="mx-auto max-w-6xl w-full px-6">
+      <section
+        id="services-hero"
+        className="relative bg-cream py-16 md:py-20 -mt-20 pt-32 md:pt-36 overflow-hidden"
+      >
+        {/* Decorative Lines - Dark on cream background */}
+        <div
+          className="absolute inset-0 top-0 pointer-events-none z-[150]"
+          style={{ marginTop: "-5rem" }}
+        >
+          {/* Pattern 1 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-0 w-px h-[25%] bg-black/12"></div>
+          <div className="absolute top-[25%] left-0 w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[25%] left-[35%] w-px h-[30%] bg-black/12"></div>
+          <div className="absolute top-[55%] left-[35%] w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-black/12"></div>
+          <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-black/12"></div>
+
+          {/* Pattern 2 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[15%] w-px h-[30%] bg-black/10"></div>
+          <div className="absolute top-[30%] left-[15%] w-[30%] h-px bg-black/10"></div>
+          <div className="absolute top-[30%] left-[45%] w-px h-[28%] bg-black/10"></div>
+          <div className="absolute top-[58%] left-[45%] w-[32%] h-px bg-black/10"></div>
+          <div className="absolute top-[58%] right-[23%] w-px h-[42%] bg-black/10"></div>
+          <div className="absolute bottom-0 right-[23%] w-[23%] h-px bg-black/10"></div>
+
+          {/* Pattern 3 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-0 w-px h-[28%] bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-[12%] h-px bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-px h-[32%] bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-[16%] h-px bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-px h-[40%] bg-black/8"></div>
+          <div className="absolute bottom-0 left-0 w-[72%] h-px bg-black/8"></div>
+
+          {/* Pattern 4 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[8%] w-px h-[22%] bg-black/7"></div>
+          <div className="absolute top-[22%] left-[8%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[22%] left-[26%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[47%] left-[26%] w-[30%] h-px bg-black/7"></div>
+          <div className="absolute top-[47%] left-[56%] w-px h-[28%] bg-black/7"></div>
+          <div className="absolute top-[75%] left-[56%] w-[44%] h-px bg-black/7"></div>
+          <div className="absolute top-[75%] right-0 w-px h-[25%] bg-black/7"></div>
+
+          {/* Pattern 5 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[52%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] left-[52%] w-[22%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[26%] w-px h-[18%] bg-black/7"></div>
+          <div className="absolute top-[38%] right-[26%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[38%] right-[8%] w-px h-[62%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[8%] w-[8%] h-px bg-black/7"></div>
+
+          {/* Pattern 6 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-[25%] w-px h-[18%] bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-[25%] h-px bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-px h-[35%] bg-black/6"></div>
+          <div className="absolute top-[53%] right-[50%] w-[15%] h-px bg-black/6"></div>
+          <div className="absolute top-[53%] right-[35%] w-px h-[47%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[65%] h-px bg-black/6"></div>
+
+          {/* Pattern 7 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[22%] w-px h-[15%] bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-[17%] h-px bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-px h-[85%] bg-black/5"></div>
+
+          {/* Pattern 8 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[40%] w-px h-[12%] bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-[20%] h-px bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-px h-[38%] bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-[17%] h-px bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-px h-[50%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[3%] h-px bg-black/6"></div>
+
+          {/* Pattern 9 - Top Right to Bottom Right */}
+          <div className="absolute top-0 right-[12%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-[3%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-[15%] h-px bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-px h-[55%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-black/7"></div>
+
+          {/* Pattern 10 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[18%] w-px h-[24%] bg-black/4"></div>
+          <div className="absolute top-[24%] left-[18%] w-[28%] h-px bg-black/4"></div>
+          <div className="absolute top-[24%] left-[46%] w-px h-[36%] bg-black/4"></div>
+          <div className="absolute top-[60%] left-[46%] w-[38%] h-px bg-black/4"></div>
+          <div className="absolute top-[60%] right-[16%] w-px h-[40%] bg-black/4"></div>
+          <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-black/4"></div>
+        </div>
+
+        <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
           {/* Top Section - Content */}
           <div className="max-w-4xl mb-12 md:mb-16">
             {/* Label */}
@@ -49,9 +136,90 @@ export default function ServicesPage() {
       {/* Accrual-Based Bookkeeping Section */}
       <section
         id="services-bookkeeping"
-        className="relative bg-bg py-16 md:py-24"
+        className="relative bg-bg py-16 md:py-24 overflow-hidden"
       >
-        <div className="mx-auto max-w-6xl w-full px-6">
+        {/* Decorative Lines - White on dark teal background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Pattern 1 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-0 w-px h-[25%] bg-white/12"></div>
+          <div className="absolute top-[25%] left-0 w-[35%] h-px bg-white/12"></div>
+          <div className="absolute top-[25%] left-[35%] w-px h-[30%] bg-white/12"></div>
+          <div className="absolute top-[55%] left-[35%] w-[35%] h-px bg-white/12"></div>
+          <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-white/12"></div>
+          <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-white/12"></div>
+
+          {/* Pattern 2 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[15%] w-px h-[30%] bg-white/10"></div>
+          <div className="absolute top-[30%] left-[15%] w-[30%] h-px bg-white/10"></div>
+          <div className="absolute top-[30%] left-[45%] w-px h-[28%] bg-white/10"></div>
+          <div className="absolute top-[58%] left-[45%] w-[32%] h-px bg-white/10"></div>
+          <div className="absolute top-[58%] right-[23%] w-px h-[42%] bg-white/10"></div>
+          <div className="absolute bottom-0 right-[23%] w-[23%] h-px bg-white/10"></div>
+
+          {/* Pattern 3 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-0 w-px h-[28%] bg-white/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-[12%] h-px bg-white/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-px h-[32%] bg-white/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-[16%] h-px bg-white/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-px h-[40%] bg-white/8"></div>
+          <div className="absolute bottom-0 left-0 w-[72%] h-px bg-white/8"></div>
+
+          {/* Pattern 4 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[8%] w-px h-[22%] bg-white/7"></div>
+          <div className="absolute top-[22%] left-[8%] w-[18%] h-px bg-white/7"></div>
+          <div className="absolute top-[22%] left-[26%] w-px h-[25%] bg-white/7"></div>
+          <div className="absolute top-[47%] left-[26%] w-[30%] h-px bg-white/7"></div>
+          <div className="absolute top-[47%] left-[56%] w-px h-[28%] bg-white/7"></div>
+          <div className="absolute top-[75%] left-[56%] w-[44%] h-px bg-white/7"></div>
+          <div className="absolute top-[75%] right-0 w-px h-[25%] bg-white/7"></div>
+
+          {/* Pattern 5 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[52%] w-px h-[20%] bg-white/7"></div>
+          <div className="absolute top-[20%] left-[52%] w-[22%] h-px bg-white/7"></div>
+          <div className="absolute top-[20%] right-[26%] w-px h-[18%] bg-white/7"></div>
+          <div className="absolute top-[38%] right-[26%] w-[18%] h-px bg-white/7"></div>
+          <div className="absolute top-[38%] right-[8%] w-px h-[62%] bg-white/7"></div>
+          <div className="absolute bottom-0 right-[8%] w-[8%] h-px bg-white/7"></div>
+
+          {/* Pattern 6 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-[25%] w-px h-[18%] bg-white/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-[25%] h-px bg-white/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-px h-[35%] bg-white/6"></div>
+          <div className="absolute top-[53%] right-[50%] w-[15%] h-px bg-white/6"></div>
+          <div className="absolute top-[53%] right-[35%] w-px h-[47%] bg-white/6"></div>
+          <div className="absolute bottom-0 left-0 w-[65%] h-px bg-white/6"></div>
+
+          {/* Pattern 7 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[22%] w-px h-[15%] bg-white/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-[17%] h-px bg-white/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-px h-[85%] bg-white/5"></div>
+
+          {/* Pattern 8 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[40%] w-px h-[12%] bg-white/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-[20%] h-px bg-white/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-px h-[38%] bg-white/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-[17%] h-px bg-white/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-px h-[50%] bg-white/6"></div>
+          <div className="absolute bottom-0 left-0 w-[3%] h-px bg-white/6"></div>
+
+          {/* Pattern 9 - Top Right to Bottom Right */}
+          <div className="absolute top-0 right-[12%] w-px h-[20%] bg-white/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-[3%] h-px bg-white/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-px h-[25%] bg-white/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-[15%] h-px bg-white/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-px h-[55%] bg-white/7"></div>
+          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-white/7"></div>
+
+          {/* Pattern 10 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[18%] w-px h-[24%] bg-white/4"></div>
+          <div className="absolute top-[24%] left-[18%] w-[28%] h-px bg-white/4"></div>
+          <div className="absolute top-[24%] left-[46%] w-px h-[36%] bg-white/4"></div>
+          <div className="absolute top-[60%] left-[46%] w-[38%] h-px bg-white/4"></div>
+          <div className="absolute top-[60%] right-[16%] w-px h-[40%] bg-white/4"></div>
+          <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-white/4"></div>
+        </div>
+
+        <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Content */}
             <div className="space-y-4 md:space-y-6">
@@ -141,9 +309,90 @@ export default function ServicesPage() {
       {/* CFO Level Service Section */}
       <section
         id="services-controller"
-        className="relative bg-cream py-16 md:py-24"
+        className="relative bg-cream py-16 md:py-24 overflow-hidden"
       >
-        <div className="mx-auto max-w-6xl w-full px-6">
+        {/* Decorative Lines - Dark on cream background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Pattern 1 */}
+          <div className="absolute top-0 left-0 w-px h-[25%] bg-black/12"></div>
+          <div className="absolute top-[25%] left-0 w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[25%] left-[35%] w-px h-[30%] bg-black/12"></div>
+          <div className="absolute top-[55%] left-[35%] w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-black/12"></div>
+          <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-black/12"></div>
+
+          {/* Pattern 2 */}
+          <div className="absolute top-0 left-[15%] w-px h-[30%] bg-black/10"></div>
+          <div className="absolute top-[30%] left-[15%] w-[30%] h-px bg-black/10"></div>
+          <div className="absolute top-[30%] left-[45%] w-px h-[28%] bg-black/10"></div>
+          <div className="absolute top-[58%] left-[45%] w-[32%] h-px bg-black/10"></div>
+          <div className="absolute top-[58%] right-[23%] w-px h-[42%] bg-black/10"></div>
+          <div className="absolute bottom-0 right-[23%] w-[23%] h-px bg-black/10"></div>
+
+          {/* Pattern 3 */}
+          <div className="absolute top-0 right-0 w-px h-[28%] bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-[12%] h-px bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-px h-[32%] bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-[16%] h-px bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-px h-[40%] bg-black/8"></div>
+          <div className="absolute bottom-0 left-0 w-[72%] h-px bg-black/8"></div>
+
+          {/* Pattern 4 */}
+          <div className="absolute top-0 left-[8%] w-px h-[22%] bg-black/7"></div>
+          <div className="absolute top-[22%] left-[8%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[22%] left-[26%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[47%] left-[26%] w-[30%] h-px bg-black/7"></div>
+          <div className="absolute top-[47%] left-[56%] w-px h-[28%] bg-black/7"></div>
+          <div className="absolute top-[75%] left-[56%] w-[44%] h-px bg-black/7"></div>
+          <div className="absolute top-[75%] right-0 w-px h-[25%] bg-black/7"></div>
+
+          {/* Pattern 5 */}
+          <div className="absolute top-0 left-[52%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] left-[52%] w-[22%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[26%] w-px h-[18%] bg-black/7"></div>
+          <div className="absolute top-[38%] right-[26%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[38%] right-[8%] w-px h-[62%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[8%] w-[8%] h-px bg-black/7"></div>
+
+          {/* Pattern 6 */}
+          <div className="absolute top-0 right-[25%] w-px h-[18%] bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-[25%] h-px bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-px h-[35%] bg-black/6"></div>
+          <div className="absolute top-[53%] right-[50%] w-[15%] h-px bg-black/6"></div>
+          <div className="absolute top-[53%] right-[35%] w-px h-[47%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[65%] h-px bg-black/6"></div>
+
+          {/* Pattern 7 */}
+          <div className="absolute top-0 left-[22%] w-px h-[15%] bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-[17%] h-px bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-px h-[85%] bg-black/5"></div>
+
+          {/* Pattern 8 */}
+          <div className="absolute top-0 left-[40%] w-px h-[12%] bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-[20%] h-px bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-px h-[38%] bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-[17%] h-px bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-px h-[50%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[3%] h-px bg-black/6"></div>
+
+          {/* Pattern 9 */}
+          <div className="absolute top-0 right-[12%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-[3%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-[15%] h-px bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-px h-[55%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-black/7"></div>
+
+          {/* Pattern 10 */}
+          <div className="absolute top-0 left-[18%] w-px h-[24%] bg-black/4"></div>
+          <div className="absolute top-[24%] left-[18%] w-[28%] h-px bg-black/4"></div>
+          <div className="absolute top-[24%] left-[46%] w-px h-[36%] bg-black/4"></div>
+          <div className="absolute top-[60%] left-[46%] w-[38%] h-px bg-black/4"></div>
+          <div className="absolute top-[60%] right-[16%] w-px h-[40%] bg-black/4"></div>
+          <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-black/4"></div>
+        </div>
+
+        <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Image */}
             <div className="relative order-2 lg:order-1">
@@ -233,9 +482,90 @@ export default function ServicesPage() {
       {/* Compliance & Risk Management Section */}
       <section
         id="services-compliance"
-        className="relative bg-bg py-16 md:py-24"
+        className="relative bg-bg py-16 md:py-24 overflow-hidden"
       >
-        <div className="mx-auto max-w-6xl w-full px-6">
+        {/* Decorative Lines - White on dark teal background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Pattern 1 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-0 w-px h-[25%] bg-white/12"></div>
+          <div className="absolute top-[25%] left-0 w-[35%] h-px bg-white/12"></div>
+          <div className="absolute top-[25%] left-[35%] w-px h-[30%] bg-white/12"></div>
+          <div className="absolute top-[55%] left-[35%] w-[35%] h-px bg-white/12"></div>
+          <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-white/12"></div>
+          <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-white/12"></div>
+
+          {/* Pattern 2 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[15%] w-px h-[30%] bg-white/10"></div>
+          <div className="absolute top-[30%] left-[15%] w-[30%] h-px bg-white/10"></div>
+          <div className="absolute top-[30%] left-[45%] w-px h-[28%] bg-white/10"></div>
+          <div className="absolute top-[58%] left-[45%] w-[32%] h-px bg-white/10"></div>
+          <div className="absolute top-[58%] right-[23%] w-px h-[42%] bg-white/10"></div>
+          <div className="absolute bottom-0 right-[23%] w-[23%] h-px bg-white/10"></div>
+
+          {/* Pattern 3 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-0 w-px h-[28%] bg-white/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-[12%] h-px bg-white/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-px h-[32%] bg-white/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-[16%] h-px bg-white/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-px h-[40%] bg-white/8"></div>
+          <div className="absolute bottom-0 left-0 w-[72%] h-px bg-white/8"></div>
+
+          {/* Pattern 4 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[8%] w-px h-[22%] bg-white/7"></div>
+          <div className="absolute top-[22%] left-[8%] w-[18%] h-px bg-white/7"></div>
+          <div className="absolute top-[22%] left-[26%] w-px h-[25%] bg-white/7"></div>
+          <div className="absolute top-[47%] left-[26%] w-[30%] h-px bg-white/7"></div>
+          <div className="absolute top-[47%] left-[56%] w-px h-[28%] bg-white/7"></div>
+          <div className="absolute top-[75%] left-[56%] w-[44%] h-px bg-white/7"></div>
+          <div className="absolute top-[75%] right-0 w-px h-[25%] bg-white/7"></div>
+
+          {/* Pattern 5 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[52%] w-px h-[20%] bg-white/7"></div>
+          <div className="absolute top-[20%] left-[52%] w-[22%] h-px bg-white/7"></div>
+          <div className="absolute top-[20%] right-[26%] w-px h-[18%] bg-white/7"></div>
+          <div className="absolute top-[38%] right-[26%] w-[18%] h-px bg-white/7"></div>
+          <div className="absolute top-[38%] right-[8%] w-px h-[62%] bg-white/7"></div>
+          <div className="absolute bottom-0 right-[8%] w-[8%] h-px bg-white/7"></div>
+
+          {/* Pattern 6 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-[25%] w-px h-[18%] bg-white/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-[25%] h-px bg-white/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-px h-[35%] bg-white/6"></div>
+          <div className="absolute top-[53%] right-[50%] w-[15%] h-px bg-white/6"></div>
+          <div className="absolute top-[53%] right-[35%] w-px h-[47%] bg-white/6"></div>
+          <div className="absolute bottom-0 left-0 w-[65%] h-px bg-white/6"></div>
+
+          {/* Pattern 7 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[22%] w-px h-[15%] bg-white/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-[17%] h-px bg-white/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-px h-[85%] bg-white/5"></div>
+
+          {/* Pattern 8 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[40%] w-px h-[12%] bg-white/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-[20%] h-px bg-white/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-px h-[38%] bg-white/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-[17%] h-px bg-white/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-px h-[50%] bg-white/6"></div>
+          <div className="absolute bottom-0 left-0 w-[3%] h-px bg-white/6"></div>
+
+          {/* Pattern 9 - Top Right to Bottom Right */}
+          <div className="absolute top-0 right-[12%] w-px h-[20%] bg-white/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-[3%] h-px bg-white/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-px h-[25%] bg-white/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-[15%] h-px bg-white/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-px h-[55%] bg-white/7"></div>
+          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-white/7"></div>
+
+          {/* Pattern 10 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[18%] w-px h-[24%] bg-white/4"></div>
+          <div className="absolute top-[24%] left-[18%] w-[28%] h-px bg-white/4"></div>
+          <div className="absolute top-[24%] left-[46%] w-px h-[36%] bg-white/4"></div>
+          <div className="absolute top-[60%] left-[46%] w-[38%] h-px bg-white/4"></div>
+          <div className="absolute top-[60%] right-[16%] w-px h-[40%] bg-white/4"></div>
+          <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-white/4"></div>
+        </div>
+
+        <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Column - Content */}
             <div className="space-y-4 md:space-y-6">
@@ -317,9 +647,90 @@ export default function ServicesPage() {
       {/* Strategic Planning Section */}
       <section
         id="services-addons"
-        className="relative bg-cream py-16 md:py-24"
+        className="relative bg-cream py-16 md:py-24 overflow-hidden"
       >
-        <div className="mx-auto max-w-6xl w-full px-6">
+        {/* Decorative Lines - Dark on cream background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Pattern 1 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-0 w-px h-[25%] bg-black/12"></div>
+          <div className="absolute top-[25%] left-0 w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[25%] left-[35%] w-px h-[30%] bg-black/12"></div>
+          <div className="absolute top-[55%] left-[35%] w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-black/12"></div>
+          <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-black/12"></div>
+
+          {/* Pattern 2 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[15%] w-px h-[30%] bg-black/10"></div>
+          <div className="absolute top-[30%] left-[15%] w-[30%] h-px bg-black/10"></div>
+          <div className="absolute top-[30%] left-[45%] w-px h-[28%] bg-black/10"></div>
+          <div className="absolute top-[58%] left-[45%] w-[32%] h-px bg-black/10"></div>
+          <div className="absolute top-[58%] right-[23%] w-px h-[42%] bg-black/10"></div>
+          <div className="absolute bottom-0 right-[23%] w-[23%] h-px bg-black/10"></div>
+
+          {/* Pattern 3 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-0 w-px h-[28%] bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-[12%] h-px bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-px h-[32%] bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-[16%] h-px bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-px h-[40%] bg-black/8"></div>
+          <div className="absolute bottom-0 left-0 w-[72%] h-px bg-black/8"></div>
+
+          {/* Pattern 4 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[8%] w-px h-[22%] bg-black/7"></div>
+          <div className="absolute top-[22%] left-[8%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[22%] left-[26%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[47%] left-[26%] w-[30%] h-px bg-black/7"></div>
+          <div className="absolute top-[47%] left-[56%] w-px h-[28%] bg-black/7"></div>
+          <div className="absolute top-[75%] left-[56%] w-[44%] h-px bg-black/7"></div>
+          <div className="absolute top-[75%] right-0 w-px h-[25%] bg-black/7"></div>
+
+          {/* Pattern 5 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[52%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] left-[52%] w-[22%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[26%] w-px h-[18%] bg-black/7"></div>
+          <div className="absolute top-[38%] right-[26%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[38%] right-[8%] w-px h-[62%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[8%] w-[8%] h-px bg-black/7"></div>
+
+          {/* Pattern 6 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-[25%] w-px h-[18%] bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-[25%] h-px bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-px h-[35%] bg-black/6"></div>
+          <div className="absolute top-[53%] right-[50%] w-[15%] h-px bg-black/6"></div>
+          <div className="absolute top-[53%] right-[35%] w-px h-[47%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[65%] h-px bg-black/6"></div>
+
+          {/* Pattern 7 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[22%] w-px h-[15%] bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-[17%] h-px bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-px h-[85%] bg-black/5"></div>
+
+          {/* Pattern 8 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[40%] w-px h-[12%] bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-[20%] h-px bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-px h-[38%] bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-[17%] h-px bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-px h-[50%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[3%] h-px bg-black/6"></div>
+
+          {/* Pattern 9 - Top Right to Bottom Right */}
+          <div className="absolute top-0 right-[12%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-[3%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-[15%] h-px bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-px h-[55%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-black/7"></div>
+
+          {/* Pattern 10 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[18%] w-px h-[24%] bg-black/4"></div>
+          <div className="absolute top-[24%] left-[18%] w-[28%] h-px bg-black/4"></div>
+          <div className="absolute top-[24%] left-[46%] w-px h-[36%] bg-black/4"></div>
+          <div className="absolute top-[60%] left-[46%] w-[38%] h-px bg-black/4"></div>
+          <div className="absolute top-[60%] right-[16%] w-px h-[40%] bg-black/4"></div>
+          <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-black/4"></div>
+        </div>
+
+        <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
           <div className="space-y-6 md:space-y-8">
             {/* Content - Full Width */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
@@ -402,9 +813,42 @@ export default function ServicesPage() {
       {/* Specialized Services Section */}
       <section
         id="services-specialized"
-        className="relative bg-black py-16 md:py-24"
+        className="relative bg-black py-16 md:py-24 overflow-hidden"
       >
-        <div className="mx-auto max-w-6xl w-full px-6">
+        {/* Decorative Lines - White on black background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Pattern 1 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-0 w-px h-[56%] bg-white/8"></div>
+          <div className="absolute top-[56%] left-0 w-[68%] h-px bg-white/8"></div>
+          <div className="absolute top-[56%] left-[68%] w-px h-[44%] bg-white/8"></div>
+          <div className="absolute bottom-0 left-[68%] w-[32%] h-px bg-white/8"></div>
+
+          {/* Pattern 2 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-0 w-px h-[62%] bg-white/6"></div>
+          <div className="absolute top-[62%] left-[18%] w-[82%] h-px bg-white/6"></div>
+          <div className="absolute top-[62%] left-[18%] w-px h-[38%] bg-white/6"></div>
+          <div className="absolute bottom-0 left-0 w-[18%] h-px bg-white/6"></div>
+
+          {/* Pattern 3 - Top Center to Bottom */}
+          <div className="absolute top-0 left-[38%] w-px h-[68%] bg-white/5"></div>
+          <div className="absolute top-[68%] left-[38%] w-[44%] h-px bg-white/5"></div>
+          <div className="absolute top-[68%] left-[82%] w-px h-[32%] bg-white/5"></div>
+          <div className="absolute bottom-0 left-[82%] w-[18%] h-px bg-white/5"></div>
+
+          {/* Pattern 4 - Top Left to Bottom Center */}
+          <div className="absolute top-0 left-[12%] w-px h-[50%] bg-white/4"></div>
+          <div className="absolute top-[50%] left-[12%] w-[54%] h-px bg-white/4"></div>
+          <div className="absolute top-[50%] left-[66%] w-px h-[50%] bg-white/4"></div>
+          <div className="absolute bottom-0 left-[66%] w-[34%] h-px bg-white/4"></div>
+
+          {/* Pattern 5 - Top Right to Bottom Right */}
+          <div className="absolute top-0 right-[12%] w-px h-[60%] bg-white/3"></div>
+          <div className="absolute top-[60%] right-[30%] w-[18%] h-px bg-white/3"></div>
+          <div className="absolute top-[60%] right-[30%] w-px h-[40%] bg-white/3"></div>
+          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-white/3"></div>
+        </div>
+
+        <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
           <div className="space-y-6 md:space-y-8">
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream leading-tight max-w-3xl">
@@ -507,8 +951,92 @@ export default function ServicesPage() {
       </section>
 
       {/* Call to Action Section */}
-      <section id="services-cta" className="relative bg-cream py-20 md:py-32">
-        <div className="mx-auto max-w-4xl w-full px-6 text-center">
+      <section
+        id="services-cta"
+        className="relative bg-cream py-20 md:py-32 overflow-hidden"
+      >
+        {/* Decorative Lines - Dark on cream background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Pattern 1 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-0 w-px h-[25%] bg-black/12"></div>
+          <div className="absolute top-[25%] left-0 w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[25%] left-[35%] w-px h-[30%] bg-black/12"></div>
+          <div className="absolute top-[55%] left-[35%] w-[35%] h-px bg-black/12"></div>
+          <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-black/12"></div>
+          <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-black/12"></div>
+
+          {/* Pattern 2 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[15%] w-px h-[30%] bg-black/10"></div>
+          <div className="absolute top-[30%] left-[15%] w-[30%] h-px bg-black/10"></div>
+          <div className="absolute top-[30%] left-[45%] w-px h-[28%] bg-black/10"></div>
+          <div className="absolute top-[58%] left-[45%] w-[32%] h-px bg-black/10"></div>
+          <div className="absolute top-[58%] right-[23%] w-px h-[42%] bg-black/10"></div>
+          <div className="absolute bottom-0 right-[23%] w-[23%] h-px bg-black/10"></div>
+
+          {/* Pattern 3 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-0 w-px h-[28%] bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-[12%] h-px bg-black/8"></div>
+          <div className="absolute top-[28%] right-[12%] w-px h-[32%] bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-[16%] h-px bg-black/8"></div>
+          <div className="absolute top-[60%] right-[28%] w-px h-[40%] bg-black/8"></div>
+          <div className="absolute bottom-0 left-0 w-[72%] h-px bg-black/8"></div>
+
+          {/* Pattern 4 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[8%] w-px h-[22%] bg-black/7"></div>
+          <div className="absolute top-[22%] left-[8%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[22%] left-[26%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[47%] left-[26%] w-[30%] h-px bg-black/7"></div>
+          <div className="absolute top-[47%] left-[56%] w-px h-[28%] bg-black/7"></div>
+          <div className="absolute top-[75%] left-[56%] w-[44%] h-px bg-black/7"></div>
+          <div className="absolute top-[75%] right-0 w-px h-[25%] bg-black/7"></div>
+
+          {/* Pattern 5 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[52%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] left-[52%] w-[22%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[26%] w-px h-[18%] bg-black/7"></div>
+          <div className="absolute top-[38%] right-[26%] w-[18%] h-px bg-black/7"></div>
+          <div className="absolute top-[38%] right-[8%] w-px h-[62%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[8%] w-[8%] h-px bg-black/7"></div>
+
+          {/* Pattern 6 - Top Right to Bottom Left */}
+          <div className="absolute top-0 right-[25%] w-px h-[18%] bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-[25%] h-px bg-black/6"></div>
+          <div className="absolute top-[18%] right-[50%] w-px h-[35%] bg-black/6"></div>
+          <div className="absolute top-[53%] right-[50%] w-[15%] h-px bg-black/6"></div>
+          <div className="absolute top-[53%] right-[35%] w-px h-[47%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[65%] h-px bg-black/6"></div>
+
+          {/* Pattern 7 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[22%] w-px h-[15%] bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-[17%] h-px bg-black/5"></div>
+          <div className="absolute top-[15%] left-[5%] w-px h-[85%] bg-black/5"></div>
+
+          {/* Pattern 8 - Top Left to Bottom Left */}
+          <div className="absolute top-0 left-[40%] w-px h-[12%] bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-[20%] h-px bg-black/6"></div>
+          <div className="absolute top-[12%] left-[20%] w-px h-[38%] bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-[17%] h-px bg-black/6"></div>
+          <div className="absolute top-[50%] left-[3%] w-px h-[50%] bg-black/6"></div>
+          <div className="absolute bottom-0 left-0 w-[3%] h-px bg-black/6"></div>
+
+          {/* Pattern 9 - Top Right to Bottom Right */}
+          <div className="absolute top-0 right-[12%] w-px h-[20%] bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-[3%] h-px bg-black/7"></div>
+          <div className="absolute top-[20%] right-[15%] w-px h-[25%] bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-[15%] h-px bg-black/7"></div>
+          <div className="absolute top-[45%] right-[30%] w-px h-[55%] bg-black/7"></div>
+          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-black/7"></div>
+
+          {/* Pattern 10 - Top Left to Bottom Right */}
+          <div className="absolute top-0 left-[18%] w-px h-[24%] bg-black/4"></div>
+          <div className="absolute top-[24%] left-[18%] w-[28%] h-px bg-black/4"></div>
+          <div className="absolute top-[24%] left-[46%] w-px h-[36%] bg-black/4"></div>
+          <div className="absolute top-[60%] left-[46%] w-[38%] h-px bg-black/4"></div>
+          <div className="absolute top-[60%] right-[16%] w-px h-[40%] bg-black/4"></div>
+          <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-black/4"></div>
+        </div>
+
+        <div className="mx-auto max-w-4xl w-full px-6 text-center relative z-10">
           <div className="space-y-6 md:space-y-8">
             {/* Heading */}
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-tight text-black leading-tight">

@@ -1,0 +1,22 @@
+{
+  "name": "Higher Level Accounting",
+  "short_name": "HLA",
+  "description": "Strategic, controller-level accounting services for growth-minded businesses",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B3F3D",
+  "theme_color": "#0B3F3D",
+  "icons": [
+    {
+      "src": "/images/icon/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
