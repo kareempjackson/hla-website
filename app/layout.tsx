@@ -3,7 +3,7 @@ import "./globals.css";
 import Footer from "../components/site/footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://higherlevelacct.com"),
+  metadataBase: new URL("https://higherlevelacct.co"),
   title: {
     default: "Higher Level Accounting | Controller-Level Accounting Services",
     template: "%s | Higher Level Accounting",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://higherlevelacct.com",
+    url: "https://higherlevelacct.co",
     siteName: "Higher Level Accounting",
     title: "Higher Level Accounting | Controller-Level Accounting Services",
     description:
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   alternates: {
-    canonical: "https://higherlevelacct.com",
+    canonical: "https://higherlevelacct.co",
   },
   verification: {
     // Add your verification codes here when available

@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import { getRecentInsights } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
 function ArrowLeft(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -28,36 +31,9 @@ function ArrowRight(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-const blogPosts = [
-  {
-    id: 1,
-    image: "/window.svg",
-    category: "Insight",
-    date: "Jan 30, 2021",
-    title: "Practice making User Flow",
-    excerpt: "In this article, we'll cover how to create user flows",
-  },
-  {
-    id: 2,
-    image: "/window.svg",
-    category: "Insight",
-    date: "Jan 30, 2021",
-    author: "Albert Sans",
-    title: "Overview of the Design Principles",
-    excerpt:
-      "What are Design Principles?... To understand design principles, we first discuss the principles.",
-  },
-  {
-    id: 3,
-    image: "/window.svg",
-    category: "Insight",
-    date: "Jan 30, 2021",
-    title: "Using Grid in website design",
-    excerpt: 'Andi: "What\'s the grid like?" Toni: "Like below"',
-  },
-];
+export default async function BlogPosts() {
+  const posts = await getRecentInsights(3);
 
-export default function BlogPosts() {
   return (
     <section className="relative bg-cream min-h-screen flex items-center py-12 md:py-12 pt-20 overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -82,7 +58,7 @@ export default function BlogPosts() {
         <div className="absolute top-0 left-[18%] w-px h-[20%] bg-black/7"></div>
         <div className="absolute top-[20%] left-[8%] w-[10%] h-px bg-black/7"></div>
         <div className="absolute top-[20%] left-[8%] w-px h-[46%] bg-black/7"></div>
-        <div className="absolute top-[66%] left-[0] w-[8%] h-px bg-black/7"></div>
+        <div className="absolute top-[66%] left-0 w-[8%] h-px bg-black/7"></div>
         <div className="absolute top-[66%] left-0 w-px h-[34%] bg-black/7"></div>
 
         {/* Pattern 4 - Top Right to Bottom Right */}
@@ -134,42 +110,64 @@ export default function BlogPosts() {
 
         {/* Blog Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {blogPosts.map((post) => (
-            <article key={post.id} className="group cursor-pointer">
-              {/* Image */}
-              <div className="mb-3 overflow-hidden rounded-sm">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  width={400}
-                  height={300}
-                  className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
+          {posts.map((post) => (
+            <Link
+              key={post._id}
+              href={`/insight/${post.slug.current}`}
+              className="group cursor-pointer"
+            >
+              <article>
+                {/* Image */}
+                <div className="mb-3 overflow-hidden rounded-sm bg-gray-200">
+                  {post.mainImage ? (
+                    <Image
+                      src={urlFor(post.mainImage).width(400).height(300).url()}
+                      alt={post.mainImage.alt || post.title}
+                      width={400}
+                      height={300}
+                      className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="h-48 w-full bg-gray-300 flex items-center justify-center">
+                      <span className="text-gray-500 text-sm">No image</span>
+                    </div>
+                  )}
+                </div>
 
-              {/* Meta */}
-              <div className="mb-2 flex items-center gap-2 text-xs text-black/50 font-light">
-                <span>Published in {post.category}</span>
-                <span>•</span>
-                <span>{post.date}</span>
-                {post.author && (
-                  <>
-                    <span>•</span>
-                    <span>by: {post.author}</span>
-                  </>
+                {/* Meta */}
+                <div className="mb-2 flex items-center gap-2 text-xs text-black/50 font-light">
+                  {post.category && (
+                    <>
+                      <span className="capitalize">
+                        {post.category.replace("-", " ")}
+                      </span>
+                      <span>•</span>
+                    </>
+                  )}
+                  <span>
+                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span>•</span>
+                  <span>by: {post.author}</span>
+                </div>
+
+                {/* Title */}
+                <h3 className="mb-2 text-base font-light text-black group-hover:text-black/70 transition-colors">
+                  {post.title}
+                </h3>
+
+                {/* Excerpt */}
+                {post.excerpt && (
+                  <p className="text-xs text-black/60 leading-relaxed font-light">
+                    {post.excerpt}
+                  </p>
                 )}
-              </div>
-
-              {/* Title */}
-              <h3 className="mb-2 text-base font-light text-black group-hover:text-black/70 transition-colors">
-                {post.title}
-              </h3>
-
-              {/* Excerpt */}
-              <p className="text-xs text-black/60 leading-relaxed font-light">
-                {post.excerpt}
-              </p>
-            </article>
+              </article>
+            </Link>
           ))}
         </div>
       </div>

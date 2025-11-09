@@ -1,9 +1,167 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Navbar from "../../components/site/navbar";
-import Footer from "../../components/site/footer";
 import { Button } from "../../components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
+import {
+  getFeaturedInsight,
+  getRecentInsightsExcludingFeatured,
+  getInsights,
+  getInsightCategories,
+  getInsightsCount,
+  type Insight,
+} from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
 export default function InsightsPage() {
+  const [featuredInsight, setFeaturedInsight] = useState<Insight | null>(null);
+  const [recentInsights, setRecentInsights] = useState<Insight[]>([]);
+  const [allInsights, setAllInsights] = useState<Insight[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [insightsCount, setInsightsCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const [count, featured, recent, all, cats] = await Promise.all([
+          getInsightsCount(),
+          getFeaturedInsight(),
+          getRecentInsightsExcludingFeatured(4),
+          getInsights(),
+          getInsightCategories(),
+        ]);
+
+        setInsightsCount(count);
+        setFeaturedInsight(featured);
+        setRecentInsights(recent);
+        setAllInsights(all);
+        setCategories(cats);
+      } catch (error) {
+        console.error("Error fetching insights:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  // Filter insights based on selected category
+  const filteredInsights =
+    selectedCategory === "all"
+      ? allInsights
+      : allInsights.filter((insight) => insight.category === selectedCategory);
+
+  // Format date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Get category display name
+  const getCategoryDisplayName = (category: string) => {
+    const categoryMap: Record<string, string> = {
+      accounting: "Accounting",
+      "tax-compliance": "Tax & Compliance",
+      "business-strategy": "Business Strategy",
+      "cannabis-industry": "Cannabis Industry",
+      "financial-planning": "Financial Planning",
+      "technology-tools": "Technology & Tools",
+    };
+    return categoryMap[category] || category;
+  };
+
+  // Empty state
+  if (!isLoading && insightsCount === 0) {
+    return (
+      <div className="relative bg-bg min-h-screen">
+        <Navbar sticky={true} />
+
+        {/* Hero Section */}
+        <section
+          id="insights-hero"
+          className="relative min-h-[50vh] flex items-center bg-bg -mt-20 pt-20"
+        >
+          {/* Decorative Lines */}
+          <div
+            className="absolute inset-0 top-0 pointer-events-none overflow-visible z-150"
+            style={{ marginTop: "-5rem" }}
+          >
+            {/* Pattern 1 */}
+            <div className="absolute top-0 left-0 w-px h-[25%] bg-white/15"></div>
+            <div className="absolute top-[25%] left-0 w-[35%] h-px bg-white/15"></div>
+            <div className="absolute top-[25%] left-[35%] w-px h-[30%] bg-white/15"></div>
+            <div className="absolute top-[55%] left-[35%] w-[35%] h-px bg-white/15"></div>
+            <div className="absolute top-[55%] left-[70%] w-px h-[45%] bg-white/15"></div>
+            <div className="absolute bottom-0 left-[70%] w-[30%] h-px bg-white/15"></div>
+          </div>
+
+          <div className="mx-auto max-w-6xl w-full px-6 py-12 relative z-10">
+            <div className="max-w-4xl">
+              <p className="text-xs font-light uppercase tracking-wider text-white/50 mb-4">
+                Insights & Resources
+              </p>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream mb-6 leading-tight">
+                Financial insights and industry expertise to help you grow with
+                confidence.
+              </h1>
+              <p className="text-sm md:text-base text-white/60 leading-relaxed font-light max-w-3xl">
+                Explore our latest articles, guides, and resources on
+                accounting, compliance, and strategic financial management.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Empty State Section */}
+        <section className="relative bg-white py-32">
+          <div className="mx-auto max-w-3xl w-full px-6 text-center">
+            <div className="mb-8">
+              <svg
+                className="mx-auto h-24 w-24 text-gray-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1}
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-light text-black mb-4">
+              No insights published yet
+            </h2>
+            <p className="text-base text-black/60 leading-relaxed font-light mb-8">
+              We&apos;re working on creating valuable content for you. Check
+              back soon for the latest insights on accounting, compliance, and
+              financial strategy.
+            </p>
+            <Link href="/contact">
+              <Button
+                size="md"
+                className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+              >
+                Contact Us
+              </Button>
+            </Link>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="relative bg-bg">
       <Navbar sticky={true} />
@@ -13,9 +171,9 @@ export default function InsightsPage() {
         id="insights-hero"
         className="relative min-h-[50vh] flex items-center bg-bg -mt-20 pt-20"
       >
-        {/* Decorative Stepped Lines - positioned absolutely to extend through navbar */}
+        {/* Decorative Stepped Lines */}
         <div
-          className="absolute inset-0 top-0 pointer-events-none overflow-visible z-[150]"
+          className="absolute inset-0 top-0 pointer-events-none overflow-visible z-150"
           style={{ marginTop: "-5rem" }}
         >
           {/* Pattern 1 - Top Left to Bottom Right */}
@@ -66,35 +224,6 @@ export default function InsightsPage() {
           <div className="absolute top-[53%] right-[50%] w-[15%] h-px bg-white/8"></div>
           <div className="absolute top-[53%] right-[35%] w-px h-[47%] bg-white/8"></div>
           <div className="absolute bottom-0 left-0 w-[65%] h-px bg-white/8"></div>
-
-          {/* Pattern 7 - Top Left to Bottom Left */}
-          <div className="absolute top-0 left-[22%] w-px h-[15%] bg-white/6"></div>
-          <div className="absolute top-[15%] left-[5%] w-[17%] h-px bg-white/6"></div>
-          <div className="absolute top-[15%] left-[5%] w-px h-[85%] bg-white/6"></div>
-
-          {/* Pattern 8 - Top Left to Bottom Left */}
-          <div className="absolute top-0 left-[40%] w-px h-[12%] bg-white/7"></div>
-          <div className="absolute top-[12%] left-[20%] w-[20%] h-px bg-white/7"></div>
-          <div className="absolute top-[12%] left-[20%] w-px h-[38%] bg-white/7"></div>
-          <div className="absolute top-[50%] left-[3%] w-[17%] h-px bg-white/7"></div>
-          <div className="absolute top-[50%] left-[3%] w-px h-[50%] bg-white/7"></div>
-          <div className="absolute bottom-0 left-0 w-[3%] h-px bg-white/7"></div>
-
-          {/* Pattern 9 - Top Right to Bottom Right */}
-          <div className="absolute top-0 right-[12%] w-px h-[20%] bg-white/9"></div>
-          <div className="absolute top-[20%] right-[15%] w-[3%] h-px bg-white/9"></div>
-          <div className="absolute top-[20%] right-[15%] w-px h-[25%] bg-white/9"></div>
-          <div className="absolute top-[45%] right-[30%] w-[15%] h-px bg-white/9"></div>
-          <div className="absolute top-[45%] right-[30%] w-px h-[55%] bg-white/9"></div>
-          <div className="absolute bottom-0 right-[30%] w-[30%] h-px bg-white/9"></div>
-
-          {/* Pattern 10 - Top Left to Bottom Right */}
-          <div className="absolute top-0 left-[18%] w-px h-[24%] bg-white/5"></div>
-          <div className="absolute top-[24%] left-[18%] w-[28%] h-px bg-white/5"></div>
-          <div className="absolute top-[24%] left-[46%] w-px h-[36%] bg-white/5"></div>
-          <div className="absolute top-[60%] left-[46%] w-[38%] h-px bg-white/5"></div>
-          <div className="absolute top-[60%] right-[16%] w-px h-[40%] bg-white/5"></div>
-          <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-white/5"></div>
         </div>
 
         <div className="mx-auto max-w-6xl w-full px-6 py-12 relative z-10">
@@ -112,8 +241,6 @@ export default function InsightsPage() {
 
             {/* Description */}
             <p className="text-sm md:text-base text-white/60 leading-relaxed font-light max-w-3xl">
-              Our biggest challenge is making sure we're always designing and
-              building products that will help you run your business better.
               Explore our latest articles, guides, and resources on accounting,
               compliance, and strategic financial management.
             </p>
@@ -122,298 +249,313 @@ export default function InsightsPage() {
       </section>
 
       {/* Featured Post Section */}
-      <section id="featured-post" className="relative bg-white py-16 md:py-24">
-        <div className="mx-auto max-w-6xl w-full px-6">
-          <Link
-            href="/insight/1"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center group cursor-pointer"
-          >
-            {/* Left Column - Image */}
-            <div className="relative">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] lg:h-[500px] flex items-center justify-center">
-                {/* Placeholder for featured image */}
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Featured Post Image
-                  </p>
+      {featuredInsight && (
+        <section
+          id="featured-post"
+          className="relative bg-white py-16 md:py-24"
+        >
+          <div className="mx-auto max-w-6xl w-full px-6">
+            <Link
+              href={`/insight/${featuredInsight.slug.current}`}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center group cursor-pointer"
+            >
+              {/* Left Column - Image */}
+              <div className="relative">
+                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] lg:h-[500px] flex items-center justify-center">
+                  {featuredInsight.mainImage?.asset ? (
+                    <Image
+                      src={urlFor(featuredInsight.mainImage)
+                        .width(800)
+                        .height(600)
+                        .url()}
+                      alt={
+                        featuredInsight.mainImage.alt || featuredInsight.title
+                      }
+                      width={800}
+                      height={600}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                      <p className="text-gray-500 text-sm font-light">
+                        Featured Post Image
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {/* Right Column - Content */}
+              <div className="space-y-6">
+                {/* Label */}
+                <p className="text-xs font-light uppercase tracking-wider text-black/50">
+                  Featured post
+                </p>
+
+                {/* Heading */}
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-black leading-tight group-hover:text-accent transition-colors">
+                  {featuredInsight.title}
+                </h2>
+
+                {/* Excerpt */}
+                <p className="text-sm md:text-base text-black/70 leading-relaxed font-light">
+                  {featuredInsight.excerpt ||
+                    "Discover the latest insights and best practices in accounting and financial management."}
+                </p>
+
+                {/* Meta info */}
+                <div className="flex flex-wrap items-center gap-4 text-xs text-black/50 font-light">
+                  <span className="uppercase tracking-wide">
+                    {featuredInsight.category &&
+                      getCategoryDisplayName(featuredInsight.category)}
+                  </span>
+                  <span>•</span>
+                  <time>{formatDate(featuredInsight.publishedAt)}</time>
+                  <span>•</span>
+                  <span>By {featuredInsight.author}</span>
+                </div>
+
+                {/* CTA */}
+                <div className="pt-4">
+                  <span className="inline-flex items-center text-accent text-sm font-light group-hover:underline">
+                    Read full article
+                    <svg
+                      className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Recent Posts Section */}
+      {recentInsights.length > 0 && (
+        <section id="recent-posts" className="relative bg-cream py-16 md:py-24">
+          <div className="mx-auto max-w-6xl w-full px-6">
+            {/* Section Header */}
+            <div className="mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-black">
+                Recent Posts
+              </h2>
             </div>
 
-            {/* Right Column - Content */}
-            <div className="space-y-6">
-              {/* Label */}
-              <p className="text-xs font-light uppercase tracking-wider text-black/50">
-                Featured post
-              </p>
+            {/* Posts Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {recentInsights.map((insight) => (
+                <Link
+                  key={insight._id}
+                  href={`/insight/${insight.slug.current}`}
+                  className="group cursor-pointer"
+                >
+                  <article className="space-y-4">
+                    {/* Image */}
+                    <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[280px] flex items-center justify-center">
+                      {insight.mainImage?.asset ? (
+                        <Image
+                          src={urlFor(insight.mainImage)
+                            .width(600)
+                            .height(400)
+                            .url()}
+                          alt={insight.mainImage.alt || insight.title}
+                          width={600}
+                          height={400}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                          <p className="text-gray-500 text-sm font-light">
+                            Post Image
+                          </p>
+                        </div>
+                      )}
+                    </div>
 
-              {/* Heading */}
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight group-hover:text-accent transition-colors">
-                Being the best we can be in everything accounting
+                    {/* Content */}
+                    <div className="space-y-3">
+                      {/* Meta */}
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-black/50 font-light">
+                        <span className="uppercase tracking-wide">
+                          {insight.category &&
+                            getCategoryDisplayName(insight.category)}
+                        </span>
+                        <span>•</span>
+                        <time>{formatDate(insight.publishedAt)}</time>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-lg md:text-xl font-light text-black leading-tight group-hover:text-accent transition-colors">
+                        {insight.title}
+                      </h3>
+
+                      {/* Excerpt */}
+                      {insight.excerpt && (
+                        <p className="text-sm text-black/70 leading-relaxed font-light line-clamp-2">
+                          {insight.excerpt}
+                        </p>
+                      )}
+
+                      {/* Read more */}
+                      <span className="inline-flex items-center text-accent text-xs font-light group-hover:underline">
+                        Read more
+                        <svg
+                          className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* All Posts Section with Category Filter */}
+      {allInsights.length > 0 && (
+        <section id="all-posts" className="relative bg-white py-16 md:py-24">
+          <div className="mx-auto max-w-6xl w-full px-6">
+            {/* Section Header with Category Filter */}
+            <div className="mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-black mb-8">
+                All Insights
               </h2>
 
-              {/* Description */}
-              <p className="text-sm md:text-base text-black/50 leading-relaxed font-light">
-                Build more meaningful and lasting relations better understand
-                their needs, identify new opportunities to help address any
-                problems faster. Build more meaningful and lasting relations
-                better understand their needs, identify new opportunities to
-                help address any problems faster. Build more meaningful and
-                lasting relations better understand their needs, identify new
-                opportunities to help address any problems faster
-              </p>
-
-              {/* Meta Info */}
-              <div className="flex items-center justify-between pt-4">
-                <p className="text-sm text-black/50 font-light">Jan 30, 2021</p>
-                <p className="text-sm text-black/50 font-light">
-                  by : Albert Sans
-                </p>
+              {/* Category Pills */}
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSelectedCategory("all")}
+                  className={`px-4 py-2 rounded-pill text-xs font-light tracking-wide transition-colors ${
+                    selectedCategory === "all"
+                      ? "bg-accent text-black"
+                      : "bg-gray-100 text-black/70 hover:bg-gray-200"
+                  }`}
+                >
+                  All Posts ({allInsights.length})
+                </button>
+                {categories.map((category) => {
+                  const count = allInsights.filter(
+                    (i) => i.category === category
+                  ).length;
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`px-4 py-2 rounded-pill text-xs font-light tracking-wide transition-colors ${
+                        selectedCategory === category
+                          ? "bg-accent text-black"
+                          : "bg-gray-100 text-black/70 hover:bg-gray-200"
+                      }`}
+                    >
+                      {getCategoryDisplayName(category)} ({count})
+                    </button>
+                  );
+                })}
               </div>
             </div>
-          </Link>
-        </div>
-      </section>
 
-      {/* Blog Posts Grid Section */}
-      <section id="blog-posts" className="relative bg-white py-16 md:py-24">
-        <div className="mx-auto max-w-6xl w-full px-6">
-          {/* Section Header */}
-          <div className="mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight mb-6">
-              Advertise, analyze, and optimize! We do it all for you
-            </h2>
-            <p className="text-sm md:text-base text-black/50 leading-relaxed font-light max-w-2xl">
-              Build more meaningful and lasting relationships - better
-              understand their needs, identify new opportunities to help address
-              any problems faster
-            </p>
+            {/* Filtered Posts Grid */}
+            {filteredInsights.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {filteredInsights.map((insight) => (
+                  <Link
+                    key={insight._id}
+                    href={`/insight/${insight.slug.current}`}
+                    className="group cursor-pointer"
+                  >
+                    <article className="space-y-4">
+                      {/* Image */}
+                      <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[220px] flex items-center justify-center">
+                        {insight.mainImage?.asset ? (
+                          <Image
+                            src={urlFor(insight.mainImage)
+                              .width(400)
+                              .height(300)
+                              .url()}
+                            alt={insight.mainImage.alt || insight.title}
+                            width={400}
+                            height={300}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                            <p className="text-gray-500 text-xs font-light">
+                              Post Image
+                            </p>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content */}
+                      <div className="space-y-2">
+                        {/* Meta */}
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-black/50 font-light">
+                          <span className="uppercase tracking-wide">
+                            {insight.category &&
+                              getCategoryDisplayName(insight.category)}
+                          </span>
+                          <span>•</span>
+                          <time>{formatDate(insight.publishedAt)}</time>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-base md:text-lg font-light text-black leading-tight group-hover:text-accent transition-colors">
+                          {insight.title}
+                        </h3>
+
+                        {/* Read more */}
+                        <span className="inline-flex items-center text-accent text-xs font-light group-hover:underline">
+                          Read more
+                          <svg
+                            className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </article>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-base text-black/60 font-light">
+                  No posts found in this category.
+                </p>
+              </div>
+            )}
           </div>
-
-          {/* Blog Posts Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Blog Post Card 1 */}
-            <Link href="/insight/2" className="flex gap-5 group cursor-pointer">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">Post 1</p>
-                </div>
-              </div>
-              <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
-                  Lead happiness for customers
-                </h3>
-                <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
-                  Build more meaningful and lasting relations better understand
-                  their needs, identify new opportunities to help address any
-                  problems faster
-                </p>
-                <div className="flex items-center gap-8 pt-2">
-                  <p className="text-xs text-black/50 font-light">
-                    Jan 30, 2021
-                  </p>
-                  <p className="text-xs text-black/50 font-light">
-                    by : Albert Sans
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            {/* Blog Post Card 2 */}
-            <Link href="/insight/1" className="flex gap-5 group cursor-pointer">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">Post 2</p>
-                </div>
-              </div>
-              <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
-                  Mutually support each other
-                </h3>
-                <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
-                  Build more meaningful and lasting relationships - better
-                  understand their needs, identify new opportunities to help
-                  address any problems faster
-                </p>
-                <div className="flex items-center gap-8 pt-2">
-                  <p className="text-xs text-black/50 font-light">
-                    Jan 30, 2021
-                  </p>
-                  <p className="text-xs text-black/50 font-light">
-                    by : Albert Sans
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            {/* Blog Post Card 3 */}
-            <Link href="/insight/2" className="flex gap-5 group cursor-pointer">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">Post 3</p>
-                </div>
-              </div>
-              <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
-                  Have fun growing together
-                </h3>
-                <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
-                  Build more meaningful and lasting, better understand their
-                  needs, identify new opportunities to help address any problems
-                  faster
-                </p>
-                <div className="flex items-center gap-8 pt-2">
-                  <p className="text-xs text-black/50 font-light">
-                    Jan 30, 2021
-                  </p>
-                  <p className="text-xs text-black/50 font-light">
-                    by : Albert Sans
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            {/* Blog Post Card 4 */}
-            <Link href="/insight/1" className="flex gap-5 group cursor-pointer">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 w-[200px] h-[200px] flex-shrink-0">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">Post 4</p>
-                </div>
-              </div>
-              <div className="space-y-3 flex-1">
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
-                  Make Your Business Grow
-                </h3>
-                <p className="text-xs sm:text-sm text-black/50 leading-relaxed font-light">
-                  Build more meaningful and lasting better understand their
-                  needs, identify new opportunities to help address any problems
-                  faster
-                </p>
-                <div className="flex items-center gap-8 pt-2">
-                  <p className="text-xs text-black/50 font-light">
-                    Jan 30, 2021
-                  </p>
-                  <p className="text-xs text-black/50 font-light">
-                    by : Albert Sans
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* All Articles Section */}
-      <section
-        id="all-articles"
-        className="relative bg-gray-50 py-16 md:py-24 overflow-hidden"
-      >
-        <div className="mx-auto max-w-6xl w-full px-6">
-          {/* Filter Navigation */}
-          <div className="flex flex-wrap items-center gap-6 mb-12 pb-4">
-            <button className="text-xs font-light text-black border-b-2 border-black pb-1">
-              View all
-            </button>
-            <button className="text-xs font-light text-black/50 hover:text-black transition-colors">
-              Design
-            </button>
-            <button className="text-xs font-light text-black/50 hover:text-black transition-colors">
-              Articles
-            </button>
-            <button className="text-xs font-light text-black/50 hover:text-black transition-colors">
-              Product
-            </button>
-            <button className="text-xs font-light text-black/50 hover:text-black transition-colors">
-              Software Development
-            </button>
-            <button className="text-xs font-light text-black/50 hover:text-black transition-colors">
-              Customer Success
-            </button>
-          </div>
-        </div>
-
-        {/* Articles Slider */}
-        <div className="relative">
-          <div className="flex gap-6 overflow-x-auto scrollbar-hide pl-6 md:pl-[calc((100vw-72rem)/2+1.5rem)]">
-            {/* Article Card 1 */}
-            <Link
-              href="/insight/1"
-              className="flex-shrink-0 w-[500px] space-y-4 group cursor-pointer"
-            >
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[450px] flex items-center justify-center">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Article Image 1
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-xs text-black/50 font-light">
-                  <span>Published in Insight Jan 30, 2021</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
-                  Practice making User Flow
-                </h3>
-                <p className="text-sm text-black/50 leading-relaxed font-light">
-                  In this article, we'll cover how to create user flows
-                </p>
-              </div>
-            </Link>
-
-            {/* Article Card 2 */}
-            <Link
-              href="/insight/2"
-              className="flex-shrink-0 w-[500px] space-y-4 group cursor-pointer"
-            >
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[450px] flex items-center justify-center">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Article Image 2
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-black/50 font-light">
-                  <span>Published in Insight Jan 30, 2021</span>
-                  <span>by : Albert Sans</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
-                  Overview of the Design Principles
-                </h3>
-                <p className="text-sm text-black/50 leading-relaxed font-light">
-                  What are Design Principles?... To understand design
-                  principles, we first discuss the principles.
-                </p>
-              </div>
-            </Link>
-
-            {/* Article Card 3 */}
-            <Link
-              href="/insight/1"
-              className="flex-shrink-0 w-[500px] space-y-4 pr-6 group cursor-pointer"
-            >
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[450px] flex items-center justify-center">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Article Image 3
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-xs text-black/50 font-light">
-                  <span>Published in Insight Jan 30, 2021</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-extralight text-black leading-tight group-hover:text-accent transition-colors">
-                  Using Grid in website design
-                </h3>
-                <p className="text-sm text-black/50 leading-relaxed font-light">
-                  Andi: "What's the grid like?" Toni: "Like below"
-                </p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

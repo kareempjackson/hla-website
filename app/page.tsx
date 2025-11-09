@@ -8,6 +8,7 @@ import HowCanWeHelp from "../components/site/how-can-we-help";
 import OurProcess from "../components/site/our-process";
 import Testimonial from "../components/site/testimonial";
 import CTASection from "../components/site/cta-section";
+import { getHomePageData } from "@/sanity/lib/homePageQueries";
 
 export const metadata: Metadata = {
   title:
@@ -45,14 +46,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const homePageData = await getHomePageData();
+
   return (
     <div className="relative bg-bg">
       <Navbar />
 
       {/* Each section has sticky positioning to create the slide-over effect */}
       <div id="hero" className="sticky top-0">
-        <Hero />
+        <Hero data={homePageData?.heroSection} />
       </div>
 
       <div id="why-great" className="sticky top-0">
@@ -63,24 +66,32 @@ export default function Home() {
         <WhatWeDo />
       </div>
 
-      <div id="blog-posts" className="sticky top-0">
-        <BlogPosts />
-      </div>
+      {homePageData?.showBlogPosts !== false && (
+        <div id="blog-posts" className="sticky top-0">
+          <BlogPosts />
+        </div>
+      )}
 
-      <div id="how-can-we-help" className="sticky top-0">
-        <HowCanWeHelp />
-      </div>
+      {homePageData?.showHowCanWeHelp !== false && (
+        <div id="how-can-we-help" className="sticky top-0">
+          <HowCanWeHelp />
+        </div>
+      )}
 
-      <div id="our-process" className="sticky top-0">
-        <OurProcess />
-      </div>
+      {homePageData?.showOurProcess !== false && (
+        <div id="our-process" className="sticky top-0">
+          <OurProcess />
+        </div>
+      )}
 
-      <div id="testimonial" className="sticky top-0">
-        <Testimonial />
-      </div>
+      {homePageData?.testimonialSection?.showTestimonials !== false && (
+        <div id="testimonial" className="sticky top-0">
+          <Testimonial data={homePageData?.testimonialSection} />
+        </div>
+      )}
 
       <div id="cta-section" className="sticky top-0">
-        <CTASection />
+        <CTASection data={homePageData?.ctaSection} />
       </div>
     </div>
   );

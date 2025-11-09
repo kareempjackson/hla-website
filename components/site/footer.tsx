@@ -104,17 +104,17 @@ export default function Footer() {
             }}
           />
           <nav className="hidden gap-6 md:flex text-white/70 text-sm font-light">
-            <Link href="#about" className="hover:text-white transition-colors">
+            <Link href="/about" className="hover:text-white transition-colors">
               About Us
             </Link>
             <Link
-              href="#services"
+              href="/services"
               className="hover:text-white transition-colors"
             >
               Services
             </Link>
             <Link
-              href="#insight"
+              href="/insights"
               className="hover:text-white transition-colors"
             >
               Insight

@@ -1,7 +1,22 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function Hero() {
+interface HeroData {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  ctaText?: string;
+  heroImage?: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+    alt?: string;
+  };
+}
+
+export default function Hero({ data }: { data?: HeroData }) {
   return (
     <section className="relative min-h-screen flex items-center pt-20 bg-bg overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -103,37 +118,47 @@ export default function Hero() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 py-8 md:grid-cols-2 md:py-12 w-full relative z-10">
         <div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-cream tracking-tight">
-            Higher Level Accounting
+            {data?.title || "Higher Level Accounting"}
           </h1>
           <p className="mt-3 text-xl md:text-2xl font-light text-white/80">
-            Financial clarity for growth-focused businesses
+            {data?.subtitle ||
+              "Financial clarity for growth-focused businesses"}
           </p>
           <p className="mt-4 max-w-2xl text-xs md:text-sm text-white/60 leading-relaxed font-light">
-            Higher Level Accounting offers accrual-based bookkeeping and
-            controller-level insights for SaaS companies, agencies, and highly
-            regulated industries. We help you trust your numbers so you can
-            raise capital, scale smart and stay compliant
+            {data?.description ||
+              "Higher Level Accounting offers accrual-based bookkeeping and controller-level insights for SaaS companies, agencies, and highly regulated industries. We help you trust your numbers so you can raise capital, scale smart and stay compliant"}
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-2.5">
             <Button
               size="md"
               className="rounded-pill focus-visible:ring-0 h-10 px-7 text-xs font-light tracking-wide"
             >
-              Schedule Your Consultation
+              {data?.ctaText || "Schedule Your Consultation"}
             </Button>
           </div>
         </div>
 
         <div className="relative">
           <div className="relative overflow-hidden rounded-sm bg-surface/80">
-            <Image
-              src="/images/image/morgan-housel-PcDGGex9-jA-unsplash.jpg"
-              alt="Team collaboration"
-              width={1200}
-              height={900}
-              className="h-auto w-full object-cover"
-              priority
-            />
+            {data?.heroImage ? (
+              <Image
+                src={urlFor(data.heroImage).width(1200).height(900).url()}
+                alt={data.heroImage.alt || "Team collaboration"}
+                width={1200}
+                height={900}
+                className="h-auto w-full object-cover"
+                priority
+              />
+            ) : (
+              <Image
+                src="/images/image/morgan-housel-PcDGGex9-jA-unsplash.jpg"
+                alt="Team collaboration"
+                width={1200}
+                height={900}
+                className="h-auto w-full object-cover"
+                priority
+              />
+            )}
           </div>
         </div>
       </div>

@@ -1,8 +1,11 @@
 import Navbar from "../../components/site/navbar";
 import Footer from "../../components/site/footer";
 import { Button } from "../../components/ui/button";
+import { getServicesPageData } from "@/sanity/lib/servicesPageQueries";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const servicesData = await getServicesPageData();
   return (
     <div className="relative bg-cream">
       <Navbar sticky={true} />
@@ -14,7 +17,7 @@ export default function ServicesPage() {
       >
         {/* Decorative Lines - Dark on cream background */}
         <div
-          className="absolute inset-0 top-0 pointer-events-none z-[150]"
+          className="absolute inset-0 top-0 pointer-events-none z-150"
           style={{ marginTop: "-5rem" }}
         >
           {/* Pattern 1 - Top Left to Bottom Right */}
@@ -101,13 +104,13 @@ export default function ServicesPage() {
           <div className="max-w-4xl mb-12 md:mb-16">
             {/* Label */}
             <p className="text-xs font-light uppercase tracking-wider text-black/50 mb-4">
-              Our Services
+              {servicesData?.heroSection?.label || "Our Services"}
             </p>
 
             {/* Heading */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight text-black mb-6 leading-tight">
-              Financial clarity. Compliance without the headaches. Reports you
-              can trust.
+              {servicesData?.heroSection?.title ||
+                "Financial clarity. Compliance without the headaches. Reports you can trust."}
             </h1>
 
             {/* Buttons */}
@@ -116,19 +119,28 @@ export default function ServicesPage() {
                 size="md"
                 className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
               >
-                Schedule Your Consultation
+                {servicesData?.heroSection?.ctaText ||
+                  "Schedule Your Consultation"}
               </Button>
             </div>
           </div>
 
           {/* Bottom Section - Image */}
           <div className="relative overflow-hidden rounded-sm bg-gray-300 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] flex items-center justify-center">
-            {/* Placeholder for image */}
-            <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-              <p className="text-gray-500 text-sm font-light">
-                Service Image Placeholder
-              </p>
-            </div>
+            {servicesData?.heroSection?.heroImage?.asset ? (
+              <img
+                src={urlFor(servicesData.heroSection.heroImage).url()}
+                alt={servicesData.heroSection.heroImage.alt || "Service Hero"}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              /* Placeholder for image */
+              <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                <p className="text-gray-500 text-sm font-light">
+                  Service Image Placeholder
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -225,49 +237,36 @@ export default function ServicesPage() {
             <div className="space-y-4 md:space-y-6">
               {/* Heading */}
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream leading-tight">
-                Accrual-Based Bookkeeping
+                {servicesData?.bookkeepingService?.title ||
+                  "Accrual-Based Bookkeeping"}
               </h2>
 
               {/* Subheading */}
               <p className="text-base md:text-lg text-white/80 leading-relaxed font-light">
-                Your books should reflect economic reality, not just deposits in
-                the bank.
+                {servicesData?.bookkeepingService?.subtitle ||
+                  "Your books should reflect economic reality, not just deposits in the bank."}
               </p>
 
               {/* We deliver section */}
               <div className="space-y-4">
                 <p className="text-sm md:text-base text-white/70 font-light">
-                  We deliver:
+                  {servicesData?.bookkeepingService?.deliveryTitle ||
+                    "We deliver:"}
                 </p>
                 <ul className="space-y-3 text-xs md:text-sm text-white/60 font-light">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Monthly reconciliations across bank, credit card,
-                      merchant, and POS systems.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Revenue recognition for subscription businesses (MRR, ARR,
-                      churn).
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Project profitability tracking for agencies and service
-                      firms.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Clear financial statements (P&L, balance sheet, cash flow)
-                      you can actually use.
-                    </span>
-                  </li>
+                  {(
+                    servicesData?.bookkeepingService?.deliveryItems || [
+                      "Monthly reconciliations across bank, credit card, merchant, and POS systems.",
+                      "Revenue recognition for subscription businesses (MRR, ARR, churn).",
+                      "Project profitability tracking for agencies and service firms.",
+                      "Clear financial statements (P&L, balance sheet, cash flow) you can actually use.",
+                    ]
+                  ).map((item, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-accent mt-1">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -275,8 +274,8 @@ export default function ServicesPage() {
               <div className="pt-4 border-t border-white/10">
                 <p className="text-sm md:text-base text-white/80 leading-relaxed font-light">
                   <span className="text-accent font-normal">Outcome:</span>{" "}
-                  Numbers that finally match your operations, your margins, and
-                  your investor conversations.
+                  {servicesData?.bookkeepingService?.outcome ||
+                    "Numbers that finally match your operations, your margins, and your investor conversations."}
                 </p>
               </div>
 
@@ -286,7 +285,8 @@ export default function ServicesPage() {
                   size="md"
                   className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                 >
-                  Schedule Your Consultation
+                  {servicesData?.bookkeepingService?.ctaText ||
+                    "Schedule Your Consultation"}
                 </Button>
               </div>
             </div>
@@ -294,12 +294,23 @@ export default function ServicesPage() {
             {/* Right Column - Image */}
             <div className="relative">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
-                {/* Placeholder for image */}
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Team Image Placeholder
-                  </p>
-                </div>
+                {servicesData?.bookkeepingService?.image?.asset ? (
+                  <img
+                    src={urlFor(servicesData.bookkeepingService.image).url()}
+                    alt={
+                      servicesData.bookkeepingService.image.alt ||
+                      "Bookkeeping Service"
+                    }
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  /* Placeholder for image */
+                  <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                    <p className="text-gray-500 text-sm font-light">
+                      Team Image Placeholder
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -397,12 +408,23 @@ export default function ServicesPage() {
             {/* Left Column - Image */}
             <div className="relative order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
-                {/* Placeholder for image */}
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Controller Service Image Placeholder
-                  </p>
-                </div>
+                {servicesData?.controllerService?.image?.asset ? (
+                  <img
+                    src={urlFor(servicesData.controllerService.image).url()}
+                    alt={
+                      servicesData.controllerService.image.alt ||
+                      "Controller Service"
+                    }
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  /* Placeholder for image */
+                  <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                    <p className="text-gray-500 text-sm font-light">
+                      Controller Service Image Placeholder
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -410,49 +432,35 @@ export default function ServicesPage() {
             <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
               {/* Heading */}
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight">
-                Controller-Level Services
+                {servicesData?.controllerService?.title ||
+                  "Controller-Level Services"}
               </h2>
 
               {/* Subheading */}
               <p className="text-base md:text-lg text-black/80 leading-relaxed font-light">
-                Bookkeeping gets the numbers in. Controller oversight makes sure
-                they tell the truth.
+                {servicesData?.controllerService?.subtitle ||
+                  "Bookkeeping gets the numbers in. Controller oversight makes sure they tell the truth."}
               </p>
 
               {/* We offer section */}
               <div className="space-y-4">
                 <p className="text-sm md:text-base text-black/70 font-light">
-                  We offer:
+                  {servicesData?.controllerService?.offerTitle || "We offer:"}
                 </p>
                 <ul className="space-y-3 text-xs md:text-sm text-black/60 font-light">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Variance analysis to spot where performance doesn't align
-                      with expectations.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Cost accounting and inventory tracking for regulated
-                      industries.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Accrual adjustments for payables, deferred revenue, loans,
-                      and inter-company activity.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Internal control reminders and oversight so nothing slips
-                      through.
-                    </span>
-                  </li>
+                  {(
+                    servicesData?.controllerService?.offerItems || [
+                      "Variance analysis to spot where performance doesn't align with expectations.",
+                      "Cost accounting and inventory tracking for regulated industries.",
+                      "Accrual adjustments for payables, deferred revenue, loans, and inter-company activity.",
+                      "Internal control reminders and oversight so nothing slips through.",
+                    ]
+                  ).map((item, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-accent mt-1">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -460,8 +468,8 @@ export default function ServicesPage() {
               <div className="pt-4 border-t border-black/10">
                 <p className="text-sm md:text-base text-black/80 leading-relaxed font-light">
                   <span className="text-accent font-normal">Outcome:</span>{" "}
-                  Audit-ready books, investor-ready reporting, and expert
-                  insight into what's driving (or limiting) profitability.
+                  {servicesData?.controllerService?.outcome ||
+                    "Audit-ready books, investor-ready reporting, and expert insight into what's driving (or limiting) profitability."}
                 </p>
               </div>
 
@@ -471,7 +479,8 @@ export default function ServicesPage() {
                   size="md"
                   className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                 >
-                  Schedule Your Consultation
+                  {servicesData?.controllerService?.ctaText ||
+                    "Schedule Your Consultation"}
                 </Button>
               </div>
             </div>
@@ -571,50 +580,44 @@ export default function ServicesPage() {
             <div className="space-y-4 md:space-y-6">
               {/* Heading */}
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream leading-tight">
-                Compliance & Risk Management
+                {servicesData?.complianceService?.title ||
+                  "Compliance & Risk Management"}
               </h2>
 
               {/* Subheading */}
               <p className="text-base md:text-lg text-white/80 leading-relaxed font-light">
-                In regulated industries and high-growth SaaS or agency
-                environments compliance isn't optional.
+                {servicesData?.complianceService?.subtitle ||
+                  "In regulated industries and high-growth SaaS or agency environments compliance isn't optional."}
               </p>
 
               {/* We provide section */}
               <div className="space-y-4">
                 <p className="text-sm md:text-base text-white/70 font-light">
-                  We provide:
+                  {servicesData?.complianceService?.provideTitle ||
+                    "We provide:"}
                 </p>
                 <ul className="space-y-3 text-xs md:text-sm text-white/60 font-light">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      1099 issuance and contractor oversight (W-9s collected, no
-                      last-minute scrambles).
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Tax-ready financial packages for your CPA or tax preparer.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent mt-1">•</span>
-                    <span>
-                      Audit-prep documentation that satisfies regulators and
-                      investors.
-                    </span>
-                  </li>
+                  {(
+                    servicesData?.complianceService?.provideItems || [
+                      "1099 issuance and contractor oversight (W-9s collected, no last-minute scrambles).",
+                      "Tax-ready financial packages for your CPA or tax preparer.",
+                      "Audit-prep documentation that satisfies regulators and investors.",
+                    ]
+                  ).map((item, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-accent mt-1">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
               {/* Outcome */}
               <div className="pt-4 border-t border-white/10">
                 <p className="text-sm md:text-base text-white/80 leading-relaxed font-light">
-                  <span className="text-accent font-normal">Outcome:</span> No
-                  fines. No lost licenses. No investor red flags. Just peace of
-                  mind that you're covered.
+                  <span className="text-accent font-normal">Outcome:</span>{" "}
+                  {servicesData?.complianceService?.outcome ||
+                    "No fines. No lost licenses. No investor red flags. Just peace of mind that you're covered."}
                 </p>
               </div>
 
@@ -624,7 +627,8 @@ export default function ServicesPage() {
                   size="md"
                   className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                 >
-                  Schedule Your Consultation
+                  {servicesData?.complianceService?.ctaText ||
+                    "Schedule Your Consultation"}
                 </Button>
               </div>
             </div>
@@ -632,12 +636,23 @@ export default function ServicesPage() {
             {/* Right Column - Image */}
             <div className="relative">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
-                {/* Placeholder for image */}
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Compliance Image Placeholder
-                  </p>
-                </div>
+                {servicesData?.complianceService?.image?.asset ? (
+                  <img
+                    src={urlFor(servicesData.complianceService.image).url()}
+                    alt={
+                      servicesData.complianceService.image.alt ||
+                      "Compliance Service"
+                    }
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  /* Placeholder for image */
+                  <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                    <p className="text-gray-500 text-sm font-light">
+                      Compliance Image Placeholder
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -737,11 +752,12 @@ export default function ServicesPage() {
               {/* Left - Heading */}
               <div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-black leading-tight">
-                  Optional Strategic Add-Ons
+                  {servicesData?.strategicAddons?.title ||
+                    "Optional Strategic Add-Ons"}
                 </h2>
                 <p className="text-base md:text-lg text-black/80 leading-relaxed font-light mt-4">
-                  Beyond keeping the books accurate, we help clients plan their
-                  next move.
+                  {servicesData?.strategicAddons?.subtitle ||
+                    "Beyond keeping the books accurate, we help clients plan their next move."}
                 </p>
               </div>
 
@@ -749,37 +765,22 @@ export default function ServicesPage() {
               <div>
                 <div className="space-y-4">
                   <p className="text-sm md:text-base text-black/70 font-light">
-                    We offer:
+                    {servicesData?.strategicAddons?.offerTitle || "We offer:"}
                   </p>
                   <ul className="space-y-3 text-xs md:text-sm text-black/60 font-light">
-                    <li className="flex items-start gap-2">
-                      <span className="text-accent mt-1">•</span>
-                      <span>
-                        Cash flow forecasting and budgeting that make hiring and
-                        scaling decisions clear.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-accent mt-1">•</span>
-                      <span>
-                        Pricing and margin guidance so you know if your services
-                        are sustainable.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-accent mt-1">•</span>
-                      <span>
-                        Fundraising prep for SaaS companies (investor-ready
-                        decks and numbers).
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-accent mt-1">•</span>
-                      <span>
-                        Industry-specific advisory tailored to agencies and
-                        cannabis retailers.
-                      </span>
-                    </li>
+                    {(
+                      servicesData?.strategicAddons?.offerItems || [
+                        "Cash flow forecasting and budgeting that make hiring and scaling decisions clear.",
+                        "Pricing and margin guidance so you know if your services are sustainable.",
+                        "Fundraising prep for SaaS companies (investor-ready decks and numbers).",
+                        "Industry-specific advisory tailored to agencies and cannabis retailers.",
+                      ]
+                    ).map((item, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-accent mt-1">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -788,12 +789,23 @@ export default function ServicesPage() {
             {/* Image - Full Width at Bottom */}
             <div className="relative w-full">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[550px] flex items-center justify-center">
-                {/* Placeholder for image */}
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Strategic Planning Image Placeholder
-                  </p>
-                </div>
+                {servicesData?.strategicAddons?.image?.asset ? (
+                  <img
+                    src={urlFor(servicesData.strategicAddons.image).url()}
+                    alt={
+                      servicesData.strategicAddons.image.alt ||
+                      "Strategic Planning"
+                    }
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  /* Placeholder for image */
+                  <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                    <p className="text-gray-500 text-sm font-light">
+                      Strategic Planning Image Placeholder
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -803,7 +815,8 @@ export default function ServicesPage() {
                 size="md"
                 className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
               >
-                Schedule Your Consultation
+                {servicesData?.strategicAddons?.ctaText ||
+                  "Schedule Your Consultation"}
               </Button>
             </div>
           </div>
@@ -852,49 +865,36 @@ export default function ServicesPage() {
           <div className="space-y-6 md:space-y-8">
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-cream leading-tight max-w-3xl">
-              Specialized Services
+              {servicesData?.specializedServices?.title ||
+                "Specialized Services"}
             </h2>
 
             {/* Description */}
             <p className="text-sm md:text-base text-white/70 leading-relaxed font-light max-w-3xl">
-              Sometimes growth requires a reset and specialized services to
-              bring your finances up to speed.
+              {servicesData?.specializedServices?.description ||
+                "Sometimes growth requires a reset and specialized services to bring your finances up to speed."}
             </p>
 
             {/* We provide section */}
             <div className="space-y-4 max-w-3xl">
               <p className="text-sm md:text-base text-white/70 font-light">
-                We provide:
+                {servicesData?.specializedServices?.provideTitle ||
+                  "We provide:"}
               </p>
               <ul className="space-y-3 text-xs md:text-sm text-white/60 font-light">
-                <li className="flex items-start gap-2">
-                  <span className="text-accent mt-1">•</span>
-                  <span>
-                    Historical cleanup for clean, accurate records across prior
-                    periods.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-accent mt-1">•</span>
-                  <span>
-                    Setup & onboarding enhancements for streamlined COA setup,
-                    workflow mapping, KPI dashboards.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-accent mt-1">•</span>
-                  <span>
-                    POS integration audits for retailers needing accurate sales
-                    and tax reporting.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-accent mt-1">•</span>
-                  <span>
-                    Tax strategy sessions and annual planning for U.S. expat
-                    clients or specialized needs.
-                  </span>
-                </li>
+                {(
+                  servicesData?.specializedServices?.provideItems || [
+                    "Historical cleanup for clean, accurate records across prior periods.",
+                    "Setup & onboarding enhancements for streamlined COA setup, workflow mapping, KPI dashboards.",
+                    "POS integration audits for retailers needing accurate sales and tax reporting.",
+                    "Tax strategy sessions and annual planning for U.S. expat clients or specialized needs.",
+                  ]
+                ).map((item, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <span className="text-accent mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -904,47 +904,110 @@ export default function ServicesPage() {
                 size="md"
                 className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
               >
-                Schedule Your Consultation
+                {servicesData?.specializedServices?.ctaText ||
+                  "Schedule Your Consultation"}
               </Button>
             </div>
 
             {/* Three Column Image Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-              {/* Left Image */}
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Image Placeholder 1
-                  </p>
-                </div>
-              </div>
+              {servicesData?.specializedServices?.images &&
+              servicesData.specializedServices.images.length > 0 ? (
+                <>
+                  {/* Left Image */}
+                  {servicesData.specializedServices.images[0]?.asset && (
+                    <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
+                      <img
+                        src={urlFor(
+                          servicesData.specializedServices.images[0]
+                        ).url()}
+                        alt={
+                          servicesData.specializedServices.images[0].alt ||
+                          "Specialized Service 1"
+                        }
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
 
-              {/* Middle Column - Image + Text */}
-              <div className="space-y-4 md:space-y-5">
-                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[240px] md:h-[280px] flex items-center justify-center">
-                  <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                    <p className="text-gray-500 text-sm font-light">
-                      Image Placeholder 2
-                    </p>
-                  </div>
-                </div>
-                <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[85px] md:h-[95px] flex items-center justify-center">
-                  <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                    <p className="text-gray-500 text-sm font-light">
-                      Image Placeholder
-                    </p>
-                  </div>
-                </div>
-              </div>
+                  {/* Middle Column - Two Images */}
+                  {servicesData.specializedServices.images[1]?.asset && (
+                    <div className="space-y-4 md:space-y-5">
+                      <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[240px] md:h-[280px] flex items-center justify-center">
+                        <img
+                          src={urlFor(
+                            servicesData.specializedServices.images[1]
+                          ).url()}
+                          alt={
+                            servicesData.specializedServices.images[1].alt ||
+                            "Specialized Service 2"
+                          }
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[85px] md:h-[95px] flex items-center justify-center">
+                        <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                          <p className="text-gray-500 text-sm font-light">
+                            Image Placeholder
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-              {/* Right Image */}
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
-                <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                  <p className="text-gray-500 text-sm font-light">
-                    Image Placeholder 3
-                  </p>
-                </div>
-              </div>
+                  {/* Right Image */}
+                  {servicesData.specializedServices.images[2]?.asset && (
+                    <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
+                      <img
+                        src={urlFor(
+                          servicesData.specializedServices.images[2]
+                        ).url()}
+                        alt={
+                          servicesData.specializedServices.images[2].alt ||
+                          "Specialized Service 3"
+                        }
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* Default placeholder images */}
+                  <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
+                    <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                      <p className="text-gray-500 text-sm font-light">
+                        Image Placeholder 1
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 md:space-y-5">
+                    <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[240px] md:h-[280px] flex items-center justify-center">
+                      <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                        <p className="text-gray-500 text-sm font-light">
+                          Image Placeholder 2
+                        </p>
+                      </div>
+                    </div>
+                    <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[85px] md:h-[95px] flex items-center justify-center">
+                      <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                        <p className="text-gray-500 text-sm font-light">
+                          Image Placeholder
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[350px] md:h-[400px] flex items-center justify-center">
+                    <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                      <p className="text-gray-500 text-sm font-light">
+                        Image Placeholder 3
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -1040,12 +1103,13 @@ export default function ServicesPage() {
           <div className="space-y-6 md:space-y-8">
             {/* Heading */}
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extralight tracking-tight text-black leading-tight">
-              Ready for Clarity?
+              {servicesData?.ctaSection?.title || "Ready for Clarity?"}
             </h2>
 
             {/* Subheading */}
             <p className="text-base md:text-lg text-black/70 leading-relaxed font-light">
-              Your next decision deserves numbers you can trust.
+              {servicesData?.ctaSection?.subtitle ||
+                "Your next decision deserves numbers you can trust."}
             </p>
 
             {/* Button */}
@@ -1054,7 +1118,8 @@ export default function ServicesPage() {
                 size="lg"
                 className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 px-7 py-3 text-xs font-light tracking-wide"
               >
-                Schedule Your Consultation
+                {servicesData?.ctaSection?.buttonText ||
+                  "Schedule Your Consultation"}
               </Button>
             </div>
           </div>

@@ -1,5 +1,33 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
+
+interface TestimonialData {
+  name?: string;
+  title?: string;
+  organization?: string;
+  quote?: string;
+  image?: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+    alt?: string;
+  };
+  socialLinks?: {
+    twitter?: string;
+    linkedin?: string;
+    instagram?: string;
+  };
+}
+
+interface TestimonialSectionData {
+  showTestimonials?: boolean;
+  testimonials?: TestimonialData[];
+}
 
 function TwitterIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -25,7 +53,48 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function Testimonial() {
+export default function Testimonial({
+  data,
+}: {
+  data?: TestimonialSectionData;
+}) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -600,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 600,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const defaultTestimonial: TestimonialData = {
+    name: "Dr. Ron Daniels",
+    title: "President",
+    organization: "Institute of the Black World 21st Century, Inc.",
+    quote: `Working with Higher Level Accounting has been transformative for
+              the Institute of the Black World 21st Century. They meticulously
+              cleaned up our financial records, prepared us for audits, and
+              introduced advanced solutions that boosted efficiency and
+              transparency. Their professionalism, expertise, and dedication
+              have been invaluable to our organization.`,
+  };
+
+  const testimonials =
+    data?.testimonials && data.testimonials.length > 0
+      ? data.testimonials
+      : [defaultTestimonial];
+
   return (
     <section className="relative bg-cream-200 min-h-screen flex items-center py-16 md:py-16 pt-20 overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -50,7 +119,7 @@ export default function Testimonial() {
         <div className="absolute top-0 left-[18%] w-px h-[20%] bg-black/9"></div>
         <div className="absolute top-[20%] left-[8%] w-[10%] h-px bg-black/9"></div>
         <div className="absolute top-[20%] left-[8%] w-px h-[52%] bg-black/9"></div>
-        <div className="absolute top-[72%] left-[0] w-[8%] h-px bg-black/9"></div>
+        <div className="absolute top-[72%] left-0 w-[8%] h-px bg-black/9"></div>
         <div className="absolute top-[72%] left-0 w-px h-[28%] bg-black/9"></div>
 
         {/* Pattern 4 - Top Right to Bottom Right */}
@@ -78,72 +147,167 @@ export default function Testimonial() {
         <div className="absolute bottom-0 left-[86%] w-[14%] h-px bg-black/6"></div>
       </div>
 
-      <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-6 md:grid-cols-2 relative z-10">
-        {/* Left - Image */}
-        <div className="relative max-w-sm">
-          <div className="relative overflow-hidden rounded-sm">
-            <Image
-              src="/images/image/ibw21_president_dr_ron_daniels-400x400.jpg"
-              alt="Dr. Ron Daniels"
-              width={450}
-              height={550}
-              className="h-auto w-full object-cover"
-            />
-            {/* Name overlay at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm px-4 py-2">
-              <p className="text-xs text-white font-light">
-                <span className="text-accent font-light">Dr. Ron Daniels</span>,
-                President
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right - Content */}
-        <div>
-          <blockquote className="mb-4">
-            <p className="text-sm md:text-base text-black/70 leading-relaxed font-light mb-3">
-              "Working with Higher Level Accounting has been transformative for
-              the Institute of the Black World 21st Century. They meticulously
-              cleaned up our financial records, prepared us for audits, and
-              introduced advanced solutions that boosted efficiency and
-              transparency. Their professionalism, expertise, and dedication
-              have been invaluable to our organization."
-            </p>
-            <footer className="text-xs text-black/50 font-light">
-              — Dr. Ron Daniels, President, Institute of the Black World 21st
-              Century, Inc.
-            </footer>
-          </blockquote>
-
-          <div className="pt-2">
-            {/* Social Icons */}
+      <div className="mx-auto max-w-7xl w-full relative z-10">
+        {/* Header with Arrows */}
+        {testimonials.length > 1 && (
+          <div className="flex items-center justify-end mb-6 px-6">
             <div className="flex items-center gap-2">
-              <a
-                href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition-colors"
-                aria-label="Twitter"
+              <button
+                onClick={scrollLeft}
+                className="w-10 h-10 rounded-full border-2 border-black flex items-center justify-center hover:bg-black transition-colors group"
+                aria-label="Previous testimonial"
               >
-                <TwitterIcon className="size-3.5" />
-              </a>
-              <a
-                href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition-colors"
-                aria-label="LinkedIn"
+                <svg
+                  className="w-5 h-5 text-black group-hover:text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={scrollRight}
+                className="w-10 h-10 rounded-full border-2 border-black flex items-center justify-center hover:bg-black transition-colors group"
+                aria-label="Next testimonial"
               >
-                <LinkedInIcon className="size-3" />
-              </a>
-              <a
-                href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition-colors"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="size-3.5" />
-              </a>
+                <svg
+                  className="w-5 h-5 text-black group-hover:text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
+        )}
+
+        {/* Scrollable Testimonials */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth px-6 pb-4"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="shrink-0 w-full max-w-5xl grid grid-cols-1 items-center gap-8 md:grid-cols-2"
+            >
+              {/* Left - Image */}
+              <div className="relative max-w-sm mx-auto md:mx-0">
+                <div className="relative overflow-hidden rounded-sm">
+                  {testimonial?.image?.asset ? (
+                    <Image
+                      src={urlFor(testimonial.image)
+                        .width(450)
+                        .height(550)
+                        .url()}
+                      alt={
+                        testimonial.image.alt ||
+                        testimonial.name ||
+                        "Testimonial"
+                      }
+                      width={450}
+                      height={550}
+                      className="h-auto w-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src="/images/image/ibw21_president_dr_ron_daniels-400x400.jpg"
+                      alt={testimonial.name || "Testimonial"}
+                      width={450}
+                      height={550}
+                      className="h-auto w-full object-cover"
+                    />
+                  )}
+                  {/* Name overlay at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm px-4 py-2">
+                    <p className="text-xs text-white font-light">
+                      <span className="text-accent font-light">
+                        {testimonial?.name || "Dr. Ron Daniels"}
+                      </span>
+                      , {testimonial?.title || "President"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right - Content */}
+              <div>
+                <blockquote className="mb-4">
+                  <p className="text-sm md:text-base text-black/70 leading-relaxed font-light mb-3">
+                    "{testimonial?.quote || defaultTestimonial.quote}"
+                  </p>
+                  <footer className="text-xs text-black/50 font-light">
+                    — {testimonial?.name || defaultTestimonial.name},{" "}
+                    {testimonial?.title || defaultTestimonial.title},{" "}
+                    {testimonial?.organization ||
+                      defaultTestimonial.organization}
+                  </footer>
+                </blockquote>
+
+                <div className="pt-2">
+                  {/* Social Icons */}
+                  <div className="flex items-center gap-2">
+                    {(testimonial?.socialLinks?.twitter ||
+                      !testimonial.socialLinks) && (
+                      <Link
+                        href={testimonial?.socialLinks?.twitter || "#"}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition-colors"
+                        aria-label="Twitter"
+                      >
+                        <TwitterIcon className="size-3.5" />
+                      </Link>
+                    )}
+                    {(testimonial?.socialLinks?.linkedin ||
+                      !testimonial.socialLinks) && (
+                      <Link
+                        href={testimonial?.socialLinks?.linkedin || "#"}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition-colors"
+                        aria-label="LinkedIn"
+                      >
+                        <LinkedInIcon className="size-3" />
+                      </Link>
+                    )}
+                    {(testimonial?.socialLinks?.instagram ||
+                      !testimonial.socialLinks) && (
+                      <Link
+                        href={testimonial?.socialLinks?.instagram || "#"}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition-colors"
+                        aria-label="Instagram"
+                      >
+                        <InstagramIcon className="size-3.5" />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Add CSS to hide scrollbar */}
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 }

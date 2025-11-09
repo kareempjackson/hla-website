@@ -1,6 +1,12 @@
 import Link from "next/link";
 
-export default function CTASection() {
+interface CTAData {
+  title?: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+export default function CTASection({ data }: { data?: CTAData }) {
   return (
     <section className="relative bg-bg py-24 min-h-screen flex items-center overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -41,7 +47,7 @@ export default function CTASection() {
         <div className="absolute top-0 left-[30%] w-px h-[20%] bg-white/7"></div>
         <div className="absolute top-[20%] left-[12%] w-[18%] h-px bg-white/7"></div>
         <div className="absolute top-[20%] left-[12%] w-px h-[52%] bg-white/7"></div>
-        <div className="absolute top-[72%] left-[0] w-[12%] h-px bg-white/7"></div>
+        <div className="absolute top-[72%] left-0 w-[12%] h-px bg-white/7"></div>
         <div className="absolute top-[72%] left-0 w-px h-[28%] bg-white/7"></div>
 
         {/* Pattern 6 - Top Right to Bottom Left */}
@@ -63,13 +69,13 @@ export default function CTASection() {
 
       <div className="mx-auto max-w-4xl px-6 text-center w-full relative z-10">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extralight text-cream mb-6 tracking-tight leading-tight">
-          Running blind is a risk you can't afford
+          {data?.title || "Running blind is a risk you can't afford"}
         </h2>
         <Link
-          href="#contact"
+          href={data?.buttonLink || "#contact"}
           className="inline-flex items-center justify-center px-7 py-3 text-xs font-light text-bg bg-accent rounded-full hover:bg-accent/90 transition-colors tracking-wide"
         >
-          Schedule Your Consultation
+          {data?.buttonText || "Schedule Your Consultation"}
         </Link>
       </div>
     </section>
