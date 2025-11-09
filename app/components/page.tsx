@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Badge } from "../../components/ui/badge";
 import { Card } from "../../components/ui/card";
 import { ColorSwatch } from "../../components/ui/color-swatch";
 import { SubscribeBar } from "../../components/patterns/subscribe-bar";
+
+export const metadata: Metadata = {
+  title: "Brand Components | Higher Level Accounting",
+  description:
+    "Higher Level Accounting brand components and design elements showcase.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function ComponentsShowcase() {
   return (
@@ -12,11 +23,11 @@ export default function ComponentsShowcase() {
         {/* header_intro */}
         <header className="mb-12 sm:mb-16">
           <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
-            HLA Design System
+            Higher Level Accounting Brand Components
           </h1>
           <p className="mt-4 max-w-2xl text-white/80">
-            Tailwind v4 theme tokens and a premium, minimal component library.
-            Built to be reusable and intentional across the product.
+            Brand colors, typography, and UI components for Higher Level
+            Accounting. Built for consistency across all touchpoints.
           </p>
         </header>
 
