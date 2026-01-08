@@ -6,6 +6,28 @@ export interface HomePage {
     subtitle?: string;
     description?: string;
     ctaText?: string;
+    heroMedia?: {
+      mediaType?: "image" | "video";
+      image?: {
+        asset: {
+          _ref: string;
+          _type: string;
+        };
+        alt?: string;
+      };
+      video?: {
+        asset?: {
+          url?: string;
+        };
+      };
+      posterImage?: {
+        asset: {
+          _ref: string;
+          _type: string;
+        };
+        alt?: string;
+      };
+    };
     heroImage?: {
       asset: {
         _ref: string;
@@ -50,6 +72,22 @@ export interface HomePage {
     };
   };
   showHowCanWeHelp?: boolean;
+  howCanWeHelpSection?: {
+    title?: string;
+    items?: Array<{
+      image?: {
+        asset: {
+          _ref: string;
+          _type: string;
+        };
+        alt?: string;
+      };
+      title?: string;
+      description?: string;
+    }>;
+    footerTitle?: string;
+    footerDescription?: string;
+  };
   showOurProcess?: boolean;
   showBlogPosts?: boolean;
   testimonialSection?: {
@@ -84,10 +122,23 @@ export interface HomePage {
 export async function getHomePageData(): Promise<HomePage | null> {
   return client.fetch(
     `*[_type == "homePage" && _id == "homePage"][0] {
-      heroSection,
+      heroSection{
+        title,
+        subtitle,
+        description,
+        ctaText,
+        heroMedia{
+          mediaType,
+          image,
+          video{asset->{url}},
+          posterImage
+        },
+        heroImage
+      },
       whyGreatSection,
       whatWeDoSection,
       showHowCanWeHelp,
+      howCanWeHelpSection,
       showOurProcess,
       showBlogPosts,
       testimonialSection,

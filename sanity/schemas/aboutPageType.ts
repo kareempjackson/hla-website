@@ -39,8 +39,63 @@ export const aboutPageType = defineType({
           type: "string",
         },
         {
+          name: "heroMedia",
+          title: "Hero Media (Image or Video)",
+          type: "object",
+          fields: [
+            {
+              name: "mediaType",
+              title: "Media Type",
+              type: "string",
+              initialValue: "image",
+              options: {
+                list: [
+                  { title: "Image", value: "image" },
+                  { title: "Video", value: "video" },
+                ],
+                layout: "radio",
+              },
+            },
+            {
+              name: "image",
+              title: "Hero Image",
+              type: "image",
+              options: { hotspot: true },
+              hidden: ({ parent }) => parent?.mediaType !== "image",
+              fields: [
+                {
+                  name: "alt",
+                  type: "string",
+                  title: "Alternative Text",
+                },
+              ],
+            },
+            {
+              name: "video",
+              title: "Hero Video",
+              type: "file",
+              options: { accept: "video/*" },
+              hidden: ({ parent }) => parent?.mediaType !== "video",
+            },
+            {
+              name: "posterImage",
+              title: "Video Poster Image (Optional)",
+              type: "image",
+              options: { hotspot: true },
+              hidden: ({ parent }) => parent?.mediaType !== "video",
+              fields: [
+                {
+                  name: "alt",
+                  type: "string",
+                  title: "Alternative Text",
+                },
+              ],
+            },
+          ],
+        },
+        {
           name: "heroImage",
-          title: "Hero Image",
+          title: "Hero Image (Legacy)",
           type: "image",
           options: {
             hotspot: true,
@@ -345,6 +400,14 @@ export const aboutPageType = defineType({
           title: "Show Testimonials Section",
           type: "boolean",
           initialValue: true,
+        },
+        {
+          name: "testimonials",
+          title: "Testimonials",
+          type: "array",
+          description:
+            "Select which testimonial entries to show on the About page (no headshot required).",
+          of: [{ type: "reference", to: [{ type: "testimonial" }] }],
         },
       ],
     }),

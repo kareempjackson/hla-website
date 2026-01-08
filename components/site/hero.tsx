@@ -1,12 +1,34 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
 import { urlFor } from "@/sanity/lib/image";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 interface HeroData {
   title?: string;
   subtitle?: string;
   description?: string;
   ctaText?: string;
+  heroMedia?: {
+    mediaType?: "image" | "video";
+    image?: {
+      asset: {
+        _ref: string;
+        _type: string;
+      };
+      alt?: string;
+    };
+    video?: {
+      asset?: {
+        url?: string;
+      };
+    };
+    posterImage?: {
+      asset: {
+        _ref: string;
+        _type: string;
+      };
+      alt?: string;
+    };
+  };
   heroImage?: {
     asset: {
       _ref: string;
@@ -17,6 +39,14 @@ interface HeroData {
 }
 
 export default function Hero({ data }: { data?: HeroData }) {
+  const mediaType = data?.heroMedia?.mediaType;
+  const videoUrl = data?.heroMedia?.video?.asset?.url;
+  const isHeroVideo = mediaType === "video" && !!videoUrl;
+  const posterUrl = data?.heroMedia?.posterImage
+    ? urlFor(data.heroMedia.posterImage).width(1200).height(900).url()
+    : undefined;
+  const imageSource = data?.heroMedia?.image || data?.heroImage;
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 bg-bg overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -115,7 +145,13 @@ export default function Hero({ data }: { data?: HeroData }) {
         <div className="absolute top-[60%] right-0 w-px h-[40%] bg-white/8"></div>
       </div>
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 py-8 md:grid-cols-2 md:py-12 w-full relative z-10">
+      <div
+        className={`mx-auto grid grid-cols-1 items-center gap-10 px-6 py-8 w-full relative z-10 md:py-12 ${
+          isHeroVideo
+            ? "max-w-7xl md:grid-cols-[1fr_1.25fr] lg:grid-cols-[1fr_1.35fr]"
+            : "max-w-6xl md:grid-cols-2"
+        }`}
+      >
         <div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-cream tracking-tight">
             {data?.title || "Higher Level Accounting"}
@@ -129,21 +165,40 @@ export default function Hero({ data }: { data?: HeroData }) {
               "Higher Level Accounting offers accrual-based bookkeeping and controller-level insights for SaaS companies, agencies, and highly regulated industries. We help you trust your numbers so you can raise capital, scale smart and stay compliant"}
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-2.5">
-            <Button
-              size="md"
-              className="rounded-pill focus-visible:ring-0 h-10 px-7 text-xs font-light tracking-wide"
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
             >
               {data?.ctaText || "Schedule Your Consultation"}
-            </Button>
+            </a>
           </div>
         </div>
 
         <div className="relative">
-          <div className="relative overflow-hidden rounded-sm bg-surface/80">
-            {data?.heroImage ? (
+          <div
+            className={`relative overflow-hidden rounded-sm ${
+              mediaType === "video" && videoUrl
+                ? "w-full aspect-video bg-transparent"
+                : "bg-surface/80"
+            }`}
+          >
+            {mediaType === "video" && videoUrl ? (
+              <video
+                src={videoUrl}
+                poster={posterUrl}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 h-full w-full object-contain"
+              />
+            ) : imageSource ? (
               <Image
-                src={urlFor(data.heroImage).width(1200).height(900).url()}
-                alt={data.heroImage.alt || "Team collaboration"}
+                src={urlFor(imageSource).width(1200).height(900).url()}
+                alt={imageSource.alt || "Team collaboration"}
                 width={1200}
                 height={900}
                 className="h-auto w-full object-cover"

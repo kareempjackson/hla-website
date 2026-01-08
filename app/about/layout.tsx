@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us | Higher Level Accounting - Strategic Financial Excellence",
+  title: {
+    absolute: "About Higher Level Accounting | Controller-Level Expertise",
+  },
   description:
-    "Learn about Higher Level Accounting's mission to provide controller-level accounting services for SaaS companies, marketing agencies, and regulated retailers. We deliver financial clarity, compliance, and strategic insights.",
+    "Learn about Higher Level Accounting's team and approach. We provide controller-level accounting services for SaaS, agencies, and regulated industries.",
   keywords:
     "about higher level accounting, controller accounting firm, SaaS accounting specialists, agency accounting services, cannabis retail accounting, financial compliance experts",
   openGraph: {
-    title: "About Higher Level Accounting - Strategic Financial Excellence",
+    title: "About Higher Level Accounting | Controller-Level Expertise",
     description:
-      "Controller-level accounting services for growth-minded businesses. We serve SaaS companies, marketing agencies, and regulated retailers with accurate financials and strategic insights.",
-    url: "https://higherlevelacct.com/about",
+      "Learn about Higher Level Accounting's team and approach. We provide controller-level accounting services for SaaS, agencies, and regulated industries.",
+    url: "https://higherlevelaccounting.co/about",
     siteName: "Higher Level Accounting",
     type: "website",
     images: [
@@ -24,13 +26,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Higher Level Accounting - Strategic Financial Excellence",
+    title: "About Higher Level Accounting | Controller-Level Expertise",
     description:
-      "Controller-level accounting services for growth-minded businesses in SaaS, agencies, and regulated industries.",
+      "Learn about Higher Level Accounting's team and approach. We provide controller-level accounting services for SaaS, agencies, and regulated industries.",
     images: ["/images/logo/logo.svg"],
   },
   alternates: {
-    canonical: "https://higherlevelacct.com/about",
+    canonical: "https://higherlevelaccounting.co/about",
   },
 };
 

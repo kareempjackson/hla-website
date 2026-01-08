@@ -6,6 +6,28 @@ export interface HeroSection {
   description?: string;
   primaryButtonText?: string;
   secondaryButtonText?: string;
+  heroMedia?: {
+    mediaType?: "image" | "video";
+    image?: {
+      asset: {
+        _ref: string;
+        _type: string;
+      };
+      alt?: string;
+    };
+    video?: {
+      asset?: {
+        url?: string;
+      };
+    };
+    posterImage?: {
+      asset: {
+        _ref: string;
+        _type: string;
+      };
+      alt?: string;
+    };
+  };
   heroImage?: {
     asset?: {
       _ref: string;
@@ -92,6 +114,13 @@ export interface TeamSection {
 export interface TestimonialsSection {
   title?: string;
   showTestimonials?: boolean;
+  testimonials?: Array<{
+    name?: string;
+    role?: string;
+    company?: string;
+    quote?: string;
+    rating?: number;
+  }>;
 }
 
 export interface CtaSection {
@@ -113,12 +142,34 @@ export interface AboutPage {
 export async function getAboutPageData(): Promise<AboutPage | null> {
   return client.fetch(
     `*[_type == "aboutPage" && _id == "aboutPage"][0] {
-      heroSection,
+      heroSection{
+        title,
+        description,
+        primaryButtonText,
+        secondaryButtonText,
+        heroMedia{
+          mediaType,
+          image,
+          video{asset->{url}},
+          posterImage
+        },
+        heroImage
+      },
       missionSection,
       whoWeServeSection,
       approachSection,
       teamSection,
-      testimonialsSection,
+      testimonialsSection{
+        title,
+        showTestimonials,
+        testimonials[]->{
+          name,
+          role,
+          company,
+          quote,
+          rating
+        }
+      },
       ctaSection
     }`
   );

@@ -37,7 +37,7 @@ export async function generateMetadata({
     openGraph: {
       title: insight.title,
       description: description,
-      url: `https://higherlevelacct.com/insight/${insight.slug.current}`,
+      url: `https://higherlevelaccounting.co/insight/${insight.slug.current}`,
       siteName: "Higher Level Accounting",
       type: "article",
       publishedTime: insight.publishedAt,
@@ -60,7 +60,7 @@ export async function generateMetadata({
       images: imageUrl ? [imageUrl] : [],
     },
     alternates: {
-      canonical: `https://higherlevelacct.com/insight/${insight.slug.current}`,
+      canonical: `https://higherlevelaccounting.co/insight/${insight.slug.current}`,
     },
   };
 }
@@ -132,12 +132,12 @@ export default async function InsightPage({
       name: "Higher Level Accounting",
       logo: {
         "@type": "ImageObject",
-        url: "https://higherlevelacct.com/images/logo/logo.svg",
+        url: "https://higherlevelaccounting.co/images/logo/logo.svg",
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://higherlevelacct.com/insight/${insight.slug.current}`,
+      "@id": `https://higherlevelaccounting.co/insight/${insight.slug.current}`,
     },
   };
 

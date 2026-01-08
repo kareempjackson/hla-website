@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 const helpItems = [
   {
@@ -24,7 +25,51 @@ const helpItems = [
   },
 ];
 
-export default function HowCanWeHelp() {
+type SanityImage = {
+  asset: {
+    _ref: string;
+    _type: string;
+  };
+  alt?: string;
+};
+
+interface HowCanWeHelpSectionData {
+  title?: string;
+  items?: Array<{
+    image?: SanityImage;
+    title?: string;
+    description?: string;
+  }>;
+  footerTitle?: string;
+  footerDescription?: string;
+}
+
+export default function HowCanWeHelp({
+  data,
+}: {
+  data?: HowCanWeHelpSectionData;
+}) {
+  const items: Array<{
+    id: number;
+    title: string;
+    description: string;
+    imageString?: string;
+    imageSanity?: SanityImage;
+  }> =
+    data?.items && data.items.length > 0
+      ? data.items.map((it, idx) => ({
+          id: idx + 1,
+          title: it.title || "",
+          description: it.description || "",
+          imageSanity: it.image,
+        }))
+      : helpItems.map((it) => ({
+          id: it.id,
+          title: it.title,
+          description: it.description,
+          imageString: it.image,
+        }));
+
   return (
     <section className="relative bg-white min-h-screen flex items-center py-12 md:py-12 pt-20 overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -81,23 +126,33 @@ export default function HowCanWeHelp() {
         {/* Header */}
         <div className="mb-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-black tracking-tight">
-            Industry focus
+            {data?.title || "Industry focus"}
           </h2>
         </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {helpItems.map((item) => (
+          {items.map((item) => (
             <article key={item.id} className="group cursor-pointer">
               {/* Image */}
               <div className="mb-3 overflow-hidden rounded-sm">
+                {item.imageSanity?.asset ? (
+                  <Image
+                    src={urlFor(item.imageSanity).width(800).height(700).url()}
+                    alt={item.imageSanity.alt || item.title}
+                    width={400}
+                    height={350}
+                    className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : item.imageString ? (
                 <Image
-                  src={item.image}
+                    src={item.imageString}
                   alt={item.title}
                   width={400}
                   height={350}
                   className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
+                ) : null}
               </div>
 
               {/* Title */}
@@ -116,11 +171,11 @@ export default function HowCanWeHelp() {
         {/* Footer Note */}
         <div className="mt-8 max-w-3xl">
           <h4 className="text-base font-light text-black mb-2">
-            Not in these industries?
+            {data?.footerTitle || "Not in these industries?"}
           </h4>
           <p className="text-sm text-black/60 leading-relaxed font-light">
-            No problem. The same clarity, compliance, and strategic guidance
-            apply to any business that values accurate numbers and smart growth.
+            {data?.footerDescription ||
+              "No problem. The same clarity, compliance, and strategic guidance apply to any business that values accurate numbers and smart growth."}
           </p>
         </div>
       </div>

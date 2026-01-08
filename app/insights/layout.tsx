@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Financial Insights & Resources | Higher Level Accounting Blog",
+  title: {
+    absolute: "Financial Insights & Resources | Higher Level Accounting",
+  },
   description:
-    "Expert insights on accounting, financial compliance, strategic financial management, and industry best practices for SaaS companies, marketing agencies, and regulated retailers.",
+    "Financial insights, compliance tips, and accounting best practices for SaaS companies, agencies, and growth-focused businesses from Higher Level Accounting.",
   keywords:
     "accounting blog, financial insights, SaaS accounting tips, agency financial management, cannabis accounting compliance, controller insights, financial best practices, business accounting resources",
   openGraph: {
     title: "Financial Insights & Resources | Higher Level Accounting",
     description:
-      "Expert insights on accounting, compliance, and strategic financial management to help your business grow with confidence.",
-    url: "https://higherlevelacct.com/insights",
+      "Financial insights, compliance tips, and accounting best practices for SaaS companies, agencies, and growth-focused businesses from Higher Level Accounting.",
+    url: "https://higherlevelaccounting.co/insights",
     siteName: "Higher Level Accounting",
     type: "website",
     images: [
@@ -26,11 +28,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Financial Insights & Resources | Higher Level Accounting",
     description:
-      "Expert insights on accounting, compliance, and strategic financial management.",
+      "Financial insights, compliance tips, and accounting best practices for SaaS companies, agencies, and growth-focused businesses from Higher Level Accounting.",
     images: ["/images/logo/logo.svg"],
   },
   alternates: {
-    canonical: "https://higherlevelacct.com/insights",
+    canonical: "https://higherlevelaccounting.co/insights",
   },
 };
 

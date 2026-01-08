@@ -1,7 +1,5 @@
 import Navbar from "../../components/site/navbar";
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import Image from "next/image";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 export default function ContactPage() {
   // Structured data for Contact Page
@@ -11,7 +9,7 @@ export default function ContactPage() {
     name: "Contact Higher Level Accounting",
     description:
       "Contact Higher Level Accounting for strategic accounting services",
-    url: "https://higherlevelacct.com/contact",
+    url: "https://higherlevelaccounting.co/contact",
     mainEntity: {
       "@type": "Organization",
       name: "Higher Level Accounting",
@@ -131,138 +129,31 @@ export default function ContactPage() {
 
             {/* Description */}
             <p className="text-sm md:text-base text-white/60 leading-relaxed font-light max-w-xl">
-              Thank you for your interest in Higher Level Accounting. Please
-              fill out the form below to ask a question or report a technical
-              problem.
+              Thank you for your interest in Higher Level Accounting. Schedule a
+              quick call and we’ll point you in the right direction.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Contact Section with Image and Form */}
-      <section className="relative bg-teal-50 py-20 md:py-32">
-        <div className="mx-auto max-w-7xl w-full px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left - Image */}
-            <div className="relative order-2 lg:order-1">
-              <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[450px] lg:h-[550px]">
-                <Image
-                  src="/images/image/volodymyr-hryshchenko-V5vqWC9gyEU-unsplash.jpg"
-                  alt="Team collaboration"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Right - Contact Info and Form */}
-            <div className="space-y-10 order-1 lg:order-2">
-              {/* Office Location and Contact Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                {/* Office Location */}
-                <div>
-                  <h2 className="text-base font-light text-black/50 uppercase tracking-wider mb-3">
-                    Office Location
+      {/* CTA */}
+      <section className="relative bg-white py-20 md:py-28">
+        <div className="mx-auto max-w-4xl w-full px-6 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight text-bg mb-6 leading-tight">
+            Book a call
                   </h2>
-                  <p className="text-sm text-black/70 leading-relaxed font-light">
-                    Our office is located on the 7th floor of Wentworth Chambers
-                    at 180 Phillip Street, Sydney.
-                  </p>
-                </div>
-
-                {/* Contact */}
-                <div>
-                  <h2 className="text-base font-light text-black/50 uppercase tracking-wider mb-3">
-                    Contact
-                  </h2>
-                  <div className="space-y-2.5">
-                    <div className="flex items-center gap-2.5">
-                      <svg
-                        className="w-4 h-4 text-black/50 flex-shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                        />
-                      </svg>
-                      <p className="text-sm text-black/70 font-light">
-                        61 2 6724 3203
+          <p className="text-sm md:text-base text-black/60 font-light max-w-2xl mx-auto mb-10">
+            Choose a time that works for you and we’ll learn about your business
+            and goals.
                       </p>
-                    </div>
-                    <div className="flex items-center gap-2.5">
-                      <svg
-                        className="w-4 h-4 text-black/50 flex-shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
-                      <p className="text-sm text-black/70 font-light">
-                        info@higherlevelacct.com
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Get in touch Form */}
-              <div>
-                <h2 className="text-base font-light text-black/50 uppercase tracking-wider mb-6">
-                  Get in touch
-                </h2>
-                <form className="space-y-3.5">
-                  {/* Full Name */}
-                  <div>
-                    <Input
-                      type="text"
-                      placeholder="Full Name Here"
-                      className="w-full h-11 px-4 text-xs font-light bg-white border-0 rounded-full focus:ring-1 focus:ring-accent/30 transition-all placeholder:text-black/30"
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder="Email"
-                      className="w-full h-11 px-4 text-xs font-light bg-white border-0 rounded-full focus:ring-1 focus:ring-accent/30 transition-all placeholder:text-black/30"
-                    />
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <textarea
-                      placeholder="Message"
-                      rows={4}
-                      className="w-full px-4 py-3 text-xs font-light bg-white border-0 rounded-sm focus:ring-1 focus:ring-accent/30 resize-none transition-all focus:outline-none placeholder:text-black/30"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="flex justify-end pt-2">
-                    <Button
-                      type="submit"
-                      size="sm"
-                      className="rounded-full focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-9 px-8 text-xs font-light tracking-wide transition-all"
-                    >
-                      Submit
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-11 px-7 text-sm"
+          >
+            Schedule a fit call
+          </a>
         </div>
       </section>
     </div>

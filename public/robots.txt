@@ -7,5 +7,5 @@ Allow: /
 # Disallow: /private/
 
 # Sitemap location
-Sitemap: https://higherlevelacct.com/sitemap.xml
+Sitemap: https://higherlevelaccounting.co/sitemap.xml
 

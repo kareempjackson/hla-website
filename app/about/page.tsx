@@ -1,8 +1,6 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../../components/site/navbar";
 import Footer from "../../components/site/footer";
@@ -12,6 +10,8 @@ import {
   type AboutPage,
 } from "@/sanity/lib/aboutPageQueries";
 import { urlFor } from "@/sanity/lib/image";
+import { CALENDLY_URL } from "@/lib/calendly";
+import AboutTestimonials from "@/components/site/about-testimonials";
 
 // Note: metadata export doesn't work in client components,
 // so we'll need to add metadata via layout or convert to server component
@@ -54,7 +54,7 @@ export default function AboutPage() {
     name: "Higher Level Accounting",
     description:
       "Higher Level Accounting provides strategic, controller-level accounting services for growth-minded businesses. Our focus is on delivering accurate, accrual-based financials, actionable insights, and rock-solid compliance.",
-    url: "https://higherlevelacct.com/about",
+    url: "https://higherlevelaccounting.co/about",
     serviceType: [
       "Controller-Level Accounting",
       "Accrual-Based Bookkeeping",
@@ -71,6 +71,43 @@ export default function AboutPage() {
     ],
   };
 
+  // About hero media (match home hero spacing/sizing)
+  const mediaType = aboutData?.heroSection?.heroMedia?.mediaType;
+  const videoUrl = aboutData?.heroSection?.heroMedia?.video?.asset?.url;
+  const isHeroVideo = mediaType === "video" && !!videoUrl;
+  const posterUrl = aboutData?.heroSection?.heroMedia?.posterImage
+    ? urlFor(aboutData.heroSection.heroMedia.posterImage)
+        .width(1200)
+        .height(900)
+        .url()
+    : undefined;
+  const imageSource =
+    aboutData?.heroSection?.heroMedia?.image || aboutData?.heroSection?.heroImage;
+
+  const teamMembers =
+    aboutData?.teamSection?.teamMembers && aboutData.teamSection.teamMembers.length > 0
+      ? aboutData.teamSection.teamMembers
+      : [
+          {
+            name: "Mattew Jane",
+            role: "Senior Consultant",
+            quote: "When you have a dream, you've got to grab it and never let go",
+            bio: "When it comes to your cannabis business, accounting can be challenging but we are here to help through it all.",
+          },
+          {
+            name: "Jane Smith",
+            role: "Financial Analyst",
+            quote: "Excellence is not a skill, it's an attitude",
+            bio: "Our commitment to providing exceptional financial services goes beyond numbers. We believe in building lasting relationships with our clients and helping them achieve their business goals.",
+          },
+          {
+            name: "John Doe",
+            role: "Accounting Manager",
+            quote: "Success is the sum of small efforts repeated day in and day out",
+            bio: "We bring precision and dedication to every client engagement. Our team is committed to delivering financial clarity that empowers businesses to make informed decisions.",
+          },
+        ];
+
   return (
     <div className="relative bg-bg">
       {/* Add structured data */}
@@ -83,7 +120,7 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <div id="about-hero" className="sticky top-0 z-10">
-        <section className="relative min-h-screen flex flex-col pt-20 bg-bg overflow-hidden">
+        <section className="relative min-h-screen flex items-center pt-20 bg-bg overflow-hidden">
           {/* Decorative Lines - White on dark teal background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Pattern 1 - Top Left to Bottom Right */}
@@ -165,64 +202,76 @@ export default function AboutPage() {
             <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-white/4"></div>
           </div>
 
-          {/* Top Section - About Us Text and Trusted Clients */}
-          <div className="mx-auto max-w-6xl w-full px-6 py-12 relative z-10">
-            <div className="max-w-2xl mx-auto text-center">
-              {/* About Us Content */}
-              <div className="space-y-6">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-extralight tracking-tight text-cream">
-                  {aboutData?.heroSection?.title || "Why Higher Level Exists"}
-                </h1>
-
-                <p className="text-sm md:text-base text-white/60 leading-relaxed font-light">
-                  {aboutData?.heroSection?.description ||
-                    "We exist because financial guesswork doesn't scale. Too many firms stop at 'good enough'. We go a step further to uncover the gaps so that you have financial clarity you can trust to make the right moves."}
-                </p>
-
-                <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
-                  <Link href="/contact">
-                    <Button
-                      size="md"
-                      className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
-                    >
-                      {aboutData?.heroSection?.primaryButtonText ||
-                        "Contact Us"}
-                    </Button>
-                  </Link>
-                  <Link href="/services">
-                    <Button
-                      size="md"
-                      variant="ghost"
-                      className="rounded-pill focus-visible:ring-0 bg-black text-white hover:bg-black/80 h-10 px-7 text-xs font-light tracking-wide border border-white/10"
-                    >
-                      {aboutData?.heroSection?.secondaryButtonText ||
-                        "Learn More"}
-                    </Button>
-                  </Link>
-                </div>
+          {/* Hero Content (match home hero spacing/sizing) */}
+          <div
+            className={`mx-auto grid grid-cols-1 items-center gap-10 px-6 py-8 w-full relative z-10 md:py-12 ${
+              isHeroVideo
+                ? "max-w-7xl md:grid-cols-[1fr_1.2fr] lg:grid-cols-[1fr_1.3fr]"
+                : "max-w-6xl md:grid-cols-2"
+            }`}
+          >
+            {/* Copy */}
+            <div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-cream tracking-tight">
+                {aboutData?.heroSection?.title || "Why Higher Level Exists"}
+              </h1>
+              <p className="mt-4 max-w-2xl text-xs md:text-sm text-white/60 leading-relaxed font-light">
+                {aboutData?.heroSection?.description ||
+                  "We exist because financial guesswork doesn't scale. Too many firms stop at 'good enough'. We go a step further to uncover the gaps so that you have financial clarity you can trust to make the right moves."}
+              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-2.5">
+                <Link href="/contact">
+                  <Button
+                    size="md"
+                    className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+                  >
+                    {aboutData?.heroSection?.primaryButtonText || "Contact Us"}
+                  </Button>
+                </Link>
+                <Link href="/services">
+                  <Button
+                    size="md"
+                    variant="ghost"
+                    className="rounded-pill focus-visible:ring-0 bg-black text-white hover:bg-black/80 h-10 px-7 text-xs font-light tracking-wide border border-white/10"
+                  >
+                    {aboutData?.heroSection?.secondaryButtonText || "Learn More"}
+                  </Button>
+                </Link>
               </div>
             </div>
-          </div>
 
-          {/* Bottom Section - Customer Service Image */}
-          <div className="mx-auto max-w-6xl w-full px-6 pb-12">
-            <div className="relative overflow-hidden rounded-sm bg-surface/30 min-h-[400px] flex items-center justify-center">
-              {aboutData?.heroSection?.heroImage?.asset ? (
-                <img
-                  src={urlFor(aboutData.heroSection.heroImage).url()}
-                  alt={
-                    aboutData.heroSection.heroImage.alt || "About Hero Image"
-                  }
-                  className="w-full h-[400px] object-cover"
-                />
-              ) : (
-                /* Placeholder for customer service image - replace with actual image when available */
-                <div className="w-full h-[400px] bg-linear-to-br from-surface to-bg flex items-center justify-center">
-                  <p className="text-white/50 text-sm font-light">
-                    Customer Service Image Placeholder
-                  </p>
-                </div>
-              )}
+            {/* Media */}
+            <div className="relative">
+              <div
+                className={`relative overflow-hidden rounded-sm ${
+                  isHeroVideo ? "w-full aspect-video bg-transparent" : "bg-transparent"
+                }`}
+              >
+                {isHeroVideo && videoUrl ? (
+                  <video
+                    src={videoUrl}
+                    poster={posterUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 h-full w-full object-contain"
+                  />
+                ) : imageSource ? (
+                  <img
+                    src={urlFor(imageSource).width(1200).height(900).url()}
+                    alt={imageSource.alt || aboutData?.heroSection?.title || "About"}
+                    className="h-auto w-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-[400px] bg-linear-to-br from-surface to-bg flex items-center justify-center">
+                    <p className="text-white/50 text-sm font-light">
+                      Customer Service Image Placeholder
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -449,30 +498,63 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="relative grid grid-cols-12 gap-3">
                   {/* Top Left - Team High Five (larger, spans more) */}
-                  <div className="col-span-7 relative overflow-hidden rounded-sm bg-gray-700 h-72">
-                    <div className="w-full h-full bg-gray-600 flex items-center justify-center">
-                      <p className="text-gray-400 text-xs font-light">
-                        Team Image
-                      </p>
-                    </div>
+                  <div className="col-span-7 relative overflow-hidden rounded-sm bg-gray-700 h-72 flex items-center justify-center p-3">
+                    {aboutData?.whoWeServeSection?.images?.[0]?.asset ? (
+                      <img
+                        src={urlFor(aboutData.whoWeServeSection.images[0]).url()}
+                        alt={
+                          aboutData.whoWeServeSection.images[0].alt ||
+                          "Who we serve image"
+                        }
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-600 flex items-center justify-center">
+                        <p className="text-gray-400 text-xs font-light">
+                          Team Image
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Top Right - Person at Computer (smaller, positioned higher) */}
                   <div className="col-span-5 relative overflow-hidden rounded-sm bg-gray-700 h-64 mt-6">
-                    <div className="w-full h-full bg-gray-600 flex items-center justify-center">
-                      <p className="text-gray-400 text-xs font-light">
-                        Computer Image
-                      </p>
-                    </div>
+                    {aboutData?.whoWeServeSection?.images?.[1]?.asset ? (
+                      <img
+                        src={urlFor(aboutData.whoWeServeSection.images[1]).url()}
+                        alt={
+                          aboutData.whoWeServeSection.images[1].alt ||
+                          "Who we serve image"
+                        }
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-600 flex items-center justify-center">
+                        <p className="text-gray-400 text-xs font-light">
+                          Computer Image
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Bottom - Person Working at Desk (large, overlaps) */}
                   <div className="col-span-8 col-start-3 relative overflow-hidden rounded-sm bg-gray-700 h-80 -mt-10">
-                    <div className="w-full h-full bg-gray-600 flex items-center justify-center">
-                      <p className="text-gray-400 text-xs font-light">
-                        Desk Work Image
-                      </p>
-                    </div>
+                    {aboutData?.whoWeServeSection?.images?.[2]?.asset ? (
+                      <img
+                        src={urlFor(aboutData.whoWeServeSection.images[2]).url()}
+                        alt={
+                          aboutData.whoWeServeSection.images[2].alt ||
+                          "Who we serve image"
+                        }
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-600 flex items-center justify-center">
+                        <p className="text-gray-400 text-xs font-light">
+                          Desk Work Image
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -726,10 +808,21 @@ export default function AboutPage() {
               {/* Right Column - Image */}
               <div className="relative">
                 <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[550px] lg:h-[650px] flex items-center justify-center">
-                  {/* Placeholder for office corridor image */}
-                  <p className="text-gray-500 text-sm font-light">
-                    Office Corridor Image
-                  </p>
+                  {aboutData?.approachSection?.image?.asset ? (
+                    <img
+                      src={urlFor(aboutData.approachSection.image).url()}
+                      alt={
+                        aboutData.approachSection.image.alt ||
+                        "Approach Section Image"
+                      }
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    /* Placeholder for office corridor image */
+                    <p className="text-gray-500 text-sm font-light">
+                      Office Corridor Image
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -825,7 +918,7 @@ export default function AboutPage() {
             {/* Header */}
             <div className="flex items-center justify-between mb-10 px-6">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-black">
-                Our leadership & Team
+                {aboutData?.teamSection?.title || "Our leadership & Team"}
               </h2>
               <div className="flex items-center gap-2">
                 <button
@@ -878,349 +971,121 @@ export default function AboutPage() {
                 msOverflowStyle: "none",
               }}
             >
-              {/* Team Member 1 */}
-              <div className="shrink-0 w-[350px]">
-                <div className="relative overflow-hidden rounded-sm bg-gray-200 h-[500px]">
-                  <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-                    <p className="text-gray-500 text-xs font-light">
-                      Team Member Photo
-                    </p>
-                  </div>
-                  <div className="absolute bottom-5 left-5 right-5">
-                    <div className="bg-black/80 backdrop-blur-sm rounded-full px-5 py-2.5">
-                      <p className="text-white text-xs font-light">
-                        <span className="text-accent font-normal">
-                          Mattew Jane
-                        </span>
-                        , Senior Consultant
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Quote Card 1 */}
-              <div className="shrink-0 w-[350px]">
-                <div className="relative overflow-hidden rounded-sm bg-[#E8F5E9] p-6 h-[500px] flex flex-col justify-between">
-                  <div className="space-y-5">
-                    <h3 className="text-xl md:text-2xl font-light text-black leading-tight">
-                      "When you have a dream, you've got to grab it and never
-                      let go"
-                    </h3>
-
-                    <p className="text-xs text-black/70 leading-relaxed font-light">
-                      When it comes to your cannabis business, accounting can be
-                      challenging but we are here to help through it all. Since
-                      our inception, Higher Level Accounting has focused on
-                      providing accounting and
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                          <circle cx="4" cy="4" r="2" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <rect
-                            x="2"
-                            y="2"
-                            width="20"
-                            height="20"
-                            rx="5"
-                            ry="5"
-                          />
-                          <path
-                            d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                        </svg>
-                      </a>
-                    </div>
-
-                    <a
-                      href="#"
-                      className="inline-flex items-center text-accent text-xs font-light hover:underline"
-                    >
-                      Learn more
-                      <svg
-                        className="w-3.5 h-3.5 ml-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M9 5l7 7-7 7"
+              {teamMembers.flatMap((member, index) => {
+                const baseKey = `${member?.name || "member"}-${index}`;
+                const photoCard = (
+                  <div key={`${baseKey}-photo`} className="shrink-0 w-[350px]">
+                    <div className="relative overflow-hidden rounded-sm bg-gray-200 h-[500px]">
+                      {member?.photo?.asset ? (
+                        <img
+                          src={urlFor(member.photo).url()}
+                          alt={member.photo.alt || member.name || "Team Member"}
+                          className="w-full h-full object-cover"
                         />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Team Member 2 */}
-              <div className="shrink-0 w-[350px]">
-                <div className="relative overflow-hidden rounded-sm bg-gray-200 h-[500px]">
-                  <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-                    <p className="text-gray-500 text-xs font-light">
-                      Team Member Photo
-                    </p>
-                  </div>
-                  <div className="absolute bottom-5 left-5 right-5">
-                    <div className="bg-black/80 backdrop-blur-sm rounded-full px-5 py-2.5">
-                      <p className="text-white text-xs font-light">
-                        <span className="text-accent font-normal">
-                          Jane Smith
-                        </span>
-                        , Financial Analyst
-                      </p>
+                      ) : (
+                        <div className="w-full h-full bg-gray-300 flex items-center justify-center">
+                          <p className="text-gray-500 text-xs font-light">
+                            Team Member Photo
+                          </p>
+                        </div>
+                      )}
+                      <div className="absolute bottom-5 left-5 right-5">
+                        <div className="bg-black/80 backdrop-blur-sm rounded-full px-5 py-2.5">
+                          <p className="text-white text-xs font-light">
+                            <span className="text-accent font-normal">
+                              {member?.name || "Team Member"}
+                            </span>
+                            {member?.role ? `, ${member.role}` : ""}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
 
-              {/* Quote Card 2 */}
-              <div className="shrink-0 w-[350px]">
-                <div className="relative overflow-hidden rounded-sm bg-[#E8F5E9] p-6 h-[500px] flex flex-col justify-between">
-                  <div className="space-y-5">
-                    <h3 className="text-xl md:text-2xl font-light text-black leading-tight">
-                      "Excellence is not a skill, it's an attitude"
-                    </h3>
+                const quoteCard = (
+                  <div key={`${baseKey}-quote`} className="shrink-0 w-[350px]">
+                    <div className="relative overflow-hidden rounded-sm bg-[#E8F5E9] p-6 h-[500px] flex flex-col justify-between">
+                      <div className="space-y-5">
+                        {member?.quote ? (
+                          <h3 className="text-xl md:text-2xl font-light text-black leading-tight">
+                            "{member.quote}"
+                          </h3>
+                        ) : (
+                          <h3 className="text-xl md:text-2xl font-light text-black leading-tight">
+                            "Excellence is not a skill, it's an attitude"
+                          </h3>
+                        )}
 
-                    <p className="text-xs text-black/70 leading-relaxed font-light">
-                      Our commitment to providing exceptional financial services
-                      goes beyond numbers. We believe in building lasting
-                      relationships with our clients and helping them achieve
-                      their business goals.
-                    </p>
-                  </div>
+                        <p className="text-xs text-black/70 leading-relaxed font-light">
+                          {member?.bio ||
+                            "Our commitment to providing exceptional financial services goes beyond numbers. We believe in building lasting relationships with our clients and helping them achieve their business goals."}
+                        </p>
+                      </div>
 
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                          <circle cx="4" cy="4" r="2" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <rect
-                            x="2"
-                            y="2"
-                            width="20"
-                            height="20"
-                            rx="5"
-                            ry="5"
-                          />
-                          <path
-                            d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                        </svg>
-                      </a>
-                    </div>
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                          {member?.twitterUrl && (
+                            <a
+                              href={member.twitterUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
+                              aria-label="Twitter"
+                            >
+                              <svg
+                                className="w-4 h-4 text-white"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                              </svg>
+                            </a>
+                          )}
+                          {member?.linkedinUrl && (
+                            <a
+                              href={member.linkedinUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
+                              aria-label="LinkedIn"
+                            >
+                              <svg
+                                className="w-4 h-4 text-white"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                              </svg>
+                            </a>
+                          )}
+                          {member?.instagramUrl && (
+                            <a
+                              href={member.instagramUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
+                              aria-label="Instagram"
+                            >
+                              <svg
+                                className="w-4 h-4 text-white"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                              </svg>
+                            </a>
+                          )}
+                        </div>
 
-                    <a
-                      href="#"
-                      className="inline-flex items-center text-accent text-xs font-light hover:underline"
-                    >
-                      Learn more
-                      <svg
-                        className="w-3.5 h-3.5 ml-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Team Member 3 */}
-              <div className="shrink-0 w-[350px]">
-                <div className="relative overflow-hidden rounded-sm bg-gray-200 h-[500px]">
-                  <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-                    <p className="text-gray-500 text-xs font-light">
-                      Team Member Photo
-                    </p>
-                  </div>
-                  <div className="absolute bottom-5 left-5 right-5">
-                    <div className="bg-black/80 backdrop-blur-sm rounded-full px-5 py-2.5">
-                      <p className="text-white text-xs font-light">
-                        <span className="text-accent font-normal">
-                          John Doe
-                        </span>
-                        , Accounting Manager
-                      </p>
+                        {/* Learn more button removed */}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
 
-              {/* Quote Card 3 */}
-              <div className="shrink-0 w-[350px]">
-                <div className="relative overflow-hidden rounded-sm bg-[#E8F5E9] p-6 h-[500px] flex flex-col justify-between">
-                  <div className="space-y-5">
-                    <h3 className="text-xl md:text-2xl font-light text-black leading-tight">
-                      "Success is the sum of small efforts repeated day in and
-                      day out"
-                    </h3>
-
-                    <p className="text-xs text-black/70 leading-relaxed font-light">
-                      We bring precision and dedication to every client
-                      engagement. Our team is committed to delivering financial
-                      clarity that empowers businesses to make informed
-                      decisions.
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                          <circle cx="4" cy="4" r="2" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="w-9 h-9 rounded-full bg-black flex items-center justify-center hover:bg-black/80 transition-colors"
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <rect
-                            x="2"
-                            y="2"
-                            width="20"
-                            height="20"
-                            rx="5"
-                            ry="5"
-                          />
-                          <path
-                            d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                        </svg>
-                      </a>
-                    </div>
-
-                    <a
-                      href="#"
-                      className="inline-flex items-center text-accent text-xs font-light hover:underline"
-                    >
-                      Learn more
-                      <svg
-                        className="w-3.5 h-3.5 ml-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
+                return [photoCard, quoteCard];
+              })}
             </div>
           </div>
 
@@ -1318,97 +1183,10 @@ export default function AboutPage() {
               <div className="absolute bottom-0 right-[16%] w-[16%] h-px bg-black/4"></div>
             </div>
 
-            <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
-              <div className="max-w-3xl mx-auto">
-                {/* Heading */}
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight tracking-tight text-black mb-5">
-                  Testimonials
-                </h2>
-
-                {/* Star Rating */}
-                <div className="flex items-center gap-1 mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-5 h-5 text-yellow-400 fill-current"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  ))}
-                  <span className="text-base font-light text-black ml-1.5">
-                    5.0
-                  </span>
-                </div>
-
-                {/* Testimonial Text */}
-                <blockquote className="text-lg md:text-xl lg:text-2xl font-light text-black leading-relaxed mb-8">
-                  Alvonn and his team are dedicated professionals who provide
-                  excellent accounting services. Alvonn is very detailed and
-                  conscientious in his work and has solved many bookkeeping and
-                  accounting problems. I recommend Alvonn and Higher Level
-                  Accounting to any business owner that needs someone to watch
-                  their financial back!
-                </blockquote>
-
-                {/* Author Card and Navigation */}
-                <div className="flex items-end justify-between">
-                  {/* Author Card */}
-                  <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm">
-                    <div className="w-12 h-12 rounded-md bg-gray-300 overflow-hidden shrink-0">
-                      {/* Placeholder for profile image */}
-                      <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                        <span className="text-white text-xs font-light">
-                          Photo
-                        </span>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-black">
-                        Whitney Stone
-                      </h3>
-                      <p className="text-xs text-gray-500 font-light uppercase tracking-wide">
-                        CEO MJ ADMIN
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Navigation Arrows */}
-                  <div className="flex items-center gap-2">
-                    <button className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black/5 transition-colors">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M15 19l-7-7 7-7"
-                        />
-                      </svg>
-                    </button>
-                    <button className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black/5 transition-colors">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <AboutTestimonials
+              title={aboutData?.testimonialsSection?.title || "Testimonials"}
+              testimonials={aboutData?.testimonialsSection?.testimonials}
+            />
           </section>
         </div>
       )}
@@ -1511,12 +1289,14 @@ export default function AboutPage() {
               </p>
 
               <div className="pt-4">
-                <Button
-                  size="md"
-                  className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-12 px-10 text-base font-normal tracking-wide"
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-12 px-10 text-base font-normal tracking-wide"
                 >
                   Schedule Your Consultation
-                </Button>
+                </a>
               </div>
             </div>
           </div>

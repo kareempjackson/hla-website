@@ -307,7 +307,7 @@ export const servicesPageType = defineType({
         },
         {
           name: "images",
-          title: "Gallery Images (3 images)",
+          title: "Gallery Images (4 images)",
           type: "array",
           of: [
             {
@@ -324,7 +324,7 @@ export const servicesPageType = defineType({
               ],
             },
           ],
-          validation: (Rule) => Rule.max(3),
+          validation: (Rule) => Rule.max(4),
         },
       ],
     }),

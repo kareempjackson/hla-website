@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 interface CTAData {
   title?: string;
@@ -7,6 +8,12 @@ interface CTAData {
 }
 
 export default function CTASection({ data }: { data?: CTAData }) {
+  const href =
+    data?.buttonLink && data.buttonLink.includes("calendly.com")
+      ? data.buttonLink
+      : CALENDLY_URL;
+  const isExternal = href.startsWith("http");
+
   return (
     <section className="relative bg-bg py-24 min-h-screen flex items-center overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -72,7 +79,9 @@ export default function CTASection({ data }: { data?: CTAData }) {
           {data?.title || "Running blind is a risk you can't afford"}
         </h2>
         <Link
-          href={data?.buttonLink || "#contact"}
+          href={href}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
           className="inline-flex items-center justify-center px-7 py-3 text-xs font-light text-bg bg-accent rounded-full hover:bg-accent/90 transition-colors tracking-wide"
         >
           {data?.buttonText || "Schedule Your Consultation"}

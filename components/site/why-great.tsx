@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { urlFor } from "@/sanity/lib/image";
 
 function UsersIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -34,7 +34,23 @@ function StarIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function WhyGreat() {
+interface WhyGreatSectionData {
+  title?: string;
+  problems?: string[];
+  description?: string;
+  consequencesTitle?: string;
+  consequences?: string[];
+  closingText?: string;
+  image?: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+    alt?: string;
+  };
+}
+
+export default function WhyGreat({ data }: { data?: WhyGreatSectionData }) {
   return (
     <section className="relative bg-cream min-h-screen flex items-center py-12 md:py-12 pt-20 overflow-hidden">
       {/* Decorative Stepped Lines */}
@@ -91,49 +107,63 @@ export default function WhyGreat() {
         {/* Left content */}
         <div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-brand-deep leading-tight tracking-tight">
-            Your numbers might be lying
+            {data?.title || "Your numbers might be lying"}
           </h2>
           <div className="mt-4 space-y-1 text-xs md:text-sm text-brand-deep/70 font-light">
+            {(data?.problems?.length ? data.problems : undefined)?.map(
+              (problem, idx) => (
+                <p key={idx}>{problem}</p>
+              )
+            ) || (
+              <>
             <p>Revenue reports not matching what's in the bank?</p>
             <p>"Profit" disappearing right after you pay your vendors?</p>
             <p>Your books are "done" but things still feel out of whack</p>
+              </>
+            )}
           </div>
 
           <p className="mt-5 text-xs md:text-sm text-brand-deep font-light">
-            Bad numbers can quickly tank your next move and most businesses
-            don't see it coming until it's too late.
+            {data?.description ||
+              "Bad numbers can quickly tank your next move and most businesses don't see it coming until it's too late."}
           </p>
 
           <div className="mt-5">
             <p className="text-xs md:text-sm text-brand-deep/70 mb-2.5 font-light">
-              When revenue and costs don't line up, you make bad calls:
+              {data?.consequencesTitle ||
+                "When revenue and costs don't line up, you make bad calls:"}
             </p>
             <ul className="space-y-1.5 text-xs md:text-sm text-brand-deep/70 font-light">
-              <li className="flex items-start gap-2">
+              {(data?.consequences?.length
+                ? data.consequences
+                : ["Hire too soon", "Underprice services", "Spend cash you don't really have"]
+              ).map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2">
                 <span className="text-accent mt-1">•</span>
-                <span>Hire too soon</span>
+                  <span>{item}</span>
               </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent mt-1">•</span>
-                <span>Underprice services</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-accent mt-1">•</span>
-                <span>Spend cash you don't really have</span>
-              </li>
+              ))}
             </ul>
           </div>
 
           <p className="mt-5 text-xs md:text-sm text-brand-deep/70 leading-relaxed font-light">
-            The cost isn't just money but maybe a fine you never saw coming, a
-            license you can't get back, or an investor walking away before
-            you've even finished your pitch.
+            {data?.closingText ||
+              "The cost isn't just money but maybe a fine you never saw coming, a license you can't get back, or an investor walking away before you've even finished your pitch."}
           </p>
         </div>
 
         {/* Right image */}
         <div className="relative max-w-md mx-auto">
           <div className="relative overflow-hidden rounded-sm aspect-[3/4]">
+            {data?.image?.asset ? (
+              <Image
+                src={urlFor(data.image).width(900).height(1200).url()}
+                alt={data.image.alt || data.title || "Why Great"}
+                width={600}
+                height={800}
+                className="h-full w-full object-cover"
+              />
+            ) : (
             <Image
               src="/images/image/annie-spratt-tuJ3tXSayco-unsplash.jpg"
               alt="Team collaboration"
@@ -141,6 +171,7 @@ export default function WhyGreat() {
               height={800}
               className="h-full w-full object-cover"
             />
+            )}
           </div>
         </div>
       </div>

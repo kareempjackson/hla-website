@@ -10,18 +10,6 @@ function ArrowUpRight(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function PhoneIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M6.5 3.5h3l1.5 4-2 1.5a14 14 0 0 0 6 6l1.5-2 4 1.5v3c0 .8-.6 1.5-1.4 1.5A16.5 16.5 0 0 1 5 5C5 4.2 5.7 3.5 6.5 3.5Z"
-        stroke="currentColor"
-        strokeWidth={1.2}
-      />
-    </svg>
-  );
-}
-
 function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
@@ -50,39 +38,12 @@ function PinIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function XIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path d="m4 4 16 16M20 4 4 20" stroke="currentColor" strokeWidth={1.4} />
-    </svg>
-  );
-}
+// Removed X/Instagram/Facebook icons per request (LinkedIn only)
 
-function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
+function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <rect
-        x="4"
-        y="4"
-        width="16"
-        height="16"
-        rx="4"
-        stroke="currentColor"
-        strokeWidth={1.2}
-      />
-      <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth={1.2} />
-      <circle cx="17" cy="7" r="1" fill="currentColor" />
-    </svg>
-  );
-}
-
-function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M14 8h2V5h-2c-2 0-3 1.3-3 3.2V11H9v3h2v5h3v-5h2.2l.3-3H14V8.9C14 8.4 14.4 8 15 8Z"
-        fill="currentColor"
-      />
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
     </svg>
   );
 }
@@ -128,15 +89,22 @@ export default function Footer() {
 
       {/* client portal row */}
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex items-center justify-between py-12">
+        <div className="flex items-center justify-between py-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-wide font-extralight text-cream flex items-center gap-3">
             Client Portal
             <ArrowUpRight className="size-7 text-cream" />
           </h2>
-          <div className="hidden items-center gap-4 md:flex">
-            <XIcon className="size-5 text-white/60 hover:text-white/80 transition-colors cursor-pointer" />
-            <InstagramIcon className="size-5 text-white/60 hover:text-white/80 transition-colors cursor-pointer" />
-            <FacebookIcon className="size-5 text-white/60 hover:text-white/80 transition-colors cursor-pointer" />
+          <div className="hidden items-center md:flex">
+            <a
+              href="https://www.linkedin.com/company/higher-level-accounting/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-white/80 transition-colors text-sm font-light"
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon className="size-5" />
+              <span className="hidden lg:inline">LinkedIn</span>
+            </a>
           </div>
         </div>
       </div>
@@ -145,8 +113,8 @@ export default function Footer() {
       <div className="w-full border-t border-white/10" />
 
       {/* columns */}
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+      <div className="mx-auto max-w-6xl px-6 py-10">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
           <div className="space-y-3">
             <Image
               src="/images/icon/icon.png"
@@ -166,25 +134,14 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <h3 className="text-white/70 text-sm font-light mb-4">Services</h3>
-            <ul className="space-y-2.5 text-white/60 text-xs font-light">
-              <li>Full Service Accounting</li>
-              <li>Offers CEOS</li>
-              <li>Business Services</li>
-              <li>Tax Service</li>
-            </ul>
-          </div>
-          <div>
             <h3 className="text-white/70 text-sm font-light mb-4">Contacts</h3>
             <ul className="space-y-3 text-white/60 text-xs font-light">
-              <li className="flex items-center gap-2.5">
-                <PhoneIcon className="size-4" /> 61 2 6724 3203
-              </li>
               <li className="flex items-center gap-2.5">
                 <MailIcon className="size-4" /> Info@higherlevelacct.com
               </li>
               <li className="flex items-center gap-2.5">
-                <PinIcon className="size-4" /> 7th floor Wentworth Chambers
+                <PinIcon className="size-4" /> 1930 Village Center Cir, Las
+                Vegas, NV 89134
               </li>
             </ul>
           </div>

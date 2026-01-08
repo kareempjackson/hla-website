@@ -1,8 +1,8 @@
 import Navbar from "../../components/site/navbar";
 import Footer from "../../components/site/footer";
-import { Button } from "../../components/ui/button";
 import { getServicesPageData } from "@/sanity/lib/servicesPageQueries";
 import { urlFor } from "@/sanity/lib/image";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 export default async function ServicesPage() {
   const servicesData = await getServicesPageData();
@@ -115,13 +115,15 @@ export default async function ServicesPage() {
 
             {/* Buttons */}
             <div className="flex flex-wrap items-center gap-2.5">
-              <Button
-                size="md"
-                className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
               >
                 {servicesData?.heroSection?.ctaText ||
                   "Schedule Your Consultation"}
-              </Button>
+              </a>
             </div>
           </div>
 
@@ -281,13 +283,15 @@ export default async function ServicesPage() {
 
               {/* Buttons */}
               <div className="flex flex-wrap items-center gap-2.5 pt-2">
-                <Button
-                  size="md"
-                  className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
                 >
                   {servicesData?.bookkeepingService?.ctaText ||
                     "Schedule Your Consultation"}
-                </Button>
+                </a>
               </div>
             </div>
 
@@ -475,13 +479,15 @@ export default async function ServicesPage() {
 
               {/* Buttons */}
               <div className="flex flex-wrap items-center gap-2.5 pt-2">
-                <Button
-                  size="md"
-                  className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
                 >
                   {servicesData?.controllerService?.ctaText ||
                     "Schedule Your Consultation"}
-                </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -623,13 +629,15 @@ export default async function ServicesPage() {
 
               {/* Buttons */}
               <div className="flex flex-wrap items-center gap-2.5 pt-2">
-                <Button
-                  size="md"
-                  className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
                 >
                   {servicesData?.complianceService?.ctaText ||
                     "Schedule Your Consultation"}
-                </Button>
+                </a>
               </div>
             </div>
 
@@ -811,13 +819,15 @@ export default async function ServicesPage() {
 
             {/* Buttons */}
             <div className="flex flex-wrap items-center gap-2.5">
-              <Button
-                size="md"
-                className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
               >
                 {servicesData?.strategicAddons?.ctaText ||
                   "Schedule Your Consultation"}
-              </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -900,13 +910,15 @@ export default async function ServicesPage() {
 
             {/* Buttons */}
             <div className="flex flex-wrap items-center gap-2.5">
-              <Button
-                size="md"
-                className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
               >
                 {servicesData?.specializedServices?.ctaText ||
                   "Schedule Your Consultation"}
-              </Button>
+              </a>
             </div>
 
             {/* Three Column Image Grid */}
@@ -931,26 +943,50 @@ export default async function ServicesPage() {
                   )}
 
                   {/* Middle Column - Two Images */}
-                  {servicesData.specializedServices.images[1]?.asset && (
+                  {(servicesData.specializedServices.images[1]?.asset ||
+                    servicesData.specializedServices.images[3]?.asset) && (
                     <div className="space-y-4 md:space-y-5">
-                      <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[240px] md:h-[280px] flex items-center justify-center">
-                        <img
-                          src={urlFor(
-                            servicesData.specializedServices.images[1]
-                          ).url()}
-                          alt={
-                            servicesData.specializedServices.images[1].alt ||
-                            "Specialized Service 2"
-                          }
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[85px] md:h-[95px] flex items-center justify-center">
-                        <div className="w-full h-full bg-gray-400 flex items-center justify-center">
-                          <p className="text-gray-500 text-sm font-light">
-                            Image Placeholder
-                          </p>
+                      {servicesData.specializedServices.images[1]?.asset ? (
+                        <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[240px] md:h-[280px] flex items-center justify-center">
+                          <img
+                            src={urlFor(
+                              servicesData.specializedServices.images[1]
+                            ).url()}
+                            alt={
+                              servicesData.specializedServices.images[1].alt ||
+                              "Specialized Service 2"
+                            }
+                            className="w-full h-full object-cover"
+                          />
                         </div>
+                      ) : (
+                        <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[240px] md:h-[280px] flex items-center justify-center">
+                          <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                            <p className="text-gray-500 text-sm font-light">
+                              Image Placeholder
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[85px] md:h-[95px] flex items-center justify-center">
+                        {servicesData.specializedServices.images[3]?.asset ? (
+                          <img
+                            src={urlFor(
+                              servicesData.specializedServices.images[3]
+                            ).url()}
+                            alt={
+                              servicesData.specializedServices.images[3].alt ||
+                              "Specialized Service 4"
+                            }
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gray-400 flex items-center justify-center">
+                            <p className="text-gray-500 text-sm font-light">
+                              Image Placeholder
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -1114,13 +1150,15 @@ export default async function ServicesPage() {
 
             {/* Button */}
             <div className="flex justify-center pt-4">
-              <Button
-                size="lg"
-                className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 px-7 py-3 text-xs font-light tracking-wide"
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 px-7 py-3 text-xs font-light tracking-wide"
               >
                 {servicesData?.ctaSection?.buttonText ||
                   "Schedule Your Consultation"}
-              </Button>
+              </a>
             </div>
           </div>
         </div>

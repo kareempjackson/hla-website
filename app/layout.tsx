@@ -3,7 +3,7 @@ import "./globals.css";
 import Footer from "../components/site/footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://higherlevelacct.co"),
+  metadataBase: new URL("https://higherlevelaccounting.co"),
   title: {
     default: "Higher Level Accounting | Controller-Level Accounting Services",
     template: "%s | Higher Level Accounting",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://higherlevelacct.co",
+    url: "https://higherlevelaccounting.co",
     siteName: "Higher Level Accounting",
     title: "Higher Level Accounting | Controller-Level Accounting Services",
     description:
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   alternates: {
-    canonical: "https://higherlevelacct.co",
+    canonical: "https://higherlevelaccounting.co",
   },
   verification: {
     // Add your verification codes here when available
@@ -95,9 +95,9 @@ export default function RootLayout({
     name: "Higher Level Accounting",
     description:
       "Strategic, controller-level accounting services for growth-minded businesses",
-    url: "https://higherlevelacct.com",
-    logo: "https://higherlevelacct.com/images/logo/logo.svg",
-    image: "https://higherlevelacct.com/images/logo/logo.svg",
+    url: "https://higherlevelaccounting.co",
+    logo: "https://higherlevelaccounting.co/images/logo/logo.svg",
+    image: "https://higherlevelaccounting.co/images/logo/logo.svg",
     telephone: "61 2 6724 3203",
     email: "info@higherlevelacct.com",
     address: {

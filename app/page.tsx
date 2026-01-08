@@ -3,7 +3,6 @@ import Navbar from "../components/site/navbar";
 import Hero from "../components/site/hero";
 import WhyGreat from "../components/site/why-great";
 import WhatWeDo from "../components/site/what-we-do";
-import BlogPosts from "../components/site/blog-posts";
 import HowCanWeHelp from "../components/site/how-can-we-help";
 import OurProcess from "../components/site/our-process";
 import Testimonial from "../components/site/testimonial";
@@ -11,18 +10,19 @@ import CTASection from "../components/site/cta-section";
 import { getHomePageData } from "@/sanity/lib/homePageQueries";
 
 export const metadata: Metadata = {
-  title:
-    "Higher Level Accounting | Controller-Level Accounting Services for Growth-Minded Businesses",
+  title: {
+    absolute: "Higher Level Accounting | Controller Services for Growth Companies",
+  },
   description:
-    "Strategic, controller-level accounting services for SaaS companies, marketing agencies, and regulated retailers. Get accurate financials, actionable insights, and rock-solid compliance to scale confidently.",
+    "Higher Level Accounting provides controller-level services and accrual bookkeeping for SaaS, agencies, and cannabis businesses. Get investor-ready financials.",
   keywords:
     "controller accounting services, accrual accounting, SaaS accounting, agency accounting, cannabis retail accounting, financial compliance, strategic accounting, investor-ready financials, bookkeeping services",
   authors: [{ name: "Higher Level Accounting" }],
   openGraph: {
-    title: "Higher Level Accounting | Controller-Level Accounting Services",
+    title: "Higher Level Accounting | Controller Services for Growth Companies",
     description:
-      "Strategic accounting services for growth-minded businesses. Accurate financials, actionable insights, and rock-solid compliance.",
-    url: "https://higherlevelacct.com",
+      "Higher Level Accounting provides controller-level services and accrual bookkeeping for SaaS, agencies, and cannabis businesses. Get investor-ready financials.",
+    url: "https://higherlevelaccounting.co",
     siteName: "Higher Level Accounting",
     type: "website",
     images: [
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Higher Level Accounting | Controller-Level Accounting Services",
+    title: "Higher Level Accounting | Controller Services for Growth Companies",
     description:
-      "Strategic accounting services for growth-minded businesses. Accurate financials, actionable insights, and rock-solid compliance.",
+      "Higher Level Accounting provides controller-level services and accrual bookkeeping for SaaS, agencies, and cannabis businesses. Get investor-ready financials.",
     images: ["/images/logo/logo.svg"],
   },
   alternates: {
-    canonical: "https://higherlevelacct.com",
+    canonical: "https://higherlevelaccounting.co",
   },
 };
 
@@ -59,22 +59,16 @@ export default async function Home() {
       </div>
 
       <div id="why-great" className="sticky top-0">
-        <WhyGreat />
+        <WhyGreat data={homePageData?.whyGreatSection} />
       </div>
 
       <div id="what-we-do" className="sticky top-0">
-        <WhatWeDo />
+        <WhatWeDo data={homePageData?.whatWeDoSection} />
       </div>
-
-      {homePageData?.showBlogPosts !== false && (
-        <div id="blog-posts" className="sticky top-0">
-          <BlogPosts />
-        </div>
-      )}
 
       {homePageData?.showHowCanWeHelp !== false && (
         <div id="how-can-we-help" className="sticky top-0">
-          <HowCanWeHelp />
+          <HowCanWeHelp data={homePageData?.howCanWeHelpSection} />
         </div>
       )}
 

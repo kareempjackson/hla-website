@@ -8,17 +8,39 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar({ sticky = false }: { sticky?: boolean }) {
   const pathname = usePathname();
-  const [isDark, setIsDark] = useState(pathname === "/" ? true : true); // Start with dark for both pages
+  const [mounted, setMounted] = useState(false);
+
+  // Avoid hydration mismatches by not relying on pathname during the initial render
+  const path = mounted ? pathname : null;
+
+  // Compute initial dark state based on pathname and sticky prop
+  const getInitialDarkState = () => {
+    if (path === "/services" && sticky) return false;
+    if (path === "/insights" && sticky) return true;
+    if (path === "/pricing" && sticky) return true;
+    return true;
+  };
+
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    // Skip scroll-based color changes on services and insights pages when sticky
-    if (pathname === "/services" && sticky) {
-      setIsDark(false); // Keep it light for services page
-      return;
-    }
+    setMounted(true);
+  }, []);
 
-    if (pathname === "/insights" && sticky) {
-      setIsDark(true); // Keep it dark for insights page
+  // Update state when pathname or sticky changes
+  useEffect(() => {
+    if (!mounted) return;
+    setIsDark(getInitialDarkState());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted, pathname, sticky]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    // Skip scroll-based color changes on specific pages when sticky
+    if (
+      sticky &&
+      (path === "/services" || path === "/insights" || path === "/pricing")
+    ) {
       return;
     }
 
@@ -123,14 +145,15 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
       clearTimeout(timer2);
       clearTimeout(timer3);
     };
-  }, [pathname, sticky]);
+  }, [mounted, path, sticky]);
 
   // Color classes based on background
   // For dark green #00433E: using a more precise filter
-  const isServicesPage = pathname === "/services";
-  const isAboutPage = pathname === "/about";
-  const isHomePage = pathname === "/";
-  const isInsightsPage = pathname === "/insights";
+  const isServicesPage = path === "/services";
+  const isAboutPage = path === "/about";
+  const isHomePage = path === "/";
+  const isInsightsPage = path === "/insights";
+  const isPricingPage = path === "/pricing";
 
   // On about page or home page cream/light sections, use special styling
   const isAboutCreamSection = isAboutPage && !isDark;
@@ -144,31 +167,34 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
   const navBg =
     (isDark && isAboutPage) ||
     (isDark && isHomePage) ||
-    (isDark && isInsightsPage && sticky)
+    (isDark && isInsightsPage && sticky) ||
+    (isDark && isPricingPage && sticky)
       ? "bg-cream"
       : isDark
-      ? "bg-[#0000003D]"
-      : isServicesPage && sticky
-      ? "bg-bg"
-      : isAboutCreamSection || isHomeLightSection
-      ? "bg-bg"
-      : "bg-white/40";
+        ? "bg-[#0000003D]"
+        : isServicesPage && sticky
+          ? "bg-bg"
+          : isAboutCreamSection || isHomeLightSection
+            ? "bg-bg"
+            : "bg-white/40";
   const navTextColor =
     (isDark && isAboutPage) ||
     (isDark && isHomePage) ||
-    (isDark && isInsightsPage && sticky)
+    (isDark && isInsightsPage && sticky) ||
+    (isDark && isPricingPage && sticky)
       ? "text-bg hover:text-bg/80"
       : isDark || sticky || isAboutCreamSection || isHomeLightSection
-      ? "text-white/90 hover:text-white"
-      : "text-black/70 hover:text-black";
+        ? "text-white/90 hover:text-white"
+        : "text-black/70 hover:text-black";
   const activeTabBg =
     (isDark && isAboutPage) ||
     (isDark && isHomePage) ||
-    (isDark && isInsightsPage && sticky)
+    (isDark && isInsightsPage && sticky) ||
+    (isDark && isPricingPage && sticky)
       ? "bg-bg text-white"
       : isDark || sticky || isAboutCreamSection || isHomeLightSection
-      ? "bg-white text-black"
-      : "bg-black text-white";
+        ? "bg-white text-black"
+        : "bg-black text-white";
 
   // Client Portal button styling
   const clientPortalClasses =
@@ -177,13 +203,13 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
       : "h-10 px-5 text-sm font-light rounded-pill border-0 focus-visible:ring-0 transition-colors duration-300";
 
   // Determine sticky background color based on page
-  const stickyBgColor = pathname === "/services" ? "bg-cream" : "bg-bg";
+  const stickyBgColor = path === "/services" ? "bg-cream" : "bg-bg";
 
   return (
     <nav
       className={`${
         sticky ? `sticky ${stickyBgColor}` : "fixed"
-      } top-0 left-0 right-0 z-[100] transition-colors duration-300`}
+      } top-0 left-0 right-0 z-100 transition-colors duration-300`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
         {/* Left: Logo */}
@@ -206,7 +232,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
             <Link
               href="/"
               className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
-                pathname === "/" ? `${activeTabBg} shadow-sm` : navTextColor
+                path === "/" ? `${activeTabBg} shadow-sm` : navTextColor
               }`}
             >
               Home
@@ -214,9 +240,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
             <Link
               href="/about"
               className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
-                pathname === "/about"
-                  ? `${activeTabBg} shadow-sm`
-                  : navTextColor
+                path === "/about" ? `${activeTabBg} shadow-sm` : navTextColor
               }`}
             >
               About
@@ -224,9 +248,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
             <Link
               href="/services"
               className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center gap-2 transition-colors duration-300 ${
-                pathname === "/services"
-                  ? `${activeTabBg} shadow-sm`
-                  : navTextColor
+                path === "/services" ? `${activeTabBg} shadow-sm` : navTextColor
               }`}
             >
               <span>Services</span>
@@ -234,19 +256,25 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
             <Link
               href="/insights"
               className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
-                pathname === "/insights"
-                  ? `${activeTabBg} shadow-sm`
-                  : navTextColor
+                path === "/insights" ? `${activeTabBg} shadow-sm` : navTextColor
               }`}
             >
               Insights
             </Link>
-            {pathname === "/" && (
+            <Link
+              href="/pricing"
+              className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
+                path === "/pricing" ? `${activeTabBg} shadow-sm` : navTextColor
+              }`}
+            >
+              Pricing
+            </Link>
+            {isHomePage && (
               <Link
                 href="/#how-can-we-help"
                 onClick={(e) => {
                   // If we're already on home page, prevent default and smooth scroll
-                  if (pathname === "/") {
+                  if (path === "/") {
                     e.preventDefault();
                     const section = document.getElementById("how-can-we-help");
                     if (section) {
@@ -267,9 +295,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
             <Link
               href="/contact"
               className={`rounded-pill h-full px-5 text-sm font-light whitespace-nowrap flex items-center transition-colors duration-300 ${
-                pathname === "/contact"
-                  ? `${activeTabBg} shadow-sm`
-                  : navTextColor
+                path === "/contact" ? `${activeTabBg} shadow-sm` : navTextColor
               }`}
             >
               Contact

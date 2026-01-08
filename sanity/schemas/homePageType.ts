@@ -43,8 +43,63 @@ export const homePageType = defineType({
           type: "string",
         },
         {
+          name: "heroMedia",
+          title: "Hero Media (Image or Video)",
+          type: "object",
+          fields: [
+            {
+              name: "mediaType",
+              title: "Media Type",
+              type: "string",
+              initialValue: "image",
+              options: {
+                list: [
+                  { title: "Image", value: "image" },
+                  { title: "Video", value: "video" },
+                ],
+                layout: "radio",
+              },
+            },
+            {
+              name: "image",
+              title: "Hero Image",
+              type: "image",
+              options: { hotspot: true },
+              hidden: ({ parent }) => parent?.mediaType !== "image",
+              fields: [
+                {
+                  name: "alt",
+                  type: "string",
+                  title: "Alternative Text",
+                },
+              ],
+            },
+            {
+              name: "video",
+              title: "Hero Video",
+              type: "file",
+              options: { accept: "video/*" },
+              hidden: ({ parent }) => parent?.mediaType !== "video",
+            },
+            {
+              name: "posterImage",
+              title: "Video Poster Image (Optional)",
+              type: "image",
+              options: { hotspot: true },
+              hidden: ({ parent }) => parent?.mediaType !== "video",
+              fields: [
+                {
+                  name: "alt",
+                  type: "string",
+                  title: "Alternative Text",
+                },
+              ],
+            },
+          ],
+        },
+        {
           name: "heroImage",
-          title: "Hero Image",
+          title: "Hero Image (Legacy)",
           type: "image",
           options: {
             hotspot: true,
@@ -208,6 +263,74 @@ export const homePageType = defineType({
       title: "Show How Can We Help Section",
       type: "boolean",
       initialValue: true,
+    }),
+
+    // How Can We Help Section (content)
+    defineField({
+      name: "howCanWeHelpSection",
+      title: "How Can We Help Section",
+      type: "object",
+      fields: [
+        {
+          name: "title",
+          title: "Title",
+          type: "string",
+        },
+        {
+          name: "items",
+          title: "Industry Cards",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                {
+                  name: "image",
+                  title: "Image",
+                  type: "image",
+                  options: { hotspot: true },
+                  fields: [
+                    {
+                      name: "alt",
+                      type: "string",
+                      title: "Alternative Text",
+                    },
+                  ],
+                },
+                {
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                },
+                {
+                  name: "description",
+                  title: "Description",
+                  type: "text",
+                  rows: 3,
+                },
+              ],
+              preview: {
+                select: {
+                  title: "title",
+                  media: "image",
+                },
+              },
+            },
+          ],
+          validation: (Rule) => Rule.max(6),
+        },
+        {
+          name: "footerTitle",
+          title: "Footer Title",
+          type: "string",
+        },
+        {
+          name: "footerDescription",
+          title: "Footer Description",
+          type: "text",
+          rows: 2,
+        },
+      ],
     }),
 
     // Our Process Section (enabled/disabled)

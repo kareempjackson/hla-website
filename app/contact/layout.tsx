@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:
-    "Contact Us | Higher Level Accounting - Get Strategic Financial Guidance",
+  title: {
+    absolute: "Contact Higher Level Accounting | Schedule Consultation",
+  },
   description:
-    "Contact Higher Level Accounting for controller-level accounting services. Located in Sydney, we serve SaaS companies, marketing agencies, and regulated retailers across the United States. Schedule your consultation today.",
+    "Schedule a consultation with Higher Level Accounting. Get controller-level accounting services and financial clarity for your growing business",
   keywords:
     "contact higher level accounting, accounting consultation, financial services contact, Sydney accounting firm, controller services inquiry, SaaS accounting contact",
   openGraph: {
-    title: "Contact Higher Level Accounting",
+    title: "Contact Higher Level Accounting | Schedule Consultation",
     description:
-      "Get in touch for strategic, controller-level accounting services. Schedule your consultation today.",
-    url: "https://higherlevelacct.com/contact",
+      "Schedule a consultation with Higher Level Accounting. Get controller-level accounting services and financial clarity for your growing business",
+    url: "https://higherlevelaccounting.co/contact",
     siteName: "Higher Level Accounting",
     type: "website",
     images: [
@@ -25,13 +26,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Higher Level Accounting",
+    title: "Contact Higher Level Accounting | Schedule Consultation",
     description:
-      "Get in touch for strategic, controller-level accounting services.",
+      "Schedule a consultation with Higher Level Accounting. Get controller-level accounting services and financial clarity for your growing business",
     images: ["/images/logo/logo.svg"],
   },
   alternates: {
-    canonical: "https://higherlevelacct.com/contact",
+    canonical: "https://higherlevelaccounting.co/contact",
   },
 };
 
