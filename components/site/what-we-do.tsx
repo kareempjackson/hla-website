@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
+import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { CALENDLY_URL } from "@/lib/calendly";
 
 interface WhatWeDoSectionData {
   label?: string;
@@ -94,18 +95,20 @@ export default function WhatWeDo({ data }: { data?: WhatWeDoSectionData }) {
               "We're not just bookkeepers. We're strategic partners who help our clients grow by providing accrual-based bookkeeping, controller-level insights, and reports you can actually run a business on."}
           </p>
           <div className="flex flex-wrap items-center gap-2.5 mb-6">
-            <Button
-              size="sm"
-              className="rounded-pill bg-accent text-black hover:brightness-95 focus-visible:ring-0 h-10 px-7 text-xs font-light tracking-wide"
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-accent text-black hover:brightness-95 active:brightness-90 h-10 px-7 text-xs font-light tracking-wide"
             >
-              {data?.ctaButton1 || "Contact US"}
-            </Button>
-            <Button
-              size="sm"
-              className="rounded-pill bg-black text-white hover:bg-black/90 border-0 focus-visible:ring-0 h-10 px-7 text-xs font-light tracking-wide"
+              {data?.ctaButton1 || "Contact Us"}
+            </a>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center rounded-pill font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 bg-black text-white hover:bg-black/90 active:bg-black/80 h-10 px-7 text-xs font-light tracking-wide"
             >
               {data?.ctaButton2 || "Learn More"}
-            </Button>
+            </Link>
           </div>
 
           <h3 className="text-sm font-light text-black mb-4">

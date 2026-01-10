@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "../../components/site/navbar";
 import Footer from "../../components/site/footer";
 import { Button } from "../../components/ui/button";
@@ -9,9 +10,14 @@ import {
   getAboutPageData,
   type AboutPage,
 } from "@/sanity/lib/aboutPageQueries";
-import { urlFor } from "@/sanity/lib/image";
+import {
+  makeSanityImageLoader,
+  sanityImageUrl,
+  urlFor,
+} from "@/sanity/lib/image";
 import { CALENDLY_URL } from "@/lib/calendly";
 import AboutTestimonials from "@/components/site/about-testimonials";
+import HeroVideo from "@/components/site/hero-video";
 
 // Note: metadata export doesn't work in client components,
 // so we'll need to add metadata via layout or convert to server component
@@ -82,16 +88,19 @@ export default function AboutPage() {
         .url()
     : undefined;
   const imageSource =
-    aboutData?.heroSection?.heroMedia?.image || aboutData?.heroSection?.heroImage;
+    aboutData?.heroSection?.heroMedia?.image ||
+    aboutData?.heroSection?.heroImage;
 
   const teamMembers =
-    aboutData?.teamSection?.teamMembers && aboutData.teamSection.teamMembers.length > 0
+    aboutData?.teamSection?.teamMembers &&
+    aboutData.teamSection.teamMembers.length > 0
       ? aboutData.teamSection.teamMembers
       : [
           {
             name: "Mattew Jane",
             role: "Senior Consultant",
-            quote: "When you have a dream, you've got to grab it and never let go",
+            quote:
+              "When you have a dream, you've got to grab it and never let go",
             bio: "When it comes to your cannabis business, accounting can be challenging but we are here to help through it all.",
           },
           {
@@ -103,7 +112,8 @@ export default function AboutPage() {
           {
             name: "John Doe",
             role: "Accounting Manager",
-            quote: "Success is the sum of small efforts repeated day in and day out",
+            quote:
+              "Success is the sum of small efforts repeated day in and day out",
             bio: "We bring precision and dedication to every client engagement. Our team is committed to delivering financial clarity that empowers businesses to make informed decisions.",
           },
         ];
@@ -220,21 +230,26 @@ export default function AboutPage() {
                   "We exist because financial guesswork doesn't scale. Too many firms stop at 'good enough'. We go a step further to uncover the gaps so that you have financial clarity you can trust to make the right moves."}
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-2.5">
-                <Link href="/contact">
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button
                     size="md"
                     className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                   >
                     {aboutData?.heroSection?.primaryButtonText || "Contact Us"}
                   </Button>
-                </Link>
+                </a>
                 <Link href="/services">
                   <Button
                     size="md"
                     variant="ghost"
                     className="rounded-pill focus-visible:ring-0 bg-black text-white hover:bg-black/80 h-10 px-7 text-xs font-light tracking-wide border border-white/10"
                   >
-                    {aboutData?.heroSection?.secondaryButtonText || "Learn More"}
+                    {aboutData?.heroSection?.secondaryButtonText ||
+                      "Learn More"}
                   </Button>
                 </Link>
               </div>
@@ -244,25 +259,37 @@ export default function AboutPage() {
             <div className="relative">
               <div
                 className={`relative overflow-hidden rounded-sm ${
-                  isHeroVideo ? "w-full aspect-video bg-transparent" : "bg-transparent"
+                  isHeroVideo
+                    ? "w-full aspect-video bg-transparent"
+                    : "bg-transparent"
                 }`}
               >
                 {isHeroVideo && videoUrl ? (
-                  <video
+                  <HeroVideo
                     src={videoUrl}
                     poster={posterUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
                     className="absolute inset-0 h-full w-full object-contain"
                   />
                 ) : imageSource ? (
-                  <img
-                    src={urlFor(imageSource).width(1200).height(900).url()}
-                    alt={imageSource.alt || aboutData?.heroSection?.title || "About"}
+                  <Image
+                    src={sanityImageUrl(imageSource, {
+                      width: 1200,
+                      height: 900,
+                    })}
+                    loader={makeSanityImageLoader(imageSource, {
+                      width: 1200,
+                      height: 900,
+                    })}
+                    alt={
+                      imageSource.alt ||
+                      aboutData?.heroSection?.title ||
+                      "About"
+                    }
+                    width={1200}
+                    height={900}
+                    sizes="(min-width: 1024px) 55vw, (min-width: 768px) 50vw, 100vw"
                     className="h-auto w-full object-cover"
+                    priority
                   />
                 ) : (
                   <div className="w-full h-[400px] bg-linear-to-br from-surface to-bg flex items-center justify-center">
@@ -367,13 +394,20 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[550px] lg:h-[650px] flex items-center justify-center">
                   {aboutData?.missionSection?.image?.asset ? (
-                    <img
-                      src={urlFor(aboutData.missionSection.image).url()}
+                    <Image
+                      src={sanityImageUrl(aboutData.missionSection.image, {
+                        width: 1200,
+                      })}
+                      loader={makeSanityImageLoader(
+                        aboutData.missionSection.image
+                      )}
                       alt={
                         aboutData.missionSection.image.alt ||
                         "Mission Section Image"
                       }
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
                     />
                   ) : (
                     /* Placeholder for working professional image */
@@ -500,13 +534,23 @@ export default function AboutPage() {
                   {/* Top Left - Team High Five (larger, spans more) */}
                   <div className="col-span-7 relative overflow-hidden rounded-sm bg-gray-700 h-72 flex items-center justify-center p-3">
                     {aboutData?.whoWeServeSection?.images?.[0]?.asset ? (
-                      <img
-                        src={urlFor(aboutData.whoWeServeSection.images[0]).url()}
+                      <Image
+                        src={sanityImageUrl(
+                          aboutData.whoWeServeSection.images[0],
+                          {
+                            width: 900,
+                          }
+                        )}
+                        loader={makeSanityImageLoader(
+                          aboutData.whoWeServeSection.images[0]
+                        )}
                         alt={
                           aboutData.whoWeServeSection.images[0].alt ||
                           "Who we serve image"
                         }
-                        className="w-full h-full object-contain"
+                        fill
+                        sizes="(min-width: 1024px) 30vw, 60vw"
+                        className="object-contain"
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-600 flex items-center justify-center">
@@ -520,13 +564,23 @@ export default function AboutPage() {
                   {/* Top Right - Person at Computer (smaller, positioned higher) */}
                   <div className="col-span-5 relative overflow-hidden rounded-sm bg-gray-700 h-64 mt-6">
                     {aboutData?.whoWeServeSection?.images?.[1]?.asset ? (
-                      <img
-                        src={urlFor(aboutData.whoWeServeSection.images[1]).url()}
+                      <Image
+                        src={sanityImageUrl(
+                          aboutData.whoWeServeSection.images[1],
+                          {
+                            width: 900,
+                          }
+                        )}
+                        loader={makeSanityImageLoader(
+                          aboutData.whoWeServeSection.images[1]
+                        )}
                         alt={
                           aboutData.whoWeServeSection.images[1].alt ||
                           "Who we serve image"
                         }
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(min-width: 1024px) 22vw, 45vw"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-600 flex items-center justify-center">
@@ -540,13 +594,23 @@ export default function AboutPage() {
                   {/* Bottom - Person Working at Desk (large, overlaps) */}
                   <div className="col-span-8 col-start-3 relative overflow-hidden rounded-sm bg-gray-700 h-80 -mt-10">
                     {aboutData?.whoWeServeSection?.images?.[2]?.asset ? (
-                      <img
-                        src={urlFor(aboutData.whoWeServeSection.images[2]).url()}
+                      <Image
+                        src={sanityImageUrl(
+                          aboutData.whoWeServeSection.images[2],
+                          {
+                            width: 1100,
+                          }
+                        )}
+                        loader={makeSanityImageLoader(
+                          aboutData.whoWeServeSection.images[2]
+                        )}
                         alt={
                           aboutData.whoWeServeSection.images[2].alt ||
                           "Who we serve image"
                         }
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(min-width: 1024px) 35vw, 70vw"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-600 flex items-center justify-center">
@@ -742,7 +806,7 @@ export default function AboutPage() {
                         size="md"
                         className="rounded-pill focus-visible:ring-0 bg-accent text-black hover:brightness-95 h-10 px-7 text-xs font-light tracking-wide"
                       >
-                        Contact US
+                        Contact Us
                       </Button>
                     </Link>
                     <Link href="/services">
@@ -809,13 +873,20 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[550px] lg:h-[650px] flex items-center justify-center">
                   {aboutData?.approachSection?.image?.asset ? (
-                    <img
-                      src={urlFor(aboutData.approachSection.image).url()}
+                    <Image
+                      src={sanityImageUrl(aboutData.approachSection.image, {
+                        width: 1200,
+                      })}
+                      loader={makeSanityImageLoader(
+                        aboutData.approachSection.image
+                      )}
                       alt={
                         aboutData.approachSection.image.alt ||
                         "Approach Section Image"
                       }
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
                     />
                   ) : (
                     /* Placeholder for office corridor image */
@@ -977,10 +1048,13 @@ export default function AboutPage() {
                   <div key={`${baseKey}-photo`} className="shrink-0 w-[350px]">
                     <div className="relative overflow-hidden rounded-sm bg-gray-200 h-[500px]">
                       {member?.photo?.asset ? (
-                        <img
-                          src={urlFor(member.photo).url()}
+                        <Image
+                          src={sanityImageUrl(member.photo, { width: 900 })}
+                          loader={makeSanityImageLoader(member.photo)}
                           alt={member.photo.alt || member.name || "Team Member"}
-                          className="w-full h-full object-cover"
+                          fill
+                          sizes="350px"
+                          className="object-cover"
                         />
                       ) : (
                         <div className="w-full h-full bg-gray-300 flex items-center justify-center">

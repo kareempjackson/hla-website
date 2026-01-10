@@ -8,10 +8,7 @@ interface CTAData {
 }
 
 export default function CTASection({ data }: { data?: CTAData }) {
-  const href =
-    data?.buttonLink && data.buttonLink.includes("calendly.com")
-      ? data.buttonLink
-      : CALENDLY_URL;
+  const href = data?.buttonLink?.trim() ? data.buttonLink : CALENDLY_URL;
   const isExternal = href.startsWith("http");
 
   return (

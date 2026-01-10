@@ -1,6 +1,7 @@
 import Navbar from "../../components/site/navbar";
 import Footer from "../../components/site/footer";
 import { getServicesPageData } from "@/sanity/lib/servicesPageQueries";
+import SanityImage from "@/components/media/sanity-image";
 import { urlFor } from "@/sanity/lib/image";
 import { CALENDLY_URL } from "@/lib/calendly";
 
@@ -130,10 +131,14 @@ export default async function ServicesPage() {
           {/* Bottom Section - Image */}
           <div className="relative overflow-hidden rounded-sm bg-gray-300 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] flex items-center justify-center">
             {servicesData?.heroSection?.heroImage?.asset ? (
-              <img
-                src={urlFor(servicesData.heroSection.heroImage).url()}
+              <SanityImage
+                source={servicesData.heroSection.heroImage}
                 alt={servicesData.heroSection.heroImage.alt || "Service Hero"}
-                className="w-full h-full object-cover"
+                fill
+                baseWidth={1600}
+                sizes="100vw"
+                className="object-cover"
+                priority
               />
             ) : (
               /* Placeholder for image */
@@ -299,13 +304,16 @@ export default async function ServicesPage() {
             <div className="relative">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
                 {servicesData?.bookkeepingService?.image?.asset ? (
-                  <img
-                    src={urlFor(servicesData.bookkeepingService.image).url()}
+                  <SanityImage
+                    source={servicesData.bookkeepingService.image}
                     alt={
                       servicesData.bookkeepingService.image.alt ||
                       "Bookkeeping Service"
                     }
-                    className="w-full h-full object-cover"
+                    fill
+                    baseWidth={1400}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
                   />
                 ) : (
                   /* Placeholder for image */
@@ -413,13 +421,16 @@ export default async function ServicesPage() {
             <div className="relative order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
                 {servicesData?.controllerService?.image?.asset ? (
-                  <img
-                    src={urlFor(servicesData.controllerService.image).url()}
+                  <SanityImage
+                    source={servicesData.controllerService.image}
                     alt={
                       servicesData.controllerService.image.alt ||
                       "Controller Service"
                     }
-                    className="w-full h-full object-cover"
+                    fill
+                    baseWidth={1400}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
                   />
                 ) : (
                   /* Placeholder for image */
@@ -645,13 +656,16 @@ export default async function ServicesPage() {
             <div className="relative">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
                 {servicesData?.complianceService?.image?.asset ? (
-                  <img
-                    src={urlFor(servicesData.complianceService.image).url()}
+                  <SanityImage
+                    source={servicesData.complianceService.image}
                     alt={
                       servicesData.complianceService.image.alt ||
                       "Compliance Service"
                     }
-                    className="w-full h-full object-cover"
+                    fill
+                    baseWidth={1400}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
                   />
                 ) : (
                   /* Placeholder for image */
@@ -798,13 +812,16 @@ export default async function ServicesPage() {
             <div className="relative w-full">
               <div className="relative overflow-hidden rounded-sm bg-gray-300 h-[400px] md:h-[500px] lg:h-[550px] flex items-center justify-center">
                 {servicesData?.strategicAddons?.image?.asset ? (
-                  <img
-                    src={urlFor(servicesData.strategicAddons.image).url()}
+                  <SanityImage
+                    source={servicesData.strategicAddons.image}
                     alt={
                       servicesData.strategicAddons.image.alt ||
                       "Strategic Planning"
                     }
-                    className="w-full h-full object-cover"
+                    fill
+                    baseWidth={1600}
+                    sizes="100vw"
+                    className="object-cover"
                   />
                 ) : (
                   /* Placeholder for image */

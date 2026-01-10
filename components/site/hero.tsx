@@ -1,6 +1,8 @@
 import Image from "next/image";
+import SanityImage from "@/components/media/sanity-image";
 import { urlFor } from "@/sanity/lib/image";
 import { CALENDLY_URL } from "@/lib/calendly";
+import HeroVideo from "@/components/site/hero-video";
 
 interface HeroData {
   title?: string;
@@ -185,22 +187,19 @@ export default function Hero({ data }: { data?: HeroData }) {
             }`}
           >
             {mediaType === "video" && videoUrl ? (
-              <video
+              <HeroVideo
                 src={videoUrl}
                 poster={posterUrl}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
                 className="absolute inset-0 h-full w-full object-contain"
               />
             ) : imageSource ? (
-              <Image
-                src={urlFor(imageSource).width(1200).height(900).url()}
+              <SanityImage
+                source={imageSource}
                 alt={imageSource.alt || "Team collaboration"}
                 width={1200}
                 height={900}
+                intrinsic={{ width: 1200, height: 900 }}
+                sizes="(min-width: 1024px) 55vw, (min-width: 768px) 50vw, 100vw"
                 className="h-auto w-full object-cover"
                 priority
               />

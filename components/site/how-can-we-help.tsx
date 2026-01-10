@@ -133,7 +133,7 @@ export default function HowCanWeHelp({
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((item) => (
-            <article key={item.id} className="group cursor-pointer">
+            <article key={item.id} className="">
               {/* Image */}
               <div className="mb-3 overflow-hidden rounded-sm">
                 {item.imageSanity?.asset ? (
@@ -142,7 +142,7 @@ export default function HowCanWeHelp({
                     alt={item.imageSanity.alt || item.title}
                     width={400}
                     height={350}
-                    className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="h-64 w-full object-cover"
                   />
                 ) : item.imageString ? (
                 <Image
@@ -150,13 +150,13 @@ export default function HowCanWeHelp({
                   alt={item.title}
                   width={400}
                   height={350}
-                  className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="h-64 w-full object-cover"
                 />
                 ) : null}
               </div>
 
               {/* Title */}
-              <h3 className="text-base font-light text-black group-hover:text-black/70 transition-colors leading-snug mb-2.5">
+              <h3 className="text-base font-light text-black leading-snug mb-2.5">
                 {item.title}
               </h3>
 
