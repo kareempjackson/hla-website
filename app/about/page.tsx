@@ -129,8 +129,8 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <div id="about-hero" className="sticky top-0 z-10">
-        <section className="relative min-h-screen flex items-center pt-20 bg-bg overflow-hidden">
+      <div id="about-hero" className="relative md:sticky md:top-0 z-10">
+        <section className="relative min-h-screen flex items-start md:items-center pt-20 bg-bg overflow-visible md:overflow-hidden">
           {/* Decorative Lines - White on dark teal background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Pattern 1 - Top Left to Bottom Right */}
@@ -305,8 +305,8 @@ export default function AboutPage() {
       </div>
 
       {/* Mission & Vision Section */}
-      <div id="about-mission" className="sticky top-0 z-20">
-        <section className="relative bg-cream py-24 min-h-screen flex items-center overflow-hidden">
+      <div id="about-mission" className="relative md:sticky md:top-0 z-20">
+        <section className="relative bg-cream py-24 min-h-screen flex items-start md:items-center overflow-visible md:overflow-hidden">
           {/* Decorative Lines - Dark on cream background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Pattern 1 - Top Left to Bottom Right */}
@@ -443,8 +443,8 @@ export default function AboutPage() {
       </div>
 
       {/* Who We Serve Section */}
-      <div id="about-who-we-serve" className="sticky top-0 z-30">
-        <section className="relative bg-black py-24 min-h-screen flex items-center overflow-hidden">
+      <div id="about-who-we-serve" className="relative md:sticky md:top-0 z-30">
+        <section className="relative bg-black py-24 min-h-screen flex items-start md:items-center overflow-visible md:overflow-hidden">
           {/* Decorative Lines - White on black background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Pattern 1 - Top Left to Bottom Right */}
@@ -698,8 +698,8 @@ export default function AboutPage() {
       </div>
 
       {/* Our Approach Section */}
-      <div id="about-approach" className="sticky top-0 z-40">
-        <section className="relative bg-cream py-24 min-h-screen flex items-center overflow-hidden">
+      <div id="about-approach" className="relative md:sticky md:top-0 z-40">
+        <section className="relative bg-cream py-24 min-h-screen flex items-start md:items-center overflow-visible md:overflow-hidden">
           {/* Decorative Lines - Dark on cream background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Pattern 1 - Top Left to Bottom Right */}
@@ -902,8 +902,8 @@ export default function AboutPage() {
       </div>
 
       {/* Leadership & Team Section */}
-      <div id="about-team" className="sticky top-0 z-50">
-        <section className="relative bg-white py-32 overflow-hidden">
+      <div id="about-team" className="relative md:sticky md:top-0 z-50">
+        <section className="relative bg-white py-32 overflow-visible md:overflow-hidden">
           {/* Decorative Lines - Green on white background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Pattern 1 - Top Left to Bottom Right */}
@@ -1174,8 +1174,11 @@ export default function AboutPage() {
 
       {/* Testimonials Section */}
       {aboutData?.testimonialsSection?.showTestimonials !== false && (
-        <div id="about-testimonials" className="sticky top-0 z-55">
-          <section className="relative bg-cream py-32 min-h-screen flex items-center overflow-hidden">
+        <div
+          id="about-testimonials"
+          className="relative md:sticky md:top-0 z-55"
+        >
+          <section className="relative bg-cream py-32 min-h-screen flex items-start md:items-center overflow-visible md:overflow-hidden">
             {/* Decorative Lines - Dark on cream background */}
             <div className="absolute inset-0 pointer-events-none">
               {/* Pattern 1 - Top Left to Bottom Right */}
@@ -1266,8 +1269,8 @@ export default function AboutPage() {
       )}
 
       {/* Call to Action Section */}
-      <div id="about-cta" className="sticky top-0 z-60">
-        <section className="relative bg-bg py-32 min-h-screen flex items-center overflow-hidden">
+      <div id="about-cta" className="relative md:sticky md:top-0 z-60">
+        <section className="relative bg-bg py-32 min-h-screen flex items-start md:items-center overflow-visible md:overflow-hidden">
           {/* Decorative Lines - White on dark teal background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Pattern 1 - Top Left to Bottom Right */}

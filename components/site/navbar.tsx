@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 export default function Navbar({ sticky = false }: { sticky?: boolean }) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   // Avoid hydration mismatches by not relying on pathname during the initial render
   const path = mounted ? pathname : null;
@@ -26,6 +27,21 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Prevent background scroll while mobile menu is open
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [mobileOpen]);
 
   // Update state when pathname or sticky changes
   useEffect(() => {
@@ -209,7 +225,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
     <nav
       className={`${
         sticky ? `sticky ${stickyBgColor}` : "fixed"
-      } top-0 left-0 right-0 z-100 transition-colors duration-300`}
+      } relative top-0 left-0 right-0 z-100 transition-colors duration-300`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
         {/* Left: Logo */}
@@ -304,18 +320,232 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
         </div>
 
         {/* Right: CTA */}
-        <div className="shrink-0">
-          <Button
-            variant="soft"
-            className={clientPortalClasses}
+        <div className="shrink-0 flex items-center gap-2">
+          <div className="hidden md:block">
+            <Button
+              variant="soft"
+              className={clientPortalClasses}
+              type="button"
+              onClick={() => {
+                window.location.assign("https://calendly.com/af--hla/ccc");
+              }}
+            >
+              Client Portal
+            </Button>
+          </div>
+
+          <button
             type="button"
-            onClick={() => {
-              window.location.assign("https://calendly.com/af--hla/ccc");
-            }}
+            className={`md:hidden inline-flex items-center justify-center h-10 w-10 rounded-pill transition-colors duration-300 ${navBg} backdrop-blur-sm ${navTextColor}`}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-controls="mobile-menu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((v) => !v)}
           >
-            Client Portal
-          </Button>
+            {mobileOpen ? (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M18 6L6 18M6 6l12 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ) : (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 7h16M4 12h16M4 17h16"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            )}
+          </button>
         </div>
+      </div>
+
+      {/* Mobile menu (right-side drawer) */}
+      <div
+        className={`md:hidden fixed inset-0 z-200 transition-opacity duration-300 ${
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        <button
+          type="button"
+          aria-label="Close menu"
+          className={`absolute inset-0 bg-black/35 backdrop-blur-[2px] transition-opacity duration-300 ${
+            mobileOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setMobileOpen(false)}
+        />
+
+        <aside
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          className={`absolute right-0 top-0 h-full w-[min(88vw,380px)] bg-bg/95 backdrop-blur-xl border-l border-white/10 shadow-[0_12px_50px_rgba(0,0,0,0.45)] transform transition-transform duration-300 ease-out ${
+            mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="h-full flex flex-col min-h-0">
+            <div className="px-6 pt-[calc(1.25rem+env(safe-area-inset-top))] pb-4 flex items-center justify-between">
+              <div className="text-cream/70 text-xs tracking-[0.2em] uppercase">
+                Menu
+              </div>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center h-10 w-10 rounded-pill border border-white/10 bg-white/5 text-cream/90 hover:bg-white/10 transition-colors"
+                aria-label="Close menu"
+                onClick={() => setMobileOpen(false)}
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M18 6L6 18M6 6l12 12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="px-6 flex-1 min-h-0 overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
+              <div className="flex flex-col">
+                <Link
+                  href="/"
+                  onClick={() => setMobileOpen(false)}
+                  className={`py-4 text-[15px] font-light tracking-wide border-b border-white/10 transition-colors ${
+                    path === "/"
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream"
+                  }`}
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  onClick={() => setMobileOpen(false)}
+                  className={`py-4 text-[15px] font-light tracking-wide border-b border-white/10 transition-colors ${
+                    path === "/about"
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream"
+                  }`}
+                >
+                  About
+                </Link>
+                <Link
+                  href="/services"
+                  onClick={() => setMobileOpen(false)}
+                  className={`py-4 text-[15px] font-light tracking-wide border-b border-white/10 transition-colors ${
+                    path === "/services"
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream"
+                  }`}
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/insights"
+                  onClick={() => setMobileOpen(false)}
+                  className={`py-4 text-[15px] font-light tracking-wide border-b border-white/10 transition-colors ${
+                    path === "/insights"
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream"
+                  }`}
+                >
+                  Insights
+                </Link>
+                <Link
+                  href="/pricing"
+                  onClick={() => setMobileOpen(false)}
+                  className={`py-4 text-[15px] font-light tracking-wide border-b border-white/10 transition-colors ${
+                    path === "/pricing"
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream"
+                  }`}
+                >
+                  Pricing
+                </Link>
+
+                {isHomePage && (
+                  <Link
+                    href="/#how-can-we-help"
+                    onClick={(e) => {
+                      setMobileOpen(false);
+                      // If we're already on home page, prevent default and smooth scroll
+                      if (path === "/") {
+                        e.preventDefault();
+                        const section =
+                          document.getElementById("how-can-we-help");
+                        if (section) {
+                          const offset = section.offsetTop;
+                          window.scrollTo({
+                            top: offset,
+                            behavior: "smooth",
+                          });
+                        }
+                      }
+                      // Otherwise, let the link navigate normally to /#how-can-we-help
+                    }}
+                    className="py-4 text-[15px] font-light tracking-wide border-b border-white/10 transition-colors text-cream/70 hover:text-cream"
+                  >
+                    Industries
+                  </Link>
+                )}
+
+                <Link
+                  href="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className={`py-4 text-[15px] font-light tracking-wide border-b border-white/10 transition-colors ${
+                    path === "/contact"
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream"
+                  }`}
+                >
+                  Contact
+                </Link>
+              </div>
+            </nav>
+
+            <div className="shrink-0 px-6 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-6">
+              <button
+                type="button"
+                className="w-full h-12 rounded-pill bg-cream text-bg text-sm font-medium tracking-wide transition-colors hover:bg-cream/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream/50"
+                onClick={() => {
+                  setMobileOpen(false);
+                  window.location.assign("https://calendly.com/af--hla/ccc");
+                }}
+              >
+                Client Portal
+              </button>
+            </div>
+          </div>
+        </aside>
       </div>
     </nav>
   );

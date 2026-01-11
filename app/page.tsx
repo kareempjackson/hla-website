@@ -54,37 +54,37 @@ export default async function Home() {
       <Navbar />
 
       {/* Each section has sticky positioning to create the slide-over effect */}
-      <div id="hero" className="sticky top-0">
+      <div id="hero" className="relative md:sticky md:top-0">
         <Hero data={homePageData?.heroSection} />
       </div>
 
-      <div id="why-great" className="sticky top-0">
+      <div id="why-great" className="relative md:sticky md:top-0">
         <WhyGreat data={homePageData?.whyGreatSection} />
       </div>
 
-      <div id="what-we-do" className="sticky top-0">
+      <div id="what-we-do" className="relative md:sticky md:top-0">
         <WhatWeDo data={homePageData?.whatWeDoSection} />
       </div>
 
       {homePageData?.showHowCanWeHelp !== false && (
-        <div id="how-can-we-help" className="sticky top-0">
+        <div id="how-can-we-help" className="relative md:sticky md:top-0">
           <HowCanWeHelp data={homePageData?.howCanWeHelpSection} />
         </div>
       )}
 
       {homePageData?.showOurProcess !== false && (
-        <div id="our-process" className="sticky top-0">
+        <div id="our-process" className="relative md:sticky md:top-0">
           <OurProcess />
         </div>
       )}
 
       {homePageData?.testimonialSection?.showTestimonials !== false && (
-        <div id="testimonial" className="sticky top-0">
+        <div id="testimonial" className="relative md:sticky md:top-0">
           <Testimonial data={homePageData?.testimonialSection} />
         </div>
       )}
 
-      <div id="cta-section" className="sticky top-0">
+      <div id="cta-section" className="relative md:sticky md:top-0">
         <CTASection data={homePageData?.ctaSection} />
       </div>
     </div>
