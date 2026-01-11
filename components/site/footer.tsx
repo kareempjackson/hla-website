@@ -91,8 +91,14 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex items-center justify-between py-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-wide font-extralight text-cream flex items-center gap-3">
-            Client Portal
-            <ArrowUpRight className="size-7 text-cream" />
+            <a
+              href="https://calendly.com/af--hla/ccc"
+              className="inline-flex items-center gap-3 hover:opacity-90 transition-opacity"
+              aria-label="Client Portal"
+            >
+              Client Portal
+              <ArrowUpRight className="size-7 text-cream" />
+            </a>
           </h2>
           <div className="hidden items-center md:flex">
             <a
