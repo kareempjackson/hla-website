@@ -305,7 +305,14 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
 
         {/* Right: CTA */}
         <div className="shrink-0">
-          <Button variant="soft" className={clientPortalClasses}>
+          <Button
+            variant="soft"
+            className={clientPortalClasses}
+            type="button"
+            onClick={() => {
+              window.location.assign("https://calendly.com/af--hla/ccc");
+            }}
+          >
             Client Portal
           </Button>
         </div>
