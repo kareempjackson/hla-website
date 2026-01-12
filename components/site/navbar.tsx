@@ -10,6 +10,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileHeaderBg, setMobileHeaderBg] = useState<string>("bg-bg");
 
   // Avoid hydration mismatches by not relying on pathname during the initial render
   const path = mounted ? pathname : null;
@@ -55,7 +56,8 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
     // Skip scroll-based color changes on specific pages when sticky
     if (
       sticky &&
-      (path === "/services" || path === "/insights" || path === "/pricing")
+      (path === "/services" || path === "/insights" || path === "/pricing") &&
+      window.matchMedia("(min-width: 768px)").matches
     ) {
       return;
     }
@@ -144,6 +146,61 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
       if (newIsDark !== null) {
         setIsDark(newIsDark);
       }
+
+      // Mobile-only: make the header background match the section ("card") currently under it.
+      // Desktop behavior remains unchanged.
+      if (window.matchMedia("(max-width: 767px)").matches) {
+        const navEl = document.querySelector("nav");
+        const headerHeight = Math.ceil(
+          navEl?.getBoundingClientRect().height ?? 72
+        );
+        const threshold = headerHeight + 1;
+
+        const checkBg = (element: HTMLElement | null, bg: string) => {
+          if (!element) return null;
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= threshold && rect.bottom > threshold) return bg;
+          return null;
+        };
+
+        let nextBg: string | null = null;
+
+        if (path === "/") {
+          nextBg = checkBg(hero, "bg-bg");
+          if (nextBg === null) nextBg = checkBg(whyGreat, "bg-cream");
+          if (nextBg === null) nextBg = checkBg(whatWeDo, "bg-white");
+          if (nextBg === null) nextBg = checkBg(blogPosts, "bg-cream");
+          if (nextBg === null) nextBg = checkBg(howCanWeHelp, "bg-white");
+          if (nextBg === null) nextBg = checkBg(ourProcess, "bg-brand-deep");
+          if (nextBg === null) nextBg = checkBg(testimonial, "bg-cream-200");
+          if (nextBg === null) nextBg = checkBg(ctaSection, "bg-bg");
+        } else if (path === "/about") {
+          nextBg = checkBg(aboutHero, "bg-bg");
+          if (nextBg === null) nextBg = checkBg(aboutMission, "bg-cream");
+          if (nextBg === null) nextBg = checkBg(aboutWhoWeServe, "bg-black");
+          if (nextBg === null) nextBg = checkBg(aboutApproach, "bg-cream");
+          if (nextBg === null) nextBg = checkBg(aboutTeam, "bg-white");
+          if (nextBg === null) nextBg = checkBg(aboutTestimonials, "bg-cream");
+          if (nextBg === null) nextBg = checkBg(aboutCta, "bg-bg");
+        } else if (path === "/services") {
+          nextBg = checkBg(servicesHero, "bg-cream");
+          if (nextBg === null) nextBg = checkBg(servicesBookkeeping, "bg-bg");
+          if (nextBg === null) nextBg = checkBg(servicesController, "bg-cream");
+          if (nextBg === null) nextBg = checkBg(servicesCompliance, "bg-bg");
+          if (nextBg === null) nextBg = checkBg(servicesAddons, "bg-cream");
+          if (nextBg === null)
+            nextBg = checkBg(servicesSpecialized, "bg-black");
+          if (nextBg === null) nextBg = checkBg(servicesCta, "bg-cream");
+        } else if (path === "/contact") {
+          nextBg = "bg-white";
+        } else if (typeof path === "string" && path.startsWith("/insight")) {
+          nextBg = "bg-white";
+        }
+
+        if (nextBg) {
+          setMobileHeaderBg((prev) => (prev === nextBg ? prev : nextBg));
+        }
+      }
     };
 
     // Run immediately and on scroll
@@ -219,13 +276,20 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
       : "h-10 px-5 text-sm font-light rounded-pill border-0 focus-visible:ring-0 transition-colors duration-300";
 
   // Determine sticky background color based on page
-  const stickyBgColor = path === "/services" ? "bg-cream" : "bg-bg";
+  const desktopStickyBgColor =
+    path === "/services" ? "md:bg-cream" : "md:bg-bg";
+
+  // Mobile should be sticky (non-overlapping). Desktop keeps existing behavior.
+  const desktopPositionClass = sticky
+    ? `md:sticky ${desktopStickyBgColor}`
+    : "md:fixed md:bg-transparent";
 
   return (
     <nav
-      className={`${
-        sticky ? `sticky ${stickyBgColor}` : "fixed"
-      } relative top-0 left-0 right-0 z-100 transition-colors duration-300`}
+      className={`${desktopPositionClass} sticky top-0 left-0 right-0 z-100 transition-colors duration-300 ${
+        // Solid, section-matching background on mobile
+        mobileHeaderBg
+      }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
         {/* Left: Logo */}

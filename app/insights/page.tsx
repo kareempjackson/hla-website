@@ -93,7 +93,7 @@ export default function InsightsPage() {
         >
           {/* Decorative Lines */}
           <div
-            className="absolute inset-0 top-0 pointer-events-none overflow-visible z-150"
+            className="absolute inset-0 top-0 pointer-events-none overflow-visible z-[150]"
             style={{ marginTop: "-5rem" }}
           >
             {/* Pattern 1 */}
@@ -173,7 +173,7 @@ export default function InsightsPage() {
       >
         {/* Decorative Stepped Lines */}
         <div
-          className="absolute inset-0 top-0 pointer-events-none overflow-visible z-150"
+          className="absolute inset-0 top-0 pointer-events-none overflow-visible z-[150]"
           style={{ marginTop: "-5rem" }}
         >
           {/* Pattern 1 - Top Left to Bottom Right */}

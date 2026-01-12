@@ -18,7 +18,7 @@ export default async function ServicesPage() {
       >
         {/* Decorative Lines - Dark on cream background */}
         <div
-          className="absolute inset-0 top-0 pointer-events-none z-150"
+          className="absolute inset-0 top-0 pointer-events-none z-[150]"
           style={{ marginTop: "-5rem" }}
         >
           {/* Pattern 1 - Top Left to Bottom Right */}

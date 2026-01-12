@@ -148,7 +148,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans bg-bg text-text antialiased min-h-screen">
-        <div className="relative z-2">
+        <div className="relative z-[2]">
           {children}
           <Footer />
         </div>

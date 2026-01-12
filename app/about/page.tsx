@@ -1176,7 +1176,7 @@ export default function AboutPage() {
       {aboutData?.testimonialsSection?.showTestimonials !== false && (
         <div
           id="about-testimonials"
-          className="relative md:sticky md:top-0 z-55"
+          className="relative md:sticky md:top-0 z-[55]"
         >
           <section className="relative bg-cream py-32 min-h-screen flex items-start md:items-center overflow-visible md:overflow-hidden">
             {/* Decorative Lines - Dark on cream background */}
@@ -1269,7 +1269,7 @@ export default function AboutPage() {
       )}
 
       {/* Call to Action Section */}
-      <div id="about-cta" className="relative md:sticky md:top-0 z-60">
+      <div id="about-cta" className="relative md:sticky md:top-0 z-[60]">
         <section className="relative bg-bg py-32 min-h-screen flex items-start md:items-center overflow-visible md:overflow-hidden">
           {/* Decorative Lines - White on dark teal background */}
           <div className="absolute inset-0 pointer-events-none">

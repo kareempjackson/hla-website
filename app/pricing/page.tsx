@@ -16,7 +16,7 @@ export default function PricingPage() {
         {/* Decorative Stepped Lines (match Services page behavior) */}
         <DecorativeLines
           variant="dark"
-          className="overflow-visible z-150"
+          className="overflow-visible z-[150]"
           style={{ marginTop: "-5rem" }}
         />
 
