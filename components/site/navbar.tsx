@@ -327,7 +327,9 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
               className={clientPortalClasses}
               type="button"
               onClick={() => {
-                window.location.assign("https://calendly.com/af--hla/ccc");
+                window.location.assign(
+                  "https://clients.higherlevelaccounting.co/client-login"
+                );
               }}
             >
               Client Portal
@@ -538,7 +540,9 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
                 className="w-full h-12 rounded-pill bg-cream text-bg text-sm font-medium tracking-wide transition-colors hover:bg-cream/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream/50"
                 onClick={() => {
                   setMobileOpen(false);
-                  window.location.assign("https://calendly.com/af--hla/ccc");
+                  window.location.assign(
+                    "https://clients.higherlevelaccounting.co/client-login"
+                  );
                 }}
               >
                 Client Portal

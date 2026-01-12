@@ -92,7 +92,7 @@ export default function Footer() {
         <div className="flex items-center justify-between py-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-wide font-extralight text-cream flex items-center gap-3">
             <a
-              href="https://calendly.com/af--hla/ccc"
+              href="https://clients.higherlevelaccounting.co/client-login"
               className="inline-flex items-center gap-3 hover:opacity-90 transition-opacity"
               aria-label="Client Portal"
             >
