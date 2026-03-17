@@ -132,7 +132,7 @@ export default function Footer() {
                   "brightness(0) saturate(100%) invert(95%) sepia(13%) saturate(573%) hue-rotate(329deg) brightness(103%) contrast(95%)",
               }}
             />
-            <p className="max-w-md text-white/60 text-xs leading-relaxed font-light">
+            <p className="max-w-md text-white/60 text-sm leading-relaxed font-light">
               we aim to take care of the financial aspects of the business so
               that our clients can focus on what is most important, which is
               gaining customers and growing the business. We are specifically

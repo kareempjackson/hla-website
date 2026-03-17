@@ -260,7 +260,7 @@ export default async function ServicesPage() {
                   {servicesData?.bookkeepingService?.deliveryTitle ||
                     "We deliver:"}
                 </p>
-                <ul className="space-y-3 text-xs md:text-sm text-white/60 font-light">
+                <ul className="space-y-3 text-sm md:text-base text-white/60 font-light">
                   {(
                     servicesData?.bookkeepingService?.deliveryItems || [
                       "Monthly reconciliations across bank, credit card, merchant, and POS systems.",
@@ -462,7 +462,7 @@ export default async function ServicesPage() {
                 <p className="text-sm md:text-base text-black/70 font-light">
                   {servicesData?.controllerService?.offerTitle || "We offer:"}
                 </p>
-                <ul className="space-y-3 text-xs md:text-sm text-black/60 font-light">
+                <ul className="space-y-3 text-sm md:text-base text-black/60 font-light">
                   {(
                     servicesData?.controllerService?.offerItems || [
                       "Variance analysis to spot where performance doesn't align with expectations.",
@@ -613,7 +613,7 @@ export default async function ServicesPage() {
                   {servicesData?.complianceService?.provideTitle ||
                     "We provide:"}
                 </p>
-                <ul className="space-y-3 text-xs md:text-sm text-white/60 font-light">
+                <ul className="space-y-3 text-sm md:text-base text-white/60 font-light">
                   {(
                     servicesData?.complianceService?.provideItems || [
                       "1099 issuance and contractor oversight (W-9s collected, no last-minute scrambles).",
@@ -789,7 +789,7 @@ export default async function ServicesPage() {
                   <p className="text-sm md:text-base text-black/70 font-light">
                     {servicesData?.strategicAddons?.offerTitle || "We offer:"}
                   </p>
-                  <ul className="space-y-3 text-xs md:text-sm text-black/60 font-light">
+                  <ul className="space-y-3 text-sm md:text-base text-black/60 font-light">
                     {(
                       servicesData?.strategicAddons?.offerItems || [
                         "Cash flow forecasting and budgeting that make hiring and scaling decisions clear.",
@@ -908,7 +908,7 @@ export default async function ServicesPage() {
                 {servicesData?.specializedServices?.provideTitle ||
                   "We provide:"}
               </p>
-              <ul className="space-y-3 text-xs md:text-sm text-white/60 font-light">
+              <ul className="space-y-3 text-sm md:text-base text-white/60 font-light">
                 {(
                   servicesData?.specializedServices?.provideItems || [
                     "Historical cleanup for clean, accurate records across prior periods.",

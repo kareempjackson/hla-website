@@ -225,7 +225,7 @@ export default function AboutPage() {
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-cream tracking-tight">
                 {aboutData?.heroSection?.title || "Why Higher Level Exists"}
               </h1>
-              <p className="mt-4 max-w-2xl text-xs md:text-sm text-white/60 leading-relaxed font-light">
+              <p className="mt-4 max-w-2xl text-sm md:text-base text-white/60 leading-relaxed font-light">
                 {aboutData?.heroSection?.description ||
                   "We exist because financial guesswork doesn't scale. Too many firms stop at 'good enough'. We go a step further to uncover the gaps so that you have financial clarity you can trust to make the right moves."}
               </p>
@@ -426,12 +426,12 @@ export default function AboutPage() {
                 </h2>
 
                 <div className="space-y-3.5">
-                  <p className="text-xs md:text-sm text-black/60 leading-relaxed font-light">
+                  <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                     {aboutData?.missionSection?.description1 ||
                       "Higher Level Accounting provides strategic, controller-level accounting services for growth-minded businesses. Our focus is on delivering accurate, accrual-based financials, actionable insights, and rock-solid compliance, so you can scale confidently and never wonder if your numbers are telling the truth."}
                   </p>
 
-                  <p className="text-xs md:text-sm text-black/60 leading-relaxed font-light">
+                  <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                     {aboutData?.missionSection?.description2 ||
                       "Over the years, we've worked closely with founders, operators, and leadership teams across our three core verticals and beyond. In every case, the business leaders we meet are experts in their craft. However, without the right financial processes, even great companies risk fines, lost licenses, missed funding rounds, or costly missteps."}
                   </p>
@@ -629,7 +629,7 @@ export default function AboutPage() {
                   Who We Serve
                 </h2>
 
-                <p className="text-xs md:text-sm text-white/60 leading-relaxed font-light max-w-lg">
+                <p className="text-sm md:text-base text-white/60 leading-relaxed font-light max-w-lg">
                   We work exclusively with businesses that understand accounting
                   isn't just compliance — it's a growth tool. Our clients:
                 </p>
@@ -639,7 +639,7 @@ export default function AboutPage() {
                     <h3 className="text-sm md:text-base text-white font-light mb-1.5">
                       SaaS / Subscription-Based Companies:
                     </h3>
-                    <p className="text-xs md:text-sm text-white/60 leading-relaxed font-light">
+                    <p className="text-sm md:text-base text-white/60 leading-relaxed font-light">
                       Need investor-ready financials, real runway visibility,
                       and clean MRR/ARR reporting.
                     </p>
@@ -649,7 +649,7 @@ export default function AboutPage() {
                     <h3 className="text-sm md:text-base text-white font-light mb-1.5">
                       Marketing & Creative Agencies:
                     </h3>
-                    <p className="text-xs md:text-sm text-white/60 leading-relaxed font-light">
+                    <p className="text-sm md:text-base text-white/60 leading-relaxed font-light">
                       Need project-by-project profitability tracking and cash
                       flow clarity to scale without nasty surprises.
                     </p>
@@ -659,7 +659,7 @@ export default function AboutPage() {
                     <h3 className="text-sm md:text-base text-white font-light mb-1.5">
                       Retailers in Highly Regulated Industries:
                     </h3>
-                    <p className="text-xs md:text-sm text-white/60 leading-relaxed font-light">
+                    <p className="text-sm md:text-base text-white/60 leading-relaxed font-light">
                       Need compliance handled right, location-level
                       profitability tracking, and peace of mind that they won't
                       get blindsided by a regulatory misstep.
@@ -667,7 +667,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <p className="text-xs md:text-sm text-white/60 leading-relaxed font-light max-w-lg">
+                <p className="text-sm md:text-base text-white/60 leading-relaxed font-light max-w-lg">
                   We don't do bill pay, payroll, or collections. Our work lives
                   at the controller-level, where decisions get made and growth
                   happens.
@@ -794,7 +794,7 @@ export default function AboutPage() {
                     Our Approach
                   </h2>
 
-                  <p className="text-xs md:text-sm text-black/60 leading-relaxed font-light">
+                  <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                     We deliver clear, actionable financial guidance so you can
                     stay compliant, maintain financial stability, and grow with
                     confidence. That means:
@@ -823,21 +823,21 @@ export default function AboutPage() {
                 {/* Service Cards */}
                 <div className="space-y-3">
                   <div className="space-y-1.5">
-                    <p className="text-xs md:text-sm text-black/70 leading-relaxed font-light">
+                    <p className="text-sm md:text-base text-black/70 leading-relaxed font-light">
                       Structured financial processes that make decision-making
                       easier.
                     </p>
                   </div>
 
                   <div className="space-y-1.5">
-                    <p className="text-xs md:text-sm text-black/70 leading-relaxed font-light">
+                    <p className="text-sm md:text-base text-black/70 leading-relaxed font-light">
                       Strong internal controls to safeguard assets and prevent
                       costly errors.
                     </p>
                   </div>
 
                   <div className="space-y-1.5">
-                    <p className="text-xs md:text-sm text-black/70 leading-relaxed font-light">
+                    <p className="text-sm md:text-base text-black/70 leading-relaxed font-light">
                       Technology-driven solutions to streamline reporting and
                       keep you audit-ready.
                     </p>
@@ -846,14 +846,14 @@ export default function AboutPage() {
 
                 {/* Additional Info */}
                 <div className="space-y-3">
-                  <p className="text-xs md:text-sm text-black/60 leading-relaxed font-light">
+                  <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                     We also tap into a trusted network of tax and audit
                     professionals to help you navigate evolving regulations,
                     industry-specific accounting requirements, and financial
                     best practices.
                   </p>
 
-                  <p className="text-xs md:text-sm text-black/60 leading-relaxed font-light">
+                  <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                     Whether it's optimizing cash flow, strengthening financial
                     controls, or ensuring your reporting stands up to investor
                     or regulatory scrutiny, our goal is simple:
@@ -862,7 +862,7 @@ export default function AboutPage() {
 
                 {/* Bottom Description */}
                 <div className="pt-4 border-t border-black/10">
-                  <p className="text-xs md:text-sm text-black/70 leading-relaxed font-light">
+                  <p className="text-sm md:text-base text-black/70 leading-relaxed font-light">
                     Build you a solid financial foundation so you can focus on
                     growth, compliance, and long-term success.
                   </p>

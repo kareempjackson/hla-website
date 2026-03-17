@@ -401,7 +401,7 @@ export default function InsightsPage() {
 
                       {/* Excerpt */}
                       {insight.excerpt && (
-                        <p className="text-sm text-black/70 leading-relaxed font-light line-clamp-2">
+                        <p className="text-base text-black/70 leading-relaxed font-light line-clamp-2">
                           {insight.excerpt}
                         </p>
                       )}

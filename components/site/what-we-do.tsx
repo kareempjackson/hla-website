@@ -86,11 +86,11 @@ export default function WhatWeDo({ data }: { data?: WhatWeDoSectionData }) {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-black leading-tight tracking-tight mb-4">
             {data?.title || "You can't scale with unreliable books. But you can with us"}
           </h2>
-          <p className="text-xs md:text-sm text-black/60 leading-relaxed font-light mb-2.5">
+          <p className="text-sm md:text-base text-black/60 leading-relaxed font-light mb-2.5">
             {data?.description1 ||
               "Higher Level Accounting focuses on the work that drives growth, compliance, and confidence."}
           </p>
-          <p className="text-xs md:text-sm text-black/60 leading-relaxed font-light mb-5">
+          <p className="text-sm md:text-base text-black/60 leading-relaxed font-light mb-5">
             {data?.description2 ||
               "We're not just bookkeepers. We're strategic partners who help our clients grow by providing accrual-based bookkeeping, controller-level insights, and reports you can actually run a business on."}
           </p>
@@ -141,7 +141,7 @@ export default function WhatWeDo({ data }: { data?: WhatWeDoSectionData }) {
               <h4 className="text-sm font-light text-black mb-1.5">
                   {service.title}
               </h4>
-              <p className="text-xs text-black/60 leading-relaxed font-light">
+              <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                   {service.description}
               </p>
             </div>

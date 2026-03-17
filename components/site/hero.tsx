@@ -162,7 +162,7 @@ export default function Hero({ data }: { data?: HeroData }) {
             {data?.subtitle ||
               "Financial clarity for growth-focused businesses"}
           </p>
-          <p className="mt-4 max-w-2xl text-xs md:text-sm text-white/60 leading-relaxed font-light">
+          <p className="mt-4 max-w-2xl text-sm md:text-base text-white/60 leading-relaxed font-light">
             {data?.description ||
               "Higher Level Accounting offers accrual-based bookkeeping and controller-level insights for SaaS companies, agencies, and highly regulated industries. We help you trust your numbers so you can raise capital, scale smart and stay compliant"}
           </p>

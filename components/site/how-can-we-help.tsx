@@ -161,7 +161,7 @@ export default function HowCanWeHelp({
               </h3>
 
               {/* Description */}
-              <p className="text-xs text-black/60 leading-relaxed font-light">
+              <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                 {item.description}
               </p>
             </article>
@@ -173,7 +173,7 @@ export default function HowCanWeHelp({
           <h4 className="text-base font-light text-black mb-2">
             {data?.footerTitle || "Not in these industries?"}
           </h4>
-          <p className="text-sm text-black/60 leading-relaxed font-light">
+          <p className="text-base text-black/60 leading-relaxed font-light">
             {data?.footerDescription ||
               "No problem. The same clarity, compliance, and strategic guidance apply to any business that values accurate numbers and smart growth."}
           </p>

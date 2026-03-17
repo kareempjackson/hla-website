@@ -162,7 +162,7 @@ export default async function BlogPosts() {
 
                 {/* Excerpt */}
                 {post.excerpt && (
-                  <p className="text-xs text-black/60 leading-relaxed font-light">
+                  <p className="text-sm md:text-base text-black/60 leading-relaxed font-light">
                     {post.excerpt}
                   </p>
                 )}

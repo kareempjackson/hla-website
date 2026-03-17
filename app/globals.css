@@ -102,5 +102,5 @@ html, body {
 }
 
 body {
-  @apply font-sans bg-bg text-text antialiased;
+  @apply font-sans bg-bg text-text antialiased text-base;
 }

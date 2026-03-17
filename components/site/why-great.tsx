@@ -109,7 +109,7 @@ export default function WhyGreat({ data }: { data?: WhyGreatSectionData }) {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extralight text-brand-deep leading-tight tracking-tight">
             {data?.title || "Your numbers might be lying"}
           </h2>
-          <div className="mt-4 space-y-1 text-xs md:text-sm text-brand-deep/70 font-light">
+          <div className="mt-4 space-y-1 text-sm md:text-base text-brand-deep/70 font-light">
             {(data?.problems?.length ? data.problems : undefined)?.map(
               (problem, idx) => (
                 <p key={idx}>{problem}</p>
@@ -123,17 +123,17 @@ export default function WhyGreat({ data }: { data?: WhyGreatSectionData }) {
             )}
           </div>
 
-          <p className="mt-5 text-xs md:text-sm text-brand-deep font-light">
+          <p className="mt-5 text-sm md:text-base text-brand-deep font-light">
             {data?.description ||
               "Bad numbers can quickly tank your next move and most businesses don't see it coming until it's too late."}
           </p>
 
           <div className="mt-5">
-            <p className="text-xs md:text-sm text-brand-deep/70 mb-2.5 font-light">
+            <p className="text-sm md:text-base text-brand-deep/70 mb-2.5 font-light">
               {data?.consequencesTitle ||
                 "When revenue and costs don't line up, you make bad calls:"}
             </p>
-            <ul className="space-y-1.5 text-xs md:text-sm text-brand-deep/70 font-light">
+            <ul className="space-y-1.5 text-sm md:text-base text-brand-deep/70 font-light">
               {(data?.consequences?.length
                 ? data.consequences
                 : ["Hire too soon", "Underprice services", "Spend cash you don't really have"]
@@ -146,7 +146,7 @@ export default function WhyGreat({ data }: { data?: WhyGreatSectionData }) {
             </ul>
           </div>
 
-          <p className="mt-5 text-xs md:text-sm text-brand-deep/70 leading-relaxed font-light">
+          <p className="mt-5 text-sm md:text-base text-brand-deep/70 leading-relaxed font-light">
             {data?.closingText ||
               "The cost isn't just money but maybe a fine you never saw coming, a license you can't get back, or an investor walking away before you've even finished your pitch."}
           </p>
