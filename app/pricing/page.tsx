@@ -34,15 +34,14 @@ export default function PricingPage() {
 
             {/* Description */}
             <p className="text-sm md:text-base text-white/60 leading-relaxed font-light max-w-3xl">
-              One monthly plan that scales with you. Packages start at the
-              anchors below. Onboarding and cleanup are quoted after a short
-              assessment.
+              We deliver audit-ready books, faster closes, and actionable
+              reporting. Choose the package that fits your business size and
+              reporting needs.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Pricing content will go here */}
       {/* Pricing Table Section */}
       <section className="relative bg-white py-16 md:py-24 overflow-hidden">
         <DecorativeLines variant="light" />
@@ -50,9 +49,9 @@ export default function PricingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {/* Essential */}
             <div className="rounded-lg bg-[#F5EED7] p-8 flex flex-col">
-              <h3 className="text-xl font-normal text-black mb-6">Essential</h3>
-              <p className="text-2xl font-semibold text-black mb-8">
-                From $1,000 per month
+              <h3 className="text-xl font-normal text-black mb-2">Essential</h3>
+              <p className="text-2xl font-semibold text-black mb-6">
+                Starting from $1,000/month
               </p>
               <a
                 href={CALENDLY_URL}
@@ -63,30 +62,48 @@ export default function PricingPage() {
                 Book a fit call
               </a>
 
-              <ul className="space-y-4 text-sm font-normal text-black flex-grow">
+              <p className="text-xs font-normal text-black/50 uppercase tracking-wider mb-3">
+                What You Get
+              </p>
+              <ul className="space-y-4 text-sm font-normal text-black flex-grow mb-8">
                 <li className="border-b border-black/10 pb-4">
-                  Month-end close by day 15
+                  Monthly close by day 15
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Accrual bookkeeping and reconciliations
+                  Audit-ready accrual books
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Core KPI pack with monthly Loom recap
+                  Core financial reporting (P&amp;L, Balance Sheet, cash position)
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Monthly 30-minute call
+                  Monthly KPI dashboard with Loom walkthrough
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Response within 2 business days
+                  30-minute monthly review call
+                </li>
+                <li className="border-b border-black/10 pb-4">
+                  2 business day response time
+                </li>
+              </ul>
+
+              <p className="text-xs font-normal text-black/50 uppercase tracking-wider mb-3">
+                Best For
+              </p>
+              <ul className="space-y-3 text-sm font-normal text-black">
+                <li className="border-b border-black/10 pb-3">
+                  $500K–$1.5M annual revenue
+                </li>
+                <li className="text-black/70 font-light leading-relaxed">
+                  Single-entity businesses needing clean books for management decisions and tax preparation
                 </li>
               </ul>
             </div>
 
             {/* Growth */}
             <div className="rounded-lg bg-[#D4F1F4] p-8 flex flex-col">
-              <h3 className="text-xl font-normal text-black mb-6">Growth</h3>
-              <p className="text-2xl font-semibold text-black mb-8">
-                From $2,000 per month
+              <h3 className="text-xl font-normal text-black mb-2">Growth</h3>
+              <p className="text-2xl font-semibold text-black mb-6">
+                Starting from $2,000/month
               </p>
               <a
                 href={CALENDLY_URL}
@@ -97,30 +114,57 @@ export default function PricingPage() {
                 Book a fit call
               </a>
 
-              <ul className="space-y-4 text-sm font-normal text-black flex-grow">
+              <p className="text-xs font-normal text-black/50 uppercase tracking-wider mb-3">
+                What You Get
+              </p>
+              <ul className="space-y-4 text-sm font-normal text-black flex-grow mb-8">
                 <li className="border-b border-black/10 pb-4">
-                  Month-end close by day 10
+                  Monthly close by day 10
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Variance analysis and tighter controls
+                  Audit-ready books with variance analysis
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Expanded KPI pack with trend views
+                  Expanded KPI reporting with trend analysis
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Monthly 45-minute review call
+                  Deferred revenue schedules (SaaS, subscriptions, retainers)
                 </li>
                 <li className="border-b border-black/10 pb-4">
-                  Response within 1 business day
+                  Project/product-level P&amp;L tracking
+                </li>
+                <li className="border-b border-black/10 pb-4">
+                  Quarterly rolling forecast
+                </li>
+                <li className="border-b border-black/10 pb-4">
+                  45-minute monthly strategy call
+                </li>
+                <li className="border-b border-black/10 pb-4">
+                  1 business day response time
+                </li>
+              </ul>
+
+              <p className="text-xs font-normal text-black/50 uppercase tracking-wider mb-3">
+                Best For
+              </p>
+              <ul className="space-y-3 text-sm font-normal text-black">
+                <li className="border-b border-black/10 pb-3">
+                  $1.5M–$5M annual revenue
+                </li>
+                <li className="border-b border-black/10 pb-3 text-black/70 font-light leading-relaxed">
+                  Project-based businesses, SaaS companies requiring revenue recognition (ASC 606)
+                </li>
+                <li className="text-black/70 font-light leading-relaxed">
+                  Companies raising capital or seeking investor-ready financials
                 </li>
               </ul>
             </div>
 
             {/* Leadership */}
             <div className="rounded-lg bg-bg text-white p-8 flex flex-col">
-              <h3 className="text-xl font-normal mb-6">Leadership</h3>
-              <p className="text-2xl font-semibold mb-8">
-                From $3,300 per month
+              <h3 className="text-xl font-normal mb-2">Leadership</h3>
+              <p className="text-2xl font-semibold mb-6">
+                Starting from $3,300/month
               </p>
               <a
                 href={CALENDLY_URL}
@@ -131,24 +175,72 @@ export default function PricingPage() {
                 Book a fit call
               </a>
 
-              <ul className="space-y-4 text-sm font-normal flex-grow">
+              <p className="text-xs font-normal text-white/40 uppercase tracking-wider mb-3">
+                What You Get
+              </p>
+              <ul className="space-y-4 text-sm font-normal flex-grow mb-8">
                 <li className="border-b border-white/10 pb-4">
-                  Month-end close by day 7
+                  Monthly close by day 7
                 </li>
                 <li className="border-b border-white/10 pb-4">
-                  Controller oversight and board-ready reporting
+                  Audit-ready board package with controller oversight
                 </li>
                 <li className="border-b border-white/10 pb-4">
-                  Advanced KPI scorecard with drivers
+                  Rolling 12-month cash flow model
                 </li>
                 <li className="border-b border-white/10 pb-4">
-                  Weekly 30-minute executive sync
+                  Compliance and internal controls framework
                 </li>
                 <li className="border-b border-white/10 pb-4">
-                  Priority same-day response
+                  Board presentation format
+                </li>
+                <li className="border-b border-white/10 pb-4">
+                  Monthly forecast refresh
+                </li>
+                <li className="border-b border-white/10 pb-4">
+                  60-minute monthly executive review
+                </li>
+                <li className="border-b border-white/10 pb-4">
+                  Same-day priority response
+                </li>
+              </ul>
+
+              <p className="text-xs font-normal text-white/40 uppercase tracking-wider mb-3">
+                Best For
+              </p>
+              <ul className="space-y-3 text-sm font-normal text-white/80">
+                <li className="border-b border-white/10 pb-3">
+                  $5M–$10M annual revenue
+                </li>
+                <li className="border-b border-white/10 pb-3 font-light leading-relaxed">
+                  Companies with boards, investors, or lender requirements
+                </li>
+                <li className="border-b border-white/10 pb-3 font-light leading-relaxed">
+                  Highly regulated industries (cannabis, healthcare, financial services)
+                </li>
+                <li className="font-light leading-relaxed">
+                  Multi-entity structures or complex revenue recognition
                 </li>
               </ul>
             </div>
+          </div>
+
+          {/* Custom Solutions */}
+          <div className="mt-10 rounded-lg border border-black/10 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h3 className="text-xl font-normal text-black mb-2">Custom Solutions</h3>
+              <p className="text-sm font-light text-black/60 leading-relaxed max-w-2xl">
+                Need something different? We work with multi-entity structures, inventory-based businesses, and companies requiring specialized cost accounting or accelerated close timelines.
+              </p>
+            </div>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 bg-accent text-black rounded-pill py-3 px-8 text-sm font-normal hover:brightness-95 transition-all inline-flex items-center justify-center"
+            >
+              Book a fit call
+            </a>
           </div>
         </div>
       </section>
