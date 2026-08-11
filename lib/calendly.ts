@@ -1,3 +1,3 @@
-export const CALENDLY_URL = "https://form.typeform.com/to/TTFfjU3H";
+export const CALENDLY_URL = "https://heartfelt-selkie-9a6248.netlify.app";
 
 
