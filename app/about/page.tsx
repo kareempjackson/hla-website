@@ -17,6 +17,7 @@ import {
 } from "@/sanity/lib/image";
 import { CALENDLY_URL } from "@/lib/calendly";
 import AboutTestimonials from "@/components/site/about-testimonials";
+import AboutAdvisors from "@/components/site/about-advisors";
 import HeroVideo from "@/components/site/hero-video";
 
 // Note: metadata export doesn't work in client components,
@@ -1170,6 +1171,11 @@ export default function AboutPage() {
             }
           `}</style>
         </section>
+      </div>
+
+      {/* Advisors Section */}
+      <div id="about-advisors" className="relative z-[52]">
+        <AboutAdvisors />
       </div>
 
       {/* Testimonials Section */}

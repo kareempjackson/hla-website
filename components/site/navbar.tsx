@@ -79,6 +79,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
       const aboutWhoWeServe = document.getElementById("about-who-we-serve");
       const aboutApproach = document.getElementById("about-approach");
       const aboutTeam = document.getElementById("about-team");
+      const aboutAdvisors = document.getElementById("about-advisors");
       const aboutTestimonials = document.getElementById("about-testimonials");
       const aboutCta = document.getElementById("about-cta");
 
@@ -124,6 +125,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
       if (newIsDark === null) newIsDark = checkSection(aboutCta, true);
       if (newIsDark === null)
         newIsDark = checkSection(aboutTestimonials, false); // cream - light
+      if (newIsDark === null) newIsDark = checkSection(aboutAdvisors, true); // black
       if (newIsDark === null) newIsDark = checkSection(aboutTeam, false); // white - light
       if (newIsDark === null) newIsDark = checkSection(aboutApproach, false); // cream - light
       if (newIsDark === null) newIsDark = checkSection(aboutWhoWeServe, true);
@@ -180,6 +182,7 @@ export default function Navbar({ sticky = false }: { sticky?: boolean }) {
           if (nextBg === null) nextBg = checkBg(aboutWhoWeServe, "bg-black");
           if (nextBg === null) nextBg = checkBg(aboutApproach, "bg-cream");
           if (nextBg === null) nextBg = checkBg(aboutTeam, "bg-white");
+          if (nextBg === null) nextBg = checkBg(aboutAdvisors, "bg-black");
           if (nextBg === null) nextBg = checkBg(aboutTestimonials, "bg-cream");
           if (nextBg === null) nextBg = checkBg(aboutCta, "bg-bg");
         } else if (path === "/services") {
